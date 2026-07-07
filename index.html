@@ -792,35 +792,225 @@
             </div>
         </div>
         <div class="header-main">
-                                    <div class="logo-container" style="display: flex; align-items: center; height: 75px; padding: 5px 0;">
-                <img src="logo.png" alt="Florin Tours Logo" style="height: 100%; max-height: 75px; width: auto; object-fit: contain; display: block;">
-            </div>
+                                    <!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Florin Tours - شعار SVG احترافي</title>
+    <style>
+        :root {
+            --gold-matte: #A8894A;
+            --dark-bg: #0D0D0D;
+        }
 
-                    <button class="search-tab">فنادق</button>
-                    <button class="search-tab">طيران</button>
-                </div>
-                <div class="search-form">
-                    <div class="form-group">
-                        <label class="form-label">الوجهة</label>
-                        <input type="text" class="form-input" placeholder="إلى أين تريد السفر؟">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">التاريخ</label>
-                        <input type="date" class="form-input">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">المسافرون</label>
-                        <select class="form-select">
-                            <option>1 بال those</option>
-                            <option>2 بالغين</option>
-                            <option>عائلة</option>
-                        </select>
-                    </div>
-                    <button class="btn-search">ابحث الآن</button>
-                </div>
-            </d        <div class="offers-grid">
-            <div class="offer-card">
-                <div class="offer-image" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(20,20,20,0.8)), url('https://images.unsplash.com/photo-1514282401047-d79a71a590e8?q=80&w=600&auto=format&fit=crop');">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: var(--dark-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .logo-wrapper {
+            text-align: center;
+            max-width: 450px;
+            width: 100%;
+        }
+
+        .logo-wrapper svg {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            filter: drop-shadow(0 4px 20px rgba(168, 137, 74, 0.3));
+            transition: filter 0.3s ease;
+        }
+
+        .logo-wrapper svg:hover {
+            filter: drop-shadow(0 6px 30px rgba(168, 137, 74, 0.5));
+        }
+
+        .logo-fallback {
+            display: none;
+            color: var(--gold-matte);
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            padding: 20px;
+            border: 2px solid var(--gold-matte);
+            border-radius: 12px;
+            background: rgba(168, 137, 74, 0.1);
+        }
+
+        /* احتياطي في حال فشل تحميل SVG */
+        @media (prefers-reduced-motion: reduce) {
+            .logo-wrapper svg {
+                transition: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="logo-wrapper">
+        <!-- الشعار الرئيسي SVG -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" 
+             role="img" 
+             aria-labelledby="florinTitle florinDesc"
+             style="width: 100%; max-width: 400px; height: auto; display: block;">
+            
+            <!-- عناوين ووصف لإمكانية الوصول -->
+            <title id="florinTitle">شعار Florin Tours</title>
+            <desc id="florinDesc">شعار شركة فلورين تورز للسياحة والسفر يتضمن يخت شراعي وطائرة وكرة أرضية بتصميم ذهبي فاخر</desc>
+            
+            <defs>
+                <!-- تدرجات ذهبية حقيقية لمحاكاة ألوان الشعار الأصلي -->
+                <linearGradient id="primaryGold" x1="0%" y1="100%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#8a6f3e" />
+                    <stop offset="30%" stop-color="#c5a059" />
+                    <stop offset="50%" stop-color="#f3dc9a" />
+                    <stop offset="70%" stop-color="#c5a059" />
+                    <stop offset="100%" stop-color="#9a7b41" />
+                </linearGradient>
+                
+                <linearGradient id="darkNavy" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#23272a" />
+                    <stop offset="100%" stop-color="#111315" />
+                </linearGradient>
+
+                <!-- تدرج إضافي للتأثيرات الضوئية -->
+                <linearGradient id="goldShine" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#f3dc9a" stop-opacity="0.8" />
+                    <stop offset="50%" stop-color="#c5a059" stop-opacity="0.5" />
+                    <stop offset="100%" stop-color="#8a6f3e" stop-opacity="0.2" />
+                </linearGradient>
+            </defs>
+
+            <g id="Florin-Logo-Graphic">
+                <!-- الجزء العلوي: الكرة الأرضية الخلفية والانحناءات الدائرية -->
+                <path d="M235,395 C205,340 315,250 500,250 C685,250 795,340 765,395 C730,345 625,275 500,275 C375,275 270,345 235,395 Z" 
+                      fill="url(#primaryGold)" />
+                <path d="M205,460 C230,420 330,390 500,390 C670,390 770,420 795,460 C755,430 645,410 500,410 C355,410 245,430 205,460 Z" 
+                      fill="url(#darkNavy)" />
+
+                <!-- اليخت والسفينة الشراعية بتفاصيلها كاملة -->
+                <!-- الأشرعة الخلفية -->
+                <path d="M375,130 C370,220 405,345 455,365 C410,340 335,260 375,130 Z" 
+                      fill="url(#primaryGold)" />
+                <path d="M380,145 C380,225 410,340 450,360 C415,335 350,265 380,145 Z" 
+                      fill="url(#darkNavy)" />
+                
+                <!-- الشراع الرئيسي الكبير -->
+                <path d="M385,45 C370,180 470,320 565,315 C480,285 410,180 385,45 Z" 
+                      fill="url(#darkNavy)" />
+                <path d="M400,120 L405,310 L395,310 Z" 
+                      fill="url(#primaryGold)" />
+                <path d="M440,125 C435,190 480,280 550,295 C490,265 450,195 440,125 Z" 
+                      fill="url(#primaryGold)" />
+                <path d="M443,135 C440,195 480,275 540,290 C485,260 450,200 443,135 Z" 
+                      fill="url(#darkNavy)" />
+
+                <!-- الشراع الصغير الأمامي -->
+                <path d="M515,200 C505,250 540,310 580,310 C550,295 520,250 515,200 Z" 
+                      fill="url(#primaryGold)" />
+                <path d="M520,210 C512,250 540,300 572,305 C548,290 525,250 520,210 Z" 
+                      fill="url(#darkNavy)" />
+
+                <!-- جسم اليخت والنوافذ -->
+                <path d="M305,395 L590,300 L680,280 L610,345 L320,425 Z" 
+                      fill="url(#darkNavy)" />
+                <path d="M295,400 L590,305 L675,285 L600,355 L310,430 Z" 
+                      fill="url(#primaryGold)" />
+                
+                <!-- نوافذ اليخت -->
+                <path d="M312,418 L370,398 L372,408 L316,423 Z" 
+                      fill="url(#goldShine)" />
+                <path d="M385,393 L440,375 L442,385 L387,403 Z" 
+                      fill="url(#goldShine)" />
+                <path d="M455,370 L510,352 L512,362 L457,380 Z" 
+                      fill="url(#goldShine)" />
+                
+                <!-- الشريط الدائري الملتف حول اليخت (الحلقات الذهبية) -->
+                <path d="M205,465 C210,410 450,310 700,320 C760,322 785,340 780,360 C710,350 420,410 205,465 Z" 
+                      fill="url(#primaryGold)" />
+                <path d="M220,460 C250,420 440,335 690,335 C740,335 760,350 750,365 C680,360 420,415 220,460 Z" 
+                      fill="url(#darkNavy)" />
+
+                <!-- الخطوط العرضية المستقيمة التي يتوسطها الاسم -->
+                <rect x="115" y="465" width="770" height="15" 
+                      fill="url(#primaryGold)" />
+                <rect x="115" y="660" width="770" height="15" 
+                      fill="url(#primaryGold)" />
+
+                <!-- الجزء السفلي: انحناءات الكرة الأرضية والطائرة -->
+                <!-- الدوائر السفلية المظلمة والذهبية المتداخلة -->
+                <path d="M185,685 C240,840 420,945 615,930 C760,920 840,840 850,775 C770,890 530,940 310,840 C190,785 175,720 185,685 Z" 
+                      fill="url(#primaryGold)" />
+                <path d="M205,705 C250,830 410,915 590,910 C720,905 800,830 815,775 C740,865 520,905 320,820 C220,775 200,730 205,705 Z" 
+                      fill="url(#darkNavy)" />
+                <path d="M150,775 C190,870 340,895 490,845 C320,885 190,840 150,775 Z" 
+                      fill="url(#goldShine)" />
+
+                <!-- الطائرة المحلقة مع مسارها الانسيابي الذهبي -->
+                <!-- مسار الطائرة -->
+                <path d="M135,800 C220,870 420,830 540,790 C420,820 240,840 135,800 Z" 
+                      fill="url(#primaryGold)" />
+                
+                <!-- جسم وجناح الطائرة بدقة -->
+                <path d="M475,775 L520,795 L720,680 L750,670 L650,740 L675,850 L645,840 L615,760 L545,785 L540,815 L515,810 L522,790 L475,775 Z" 
+                      fill="url(#darkNavy)" />
+                <path d="M480,770 L525,790 L715,675 L740,668 L645,735 L665,840 L640,830 L610,755 L540,780 L535,805 L515,802 L520,785 L480,770 Z" 
+                      fill="url(#primaryGold)" />
+            </g>
+        </svg>
+
+        <!-- احتياطي في حال فشل تحميل SVG -->
+        <div class="logo-fallback" id="logoFallback">
+            FLORIN TOURS
+        </div>
+    </div>
+
+    <script>
+        // التحقق من دعم SVG وعرض البديل إذا لزم الأمر
+        document.addEventListener('DOMContentLoaded', function() {
+            const svgElement = document.querySelector('svg');
+            const fallbackElement = document.getElementById('logoFallback');
+            
+            // التحقق من وجود SVG وعرضه بشكل صحيح
+            if (!svgElement || !document.implementation.hasFeature("http://www.w3.org/TR/SVG11/feature#Image", "1.1")) {
+                if (fallbackElement) {
+                    fallbackElement.style.display = 'block';
+                }
+                if (svgElement) {
+                    svgElement.style.display = 'none';
+                }
+            }
+
+            // إضافة معالج أخطاء للـ SVG
+            if (svgElement) {
+                svgElement.addEventListener('error', function() {
+                    if (fallbackElement) {
+                        fallbackElement.style.display = 'block';
+                    }
+                    svgElement.style.display = 'none';
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>
+
                     <span class="offer-badge">شامل الطيران</span>
                 </div>
                 <div class="offer-details">
