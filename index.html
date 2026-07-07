@@ -776,4 +776,149 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-       
+               </style>
+</head>
+<body>
+
+     <header class="header">
+        <div class="header-top">
+            <div class="header-top-content">
+                <div>مرحباً بكم في فلورين لخدمات السفر والسياحة</div>
+                <div class="header-top-links">
+                    <a href="#">المساعدة</a>
+                    <a href="#">اتصل بنا</a>
+                    <button class="lang-switch">English</button>
+                </div>
+            </div>
+        </div>
+        <div class="header-main">
+            <div class="logo-container">
+                <svg class="logo-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800">
+                    <defs>
+                        <linearGradient id="goldMatteGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#A8894A" />
+                            <stop offset="50%" stop-color="#C9A96E" />
+                            <stop offset="100%" stop-color="#D4BC8B" />
+                        </linearGradient>
+                    </defs>
+                    <g fill="url(#goldMatteGrad)">
+                        <path d="M350,80 L380,260 L310,260 Z" />
+                        <path d="M390,65 L415,260 L385,260 Z" />
+                        <path d="M425,110 L445,260 L420,260 Z" />
+                        <path d="M260,265 L540,265 C520,310 460,330 400,330 C340,330 280,310 260,265 Z" />
+                        <rect x="100" y="370" width="600" height="8" rx="4" />
+                        <rect x="100" y="475" width="600" height="8" rx="4" />
+                        <path d="M140,550 C240,680 560,680 660,550 C540,630 260,630 140,550 Z" />
+                    </g>
+                </svg>
+                <div class="logo-text">
+                    <span class="logo-text-en">Florin Tours</span>
+                    <span class="logo-text-ar">فلورين للسياحة</span>
+                </div>
+            </div>
+            <nav class="nav-menu">
+                <a href="#" class="nav-link">الرئيسية</a>
+                <a href="#" class="nav-link">الرحلات السياحية</a>
+                <a href="#" class="nav-link">الفنادق</a>
+                <a href="#" class="nav-link">تذاكر الطيران</a>
+                <a href="#" class="nav-link">العروض الخاصة</a>
+            </nav>
+            <div style="display: flex; gap: 10px;">
+                <button class="btn-login">تسجيل الدخول</button>
+                <button class="btn-signup">حساب جديد</button>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">اكتشف العالم مع فلورين</h1>
+            <p class="hero-subtitle">أفضل عروض السفر والرحلات السياحية الفاخرة المصممة خصيصاً لك</p>
+            
+            <div class="search-container">
+                <div class="search-tabs">
+                    <button class="search-tab active">رحلات سياحية</button>
+                    <button class="search-tab">فنادق</button>
+                    <button class="search-tab">طيران</button>
+                </div>
+                <div class="search-form">
+                    <div class="form-group">
+                        <label class="form-label">الوجهة</label>
+                        <input type="text" class="form-input" placeholder="إلى أين تريد السفر؟">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">التاريخ</label>
+                        <input type="date" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">المسافرون</label>
+                        <select class="form-select">
+                            <option>1 بال those</option>
+                            <option>2 بالغين</option>
+                            <option>عائلة</option>
+                        </select>
+                    </div>
+                    <button class="btn-search">ابحث الآن</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="offers-section">
+        <h2 class="section-title">أحدث العروض السياحية</h2>
+        <p class="section-subtitle">عروض حصرية لفترة محدودة تبدأ من أقوى الوجهات</p>
+        <div class="offers-grid">
+            <div class="offer-card">
+                <div class="offer-image">
+                    <span class="offer-badge">شامل الطيران</span>
+                </div>
+                <div class="offer-details">
+                    <h3 class="offer-title">رحلة جزر المالديف الساحرة</h3>
+                    <div class="offer-info">
+                        <span>🕒 5 أيام / 4 ليالي</span>
+                        <span>⭐ 5 نجوم</span>
+                    </div>
+                    <div class="offer-price">1,200 <span>$</span></div>
+                    <button class="btn-book">احجز رحلتك الآن</button>
+                </div>
+            </div>
+            <div class="offer-card">
+                <div class="offer-image">
+                    <span class="offer-badge">الأكثر مبيعاً</span>
+                </div>
+                <div class="offer-details">
+                    <h3 class="offer-title">أسبوع في عاصمة الضباب لندن</h3>
+                    <div class="offer-info">
+                        <span>🕒 7 أيام / 6 ليالي</span>
+                        <span>⭐ 4 نجوم</span>
+                    </div>
+                    <div class="offer-price">1,550 <span>$</span></div>
+                    <button class="btn-book">احجز رحلتك الآن</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>عن فلورين</h3>
+                <p style="color: var(--text-muted); font-size: 14px;">وكالة فلورين لخدمات السفر والسياحة تقدم حلول سفر متكاملة ورحلات ترفيهية مميزة حول العالم بأعلى معايير الجودة.</p>
+            </div>
+            <div class="footer-column">
+                <h3>روابط سريعة</h3>
+                <ul class="footer-links">
+                    <li><a href="#">من نحن</a></li>
+                    <li><a href="#">شروط الخدمة</a></li>
+                    <li><a href="#">سياسة الخصوصية</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 جميع الحقوق محفوظة لشركة Florin Tours Agency.
+        </div>
+    </footer>
+    </body>
+</html>
+
+
