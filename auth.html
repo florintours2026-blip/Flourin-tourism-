@@ -262,16 +262,13 @@
             const inputId = document.getElementById('input-id');
             const btnSubmit = document.getElementById('btn-submit');
 
-            // إزالة الكلاس النشط من جميع التبويبات
             tabs.forEach(tab => tab.classList.remove('active'));
             
-            // إضافة الكلاس النشط للتبويب المحدد
             const activeTab = document.querySelector(`.category-tab[data-type="${portal}"]`);
             if (activeTab) {
                 activeTab.classList.add('active');
             }
 
-            // تكوين الواجهة حسب نوع البوابة
             switch(portal) {
                 case 'client':
                     notice.style.borderColor = '#A8894A';
@@ -294,65 +291,26 @@
                     btnSubmit.style.background = '#10b981';
                     btnSubmit.style.color = '#fff';
                     break;
-                    
+
                 case 'agency':
                     notice.style.borderColor = '#0284c7';
-                    notice.innerText = 'بوابة الشركات والوكالات الشريكة: تسجيل دخول خاص بالشركات المتعاقدة للوصول إلى أسعار المجموعات (B2B) وإصدار الفواتير السياحية المباشرة.';
+                    notice.innerText = 'بوابة الوكالات السياحية الشريكة. يرجى إدخال كود الوكالة المعتمد لدينا لمتابعة مبيعات البكجات والعملاء المشتركين.';
                     groupId.style.display = 'flex';
-                    labelId.innerText = 'رقم السجل السياحي / كود الوكالة';
-                    inputId.placeholder = 'مثال: AG-990';
+                    labelId.innerText = 'كود الوكالة (Agency ID)';
+                    inputId.placeholder = 'مثال: AG-2026';
                     inputId.required = true;
                     inputId.value = '';
                     btnSubmit.style.background = '#0284c7';
                     btnSubmit.style.color = '#fff';
                     break;
-                    
-                default:
-                    console.warn('نوع بوابة غير معروف:', portal);
             }
         }
 
-        function handleLogin(e) {
-            e.preventDefault();
-            
-            // تجميع بيانات النموذج للتحقق
-            const formData = {
-                portal: currentPortal,
-                email: e.target.querySelector('input[type="email"]').value,
-                password: e.target.querySelector('input[type="password"]').value,
-                specialId: document.getElementById('input-id').value
-            };
-
-            // محاكاة تسجيل الدخول
-            switch(currentPortal) {
-                case 'staff':
-                    alert('أهلاً بك يا فندم في لوحة تحكم الإدارة لـ Florin Tours.\nجاري توجيهك لصفحة تحديث العروض ومتابعة طلبات الحجوزات...');
-                    break;
-                    
-                case 'agency':
-                    alert('تم تسجيل دخول الوكالة الشريكة بنجاح.\nجاري فتح قوائم أسعار الـ B2B المخصصة لشركتكم.');
-                    break;
-                    
-                case 'client':
-                default:
-                    alert('تم تسجيل دخول العميل بنجاح بنظام العرض التجريبي لوكالة فلورين!');
-            }
-            
-            // يمكن إضافة إعادة توجيه هنا
-            // window.location.href = 'dashboard.html';
+        function handleLogin(event) {
+            event.preventDefault();
+            alert('تم تسجيل الدخول بنجاح إلى بوابة ' + (currentPortal === 'client' ? 'العملاء' : currentPortal === 'staff' ? 'الموظفين' : 'الوكالات') + '!');
+            window.location.href = 'index.html';
         }
-
-        // تحسين إمكانية الوصول: دعم التنقل بلوحة المفاتيح
-        document.querySelectorAll('.category-tab').forEach(tab => {
-            tab.setAttribute('tabindex', '0');
-            tab.addEventListener('keydown', function(e) {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    this.click();
-                }
-            });
-        });
     </script>
-
 </body>
 </html>
