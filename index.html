@@ -3,380 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>فلورين للسفر والسياحة - Florin Tours</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --gold-matte: #A8894A;
-            --gold-light: #C9A96E;
-            --gold-bright: #D4BC8B;
-            --dark-comfort: #1A1A1A;
-            --dark-bg: #0D0D0D;
-            --dark-card: #141414;
-            --text-light: #E0E0E0;
-            --text-muted: #999;
-            --border-dark: #2A2A2A;
-            --success: #4CAF50;
-            --warning: #FF9800;
-            --danger: #f44336;
-            --info: #2196F3;
-        }
+    <title>Flourni Tourism - فلورني للسياحة</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- شريط التنقل -->
+    <header>
+        <div class="logo">Flourni Tourism</div>
+        <nav>
+            <a href="index.html">الرئيسية</a>
+            <a href="booking.html">الحجوزات والفنادق</a>
+            <a href="payment.html">بيانات الجواز والدفع</a>
+            <button onclick="toggleLanguage()" id="lang-btn">English</button>
+        </nav>
+    </header>
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    <!-- قسم تسجيل الدخول -->
+    <section id="login-section" class="card">
+        <h2 id="login-title">تسجيل الدخول</h2>
+        <input type="email" id="email" placeholder="البريد الإلكتروني">
+        <input type="password" id="password" placeholder="كلمة المرور">
+        <button onclick="login('client')">دخول كعميل</button>
+        <button onclick="login('admin')" class="btn-admin">دخول كمسؤول (Admin)</button>
+    </section>
 
-        body {
-            font-family: 'Cairo', 'Segoe UI', sans-serif;
-            background: var(--dark-bg);
-            color: var(--text-light);
-            min-height: 100vh;
-            line-height: 1.6;
-        }
+    <!-- لوحة تحكم الأدمن (مخفية وتظهر فقط عند دخول الأدمن) -->
+    <section id="admin-panel" class="card" style="display: none;">
+        <h2>لوحة تحكم المسؤول - إضافة بكج جديد</h2>
+        <input type="text" id="pkg-title" placeholder="اسم البكج السياحي">
+        <input type="text" id="pkg-price" placeholder="السعر">
+        <textarea id="pkg-desc" placeholder="تفاصيل العرض السياحي"></textarea>
+        <button onclick="addPackage()">إضافة العرض للموقع</button>
+    </section>
 
-        /* Header */
-        .header {
-            background: var(--dark-card);
-            border-bottom: 2px solid var(--gold-matte);
-            padding: 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 20px rgba(168, 137, 74, 0.1);
-        }
+    <!-- قسم العروض السياحية والفلترة -->
+    <section id="packages-section">
+        <h2>العروض السياحية الحالية</h2>
+        <div class="filter-group">
+            <label>تصفية حسب الفئة العمرية (نظام الطيران العالمي):</label>
+            <select id="age-filter" onchange="filterPackages()">
+                <option value="all">الكل</option>
+                <option value="adult">بالغين (12+ سنة)</option>
+                <option value="child">أطفال (2-12 سنة)</option>
+                <option value="infant">رضع (تحت سنتين)</option>
+            </select>
+        </div>
+        <div id="packages-container" class="grid-container">
+            <!-- سيتم توليد البكجات هنا بواسطة الجافاسكريبت -->
+        </div>
+    </section>
 
-        .header-top {
-            background: var(--dark-comfort);
-            padding: 8px 0;
-            border-bottom: 1px solid var(--border-dark);
-        }
+    <!-- فقاعة الذكاء الاصطناعي للاستفسارات -->
+    <div id="ai-chat-bubble" onclick="toggleChat()">💬</div>
+    <div id="chat-box" style="display: none;">
+        <div class="chat-header">مساعد فلورني الذكي</div>
+        <div id="chat-content"></div>
+        <div class="chat-input-area">
+            <input type="text" id="chat-input" placeholder="اسألني عن أي بكج...">
+            <button onclick="sendMessage()">إرسال</button>
+        </div>
+    </div>
 
-        .header-top-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 13px;
-            color: var(--text-muted);
-        }
+    <footer>
+        <p>تواصل معنا: flournitourism2026@gmail.com | واتساب: 201065859268+</p>
+    </footer>
 
-        .header-top-links {
-            display: flex;
-            gap: 20px;
-            align-items: center;
-        }
-
-        .header-top-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            transition: color 0.3s;
-            font-size: 13px;
-        }
-
-        .header-top-links a:hover {
-            color: var(--gold-light);
-        }
-
-        .lang-switch {
-            background: transparent;
-            border: 1px solid var(--gold-matte);
-            color: var(--gold-light);
-            padding: 5px 15px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-family: 'Cairo', sans-serif;
-            font-size: 13px;
-            transition: all 0.3s;
-        }
-
-        .lang-switch:hover {
-            background: var(--gold-matte);
-            color: var(--dark-comfort);
-        }
-
-        .header-main {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .logo-svg {
-            width: 70px;
-            height: 70px;
-        }
-
-        .logo-text {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .logo-text-en {
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--text-light);
-            letter-spacing: 1px;
-        }
-
-        .logo-text-ar {
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--gold-light);
-        }
-
-        .nav-menu {
-            display: flex;
-            gap: 30px;
-            align-items: center;
-        }
-
-        .nav-link {
-            color: var(--text-light);
-            text-decoration: none;
-            font-size: 15px;
-            font-weight: 500;
-            padding: 8px 0;
-            position: relative;
-            transition: color 0.3s;
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--gold-matte);
-            transition: width 0.3s;
-        }
-
-        .nav-link:hover {
-            color: var(--gold-light);
-        }
-
-        .nav-link:hover::after {
-            width: 100%;
-        }
-
-        .btn-login {
-            background: transparent;
-            border: 2px solid var(--gold-matte);
-            color: var(--gold-light);
-            padding: 10px 25px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-family: 'Cairo', sans-serif;
-            font-size: 14px;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-
-        .btn-login:hover {
-            background: var(--gold-matte);
-            color: var(--dark-comfort);
-        }
-
-        .btn-signup {
-            background: var(--gold-matte);
-            border: 2px solid var(--gold-matte);
-            color: var(--dark-comfort);
-            padding: 10px 25px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-family: 'Cairo', sans-serif;
-            font-size: 14px;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-
-        .btn-signup:hover {
-            background: var(--gold-light);
-            border-color: var(--gold-light);
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, var(--dark-comfort) 0%, var(--dark-bg) 100%);
-            padding: 60px 20px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at 30% 50%, rgba(168, 137, 74, 0.05) 0%, transparent 50%);
-        }
-
-        .hero-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-title {
-            font-size: 48px;
-            font-weight: 700;
-            color: var(--text-light);
-            margin-bottom: 10px;
-            text-align: center;
-        }
-
-        .hero-subtitle {
-            font-size: 20px;
-            color: var(--gold-light);
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        /* Search Form */
-        .search-container {
-            background: var(--dark-card);
-            border-radius: 20px;
-            padding: 30px;
-            border: 1px solid var(--border-dark);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .search-tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 25px;
-            border-bottom: 2px solid var(--border-dark);
-            padding-bottom: 15px;
-        }
-
-        .search-tab {
-            padding: 10px 25px;
-            background: transparent;
-            border: none;
-            color: var(--text-muted);
-            cursor: pointer;
-            font-family: 'Cairo', sans-serif;
-            font-size: 15px;
-            font-weight: 600;
-            transition: all 0.3s;
-            border-radius: 8px;
-        }
-
-        .search-tab.active {
-            background: var(--gold-matte);
-            color: var(--dark-comfort);
-        }
-
-        .search-tab:hover:not(.active) {
-            color: var(--gold-light);
-            background: rgba(168, 137, 74, 0.1);
-        }
-
-        .search-form {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            align-items: end;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .form-label {
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .form-input {
-            background: var(--dark-bg);
-            border: 1px solid var(--border-dark);
-            color: var(--text-light);
-            padding: 12px 15px;
-            border-radius: 10px;
-            font-family: 'Cairo', sans-serif;
-            font-size: 14px;
-            transition: all 0.3s;
-        }
-
-        .form-input:focus {
-            outline: none;
-            border-color: var(--gold-matte);
-            box-shadow: 0 0 0 3px rgba(168, 137, 74, 0.1);
-        }
-
-        .form-select {
-            background: var(--dark-bg);
-            border: 1px solid var(--border-dark);
-            color: var(--text-light);
-            padding: 12px 15px;
-            border-radius: 10px;
-            font-family: 'Cairo', sans-serif;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .form-select:focus {
-            outline: none;
-            border-color: var(--gold-matte);
-        }
-
-        .btn-search {
-            background: var(--gold-matte);
-            color: var(--dark-comfort);
-            border: none;
-            padding: 14px 40px;
-            border-radius: 10px;
-            font-family: 'Cairo', sans-serif;
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s;
-            height: 48px;
-        }
-
-        .btn-search:hover {
-            background: var(--gold-light);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(168, 137, 74, 0.3);
-        }
-
-        /* Offers Section */
-        .offers-section {
-            max-width: 1400px;
-            margin: 50px auto;
-            padding: 0 20px;
-        }
-
-        .section-title {
-            font-size: 32px;
-            font-weight: 700;
-            color: var(--text-light);
-            margin-bottom: 10px;
-            text-align: center;
+    <script src="script.js"></script>
+</body>
+</html>
+         text-align: center;
         }
 
         .section-subtitle {
