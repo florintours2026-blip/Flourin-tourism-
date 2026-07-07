@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول / حساب جديد - Florin Tours</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold-matte: #A8894A;
+            --gold-light: #C9A96E;
+            --dark-comfort: #1A1A1A;
+            --dark-bg: #0D0D0D;
+            --dark-card: #141414;
+            --text-light: #E0E0E0;
+            --text-muted: #999;
+            --border-dark: #2A2A2A;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', 'Segoe UI', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-light);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .auth-container {
+            background: var(--dark-card);
+            border: 1px solid var(--border-dark);
+            border-radius: 20px;
+            padding: 40px 30px;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.6s ease-in-out;
+        }
+
+        .auth-logo {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .auth-logo a {
+            color: var(--gold-light);
+            text-decoration: none;
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .auth-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border-dark);
+            margin-bottom: 30px;
+        }
+
+        .auth-tab {
+            flex: 1;
+            text-align: center;
+            padding: 12px;
+            cursor: pointer;
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        .auth-tab.active {
+            color: var(--gold-light);
+            border-bottom: 2px solid var(--gold-matte);
+            margin-bottom: -2px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            font-size: 14px;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .form-input {
+            background: var(--dark-bg);
+            border: 1px solid var(--border-dark);
+            color: var(--text-light);
+            padding: 12px 15px;
+            border-radius: 10px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--gold-matte);
+            box-shadow: 0 0 0 3px rgba(168, 137, 74, 0.1);
+        }
+
+        .btn-auth {
+            width: 100%;
+            background: var(--gold-matte);
+            color: var(--dark-comfort);
+            border: none;
+            padding: 14px;
+            border-radius: 10px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+
+        .btn-auth:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(168, 137, 74, 0.3);
+        }
+
+        .back-home {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .back-home a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .back-home a:hover {
+            color: var(--gold-light);
+        }
+
+        #signup-form {
+            display: none;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="auth-container">
+        <div class="auth-logo">
+            <a href="index.html">Florin Tours Agency</a>
+        </div>
+
+        <div class="auth-tabs">
+            <div class="auth-tab active" onclick="switchTab('login')">تسجيل الدخول</div>
+            <div class="auth-tab" onclick="switchTab('signup')">حساب جديد</div>
+        </div>
+
+        <form id="login-form" onsubmit="event.preventDefault(); alert('تم تسجيل الدخول بنجاح بنظام العرض التجريبي لموقع فلورين!');">
+            <div class="form-group">
+                <label class="form-label">البريد الإلكتروني</label>
+                <input type="email" class="form-input" placeholder="example@domain.com" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">كلمة المرور</label>
+                <input type="password" class="form-input" placeholder="••••••••" required>
+            </div>
+            <button type="submit" class="btn-auth">دخول</button>
+        </form>
+
+        <form id="signup-form" onsubmit="event.preventDefault(); alert('تم إنشاء حسابك الجديد بنجاح في وكالة فلورين!');">
+            <div class="form-group">
+                <label class="form-label">الاسم الكامل</label>
+                <input type="text" class="form-input" placeholder="اكتب اسمك الثلاثي" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">البريد الإلكتروني</label>
+                <input type="email" class="form-input" placeholder="example@domain.com" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">كلمة المرور</label>
+                <input type="password" class="form-input" placeholder="أدخل كلمة مرور قوية" required>
+            </div>
+            <button type="submit" class="btn-auth">تأكيد وإنشاء الحساب</button>
+        </form>
+
+        <div class="back-home">
+            <a href="index.html">← العودة للصفحة الرئيسية</a>
+        </div>
+    </div>
+
+    <script>
+        function switchTab(type) {
+            const loginForm = document.getElementById('login-form');
+            const signupForm = document.getElementById('signup-form');
+            const tabs = document.querySelectorAll('.auth-tab');
+
+            if (type === 'login') {
+                loginForm.style.display = 'flex';
+                signupForm.style.display = 'none';
+                tabs[0].classList.add('active');
+                tabs[1].classList.remove('active');
+            } else {
+                loginForm.style.display = 'none';
+                signupForm.style.display = 'flex';
+                tabs[0].classList.remove('active');
+                tabs[1].classList.add('active');
+            }
+        }
+    </script>
+
+</body>
+</html>
