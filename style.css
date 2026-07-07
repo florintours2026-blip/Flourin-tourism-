@@ -1,0 +1,113 @@
+:root {
+    --primary-color: #e5b800;
+    --primary-bright: #ffcc00;
+    --bg-color: #f4f4f6;
+    --text-color: #333;
+    --white: #ffffff;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: var(--white);
+    border-bottom: 3px solid var(--primary-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+nav a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: bold;
+}
+
+.card {
+    background-color: var(--white);
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: var(--primary-color);
+    color: #000;
+    border: none;
+    padding: 12px 20px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: var(--primary-bright);
+}
+
+/* فقاعة الشات البوت */
+#ai-chat-bubble {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--primary-color);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.8rem;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+#chat-box {
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    width: 300px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    overflow: hidden;
+}
+
+.chat-header {
+    background: var(--primary-color);
+    padding: 10px;
+    font-weight: bold;
+    text-align: center;
+}
+
+#chat-content {
+    height: 200px;
+    padding: 10px;
+    overflow-y: auto;
+    font-size: 0.9rem;
+}
