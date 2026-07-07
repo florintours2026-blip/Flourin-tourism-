@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تسجيل الدخول / حساب جديد - Florin Tours</title>
+    <title>بوابة تسجيل الدخول المتكاملة - Florin Tours</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -15,6 +17,8 @@
             --text-light: #E0E0E0;
             --text-muted: #999;
             --border-dark: #2A2A2A;
+            --cyan-accent: #00b4d8;
+            --purple-accent: #7209b7;
         }
 
         * {
@@ -38,11 +42,11 @@
             background: var(--dark-card);
             border: 1px solid var(--border-dark);
             border-radius: 20px;
-            padding: 40px 30px;
+            padding: 35px 25px;
             width: 100%;
-            max-width: 450px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-            animation: fadeIn 0.6s ease-in-out;
+            max-width: 550px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+            animation: fadeIn 0.5s ease-in-out;
         }
 
         .auth-logo {
@@ -50,42 +54,75 @@
             margin-bottom: 25px;
         }
 
-        .auth-logo a {
-            color: var(--gold-light);
-            text-decoration: none;
-            font-size: 24px;
-            font-weight: 700;
-            letter-spacing: 1px;
+        .auth-logo img {
+            height: 65px;
+            width: auto;
+            object-fit: contain;
         }
 
-        .auth-tabs {
+        .category-tabs {
             display: flex;
-            border-bottom: 2px solid var(--border-dark);
-            margin-bottom: 30px;
+            background: var(--dark-bg);
+            border: 1px solid var(--border-dark);
+            border-radius: 12px;
+            padding: 5px;
+            margin-bottom: 25px;
+            gap: 5px;
+            flex-wrap: wrap;
         }
 
-        .auth-tab {
+        .category-tab {
             flex: 1;
             text-align: center;
-            padding: 12px;
+            padding: 12px 5px;
             cursor: pointer;
             color: var(--text-muted);
-            font-weight: 600;
-            font-size: 16px;
-            transition: all 0.3s;
+            font-weight: 700;
+            font-size: 14px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            user-select: none;
+            min-width: fit-content;
+            white-space: nowrap;
         }
 
-        .auth-tab.active {
-            color: var(--gold-light);
-            border-bottom: 2px solid var(--gold-matte);
-            margin-bottom: -2px;
+        .category-tab:hover {
+            color: var(--text-light);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .category-tab.active[data-type="client"] {
+            background: var(--gold-matte);
+            color: var(--dark-comfort);
+        }
+
+        .category-tab.active[data-type="staff"] {
+            background: #10b981;
+            color: white;
+        }
+
+        .category-tab.active[data-type="agency"] {
+            background: #0284c7;
+            color: white;
+        }
+
+        .notice-box {
+            background: rgba(255, 255, 255, 0.03);
+            border-right: 4px solid var(--gold-matte);
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            margin-bottom: 20px;
+            color: var(--text-light);
+            line-height: 1.6;
+            transition: border-color 0.3s ease;
         }
 
         .form-group {
             display: flex;
             flex-direction: column;
             gap: 8px;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
 
         .form-label {
@@ -107,7 +144,7 @@
 
         .form-input:focus {
             outline: none;
-            border-color: var(--gold-matte);
+            border-color: var(--gold-light);
             box-shadow: 0 0 0 3px rgba(168, 137, 74, 0.1);
         }
 
@@ -127,9 +164,12 @@
         }
 
         .btn-auth:hover {
-            background: var(--gold-light);
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(168, 137, 74, 0.3);
+            box-shadow: 0 5px 15px rgba(168, 137, 74, 0.2);
+        }
+
+        .btn-auth:active {
+            transform: translateY(0);
         }
 
         .back-home {
@@ -148,13 +188,24 @@
             color: var(--gold-light);
         }
 
-        #signup-form {
-            display: none;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* تحسينات للموبايل */
+        @media (max-width: 480px) {
+            .auth-container {
+                padding: 25px 15px;
+                border-radius: 15px;
+            }
+            .category-tab {
+                font-size: 12px;
+                padding: 10px 3px;
+            }
+            .auth-logo img {
+                height: 50px;
+            }
         }
     </style>
 </head>
@@ -162,40 +213,36 @@
 
     <div class="auth-container">
         <div class="auth-logo">
-            <a href="index.html">Florin Tours Agency</a>
+            <img src="logo.png" alt="Florin Tours Logo" onerror="this.style.display='none'; this.insertAdjacentHTML('afterend', '<p style=\'color:#A8894A; font-weight:700; font-size:20px;\'>Florin Tours</p>')">
         </div>
 
-        <div class="auth-tabs">
-            <div class="auth-tab active" onclick="switchTab('login')">تسجيل الدخول</div>
-            <div class="auth-tab" onclick="switchTab('signup')">حساب جديد</div>
+        <div class="category-tabs">
+            <div class="category-tab active" data-type="client" onclick="switchPortal('client')">دخول العملاء</div>
+            <div class="category-tab" data-type="staff" onclick="switchPortal('staff')">قطاع الموظفين</div>
+            <div class="category-tab" data-type="agency" onclick="switchPortal('agency')">دخول الوكالات</div>
         </div>
 
-        <form id="login-form" onsubmit="event.preventDefault(); alert('تم تسجيل الدخول بنجاح بنظام العرض التجريبي لموقع فلورين!');">
-            <div class="form-group">
-                <label class="form-label">البريد الإلكتروني</label>
-                <input type="email" class="form-input" placeholder="example@domain.com" required>
-            </div>
-            <div class="form-group">
-                <label class="form-label">كلمة المرور</label>
-                <input type="password" class="form-input" placeholder="••••••••" required>
-            </div>
-            <button type="submit" class="btn-auth">دخول</button>
-        </form>
+        <div class="notice-box" id="portal-notice">
+            مرحباً بك في بوابة عملاء فلورين. يمكنك تسجيل الدخول لمتابعة رحلاتك المحجوزة واستعراض التذاكر المتاحة.
+        </div>
 
-        <form id="signup-form" onsubmit="event.preventDefault(); alert('تم إنشاء حسابك الجديد بنجاح في وكالة فلورين!');">
-            <div class="form-group">
-                <label class="form-label">الاسم الكامل</label>
-                <input type="text" class="form-input" placeholder="اكتب اسمك الثلاثي" required>
+        <form id="universal-form" onsubmit="handleLogin(event)">
+            <div class="form-group" id="group-id" style="display: none;">
+                <label class="form-label" id="label-id">الرقم الوظيفي / الكود الخاص</label>
+                <input type="text" class="form-input" id="input-id" placeholder="أدخل الكود التعريفي" autocomplete="off">
             </div>
+            
             <div class="form-group">
-                <label class="form-label">البريد الإلكتروني</label>
-                <input type="email" class="form-input" placeholder="example@domain.com" required>
+                <label class="form-label">البريد الإلكتروني المعتمد</label>
+                <input type="email" class="form-input" placeholder="example@florintours.com" required autocomplete="email">
             </div>
+            
             <div class="form-group">
                 <label class="form-label">كلمة المرور</label>
-                <input type="password" class="form-input" placeholder="أدخل كلمة مرور قوية" required>
+                <input type="password" class="form-input" placeholder="••••••••" required autocomplete="current-password">
             </div>
-            <button type="submit" class="btn-auth">تأكيد وإنشاء الحساب</button>
+
+            <button type="submit" class="btn-auth" id="btn-submit">تسجيل الدخول الآمن</button>
         </form>
 
         <div class="back-home">
@@ -204,23 +251,107 @@
     </div>
 
     <script>
-        function switchTab(type) {
-            const loginForm = document.getElementById('login-form');
-            const signupForm = document.getElementById('signup-form');
-            const tabs = document.querySelectorAll('.auth-tab');
+        let currentPortal = 'client';
 
-            if (type === 'login') {
-                loginForm.style.display = 'flex';
-                signupForm.style.display = 'none';
-                tabs[0].classList.add('active');
-                tabs[1].classList.remove('active');
-            } else {
-                loginForm.style.display = 'none';
-                signupForm.style.display = 'flex';
-                tabs[0].classList.remove('active');
-                tabs[1].classList.add('active');
+        function switchPortal(portal) {
+            currentPortal = portal;
+            const tabs = document.querySelectorAll('.category-tab');
+            const notice = document.getElementById('portal-notice');
+            const groupId = document.getElementById('group-id');
+            const labelId = document.getElementById('label-id');
+            const inputId = document.getElementById('input-id');
+            const btnSubmit = document.getElementById('btn-submit');
+
+            // إزالة الكلاس النشط من جميع التبويبات
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // إضافة الكلاس النشط للتبويب المحدد
+            const activeTab = document.querySelector(`.category-tab[data-type="${portal}"]`);
+            if (activeTab) {
+                activeTab.classList.add('active');
+            }
+
+            // تكوين الواجهة حسب نوع البوابة
+            switch(portal) {
+                case 'client':
+                    notice.style.borderColor = '#A8894A';
+                    notice.innerText = 'مرحباً بك في بوابة عملاء فلورين. يمكنك تسجيل الدخول لمتابعة رحلاتك المحجوزة واستعراض التذاكر المتاحة.';
+                    groupId.style.display = 'none';
+                    inputId.required = false;
+                    inputId.value = '';
+                    btnSubmit.style.background = '#A8894A';
+                    btnSubmit.style.color = '#1A1A1A';
+                    break;
+                    
+                case 'staff':
+                    notice.style.borderColor = '#10b981';
+                    notice.innerText = 'بوابة الموظفين واللوحة الإدارية: تخولك هذه الواجهة كموظف تعديل العروض السياحية الحالية، تحديث الأسعار، ومتابعة حجوزات الطيران والفنادق الواردة من العملاء فورياً.';
+                    groupId.style.display = 'flex';
+                    labelId.innerText = 'الرقم الوظيفي (Staff ID)';
+                    inputId.placeholder = 'مثال: FT-2026';
+                    inputId.required = true;
+                    inputId.value = '';
+                    btnSubmit.style.background = '#10b981';
+                    btnSubmit.style.color = '#fff';
+                    break;
+                    
+                case 'agency':
+                    notice.style.borderColor = '#0284c7';
+                    notice.innerText = 'بوابة الشركات والوكالات الشريكة: تسجيل دخول خاص بالشركات المتعاقدة للوصول إلى أسعار المجموعات (B2B) وإصدار الفواتير السياحية المباشرة.';
+                    groupId.style.display = 'flex';
+                    labelId.innerText = 'رقم السجل السياحي / كود الوكالة';
+                    inputId.placeholder = 'مثال: AG-990';
+                    inputId.required = true;
+                    inputId.value = '';
+                    btnSubmit.style.background = '#0284c7';
+                    btnSubmit.style.color = '#fff';
+                    break;
+                    
+                default:
+                    console.warn('نوع بوابة غير معروف:', portal);
             }
         }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            
+            // تجميع بيانات النموذج للتحقق
+            const formData = {
+                portal: currentPortal,
+                email: e.target.querySelector('input[type="email"]').value,
+                password: e.target.querySelector('input[type="password"]').value,
+                specialId: document.getElementById('input-id').value
+            };
+
+            // محاكاة تسجيل الدخول
+            switch(currentPortal) {
+                case 'staff':
+                    alert('أهلاً بك يا فندم في لوحة تحكم الإدارة لـ Florin Tours.\nجاري توجيهك لصفحة تحديث العروض ومتابعة طلبات الحجوزات...');
+                    break;
+                    
+                case 'agency':
+                    alert('تم تسجيل دخول الوكالة الشريكة بنجاح.\nجاري فتح قوائم أسعار الـ B2B المخصصة لشركتكم.');
+                    break;
+                    
+                case 'client':
+                default:
+                    alert('تم تسجيل دخول العميل بنجاح بنظام العرض التجريبي لوكالة فلورين!');
+            }
+            
+            // يمكن إضافة إعادة توجيه هنا
+            // window.location.href = 'dashboard.html';
+        }
+
+        // تحسين إمكانية الوصول: دعم التنقل بلوحة المفاتيح
+        document.querySelectorAll('.category-tab').forEach(tab => {
+            tab.setAttribute('tabindex', '0');
+            tab.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    this.click();
+                }
+            });
+        });
     </script>
 
 </body>
