@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الحجوزات والفنادق - Flourni Tourism</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">Flourni Tourism</div>
+        <nav>
+            <a href="index.html">الرئيسية</a>
+            <a href="booking.html">الحجوزات والفنادق</a>
+            <a href="payment.html">بيانات الجواز والدفع</a>
+        </nav>
+    </header>
+
+    <main class="card">
+        <h2>حجز الطيران والفنادق والمنتجعات</h2>
+        <form action="payment.html" method="GET">
+            <label>نوع الحجز:</label>
+            <select id="booking-type">
+                <option value="package">بكج سياحي كامل</option>
+                <option value="flight">حجز طيران فقط</option>
+                <option value="hotel">فنادق ومنتجعات فقط</option>
+            </select>
+
+            <label>الوجهة السياحية:</label>
+            <input type="text" placeholder="مثال: جزر المالديف، دبي، القاهرة" required>
+
+            <label>تاريخ الذهاب:</label>
+            <input type="date" required>
+
+            <label>تاريخ العودة:</label>
+            <input type="date">
+
+            <button type="submit">الاستمرار لتأكيد البيانات والدفع</button>
+        </form>
+    </main>
+
+    <footer>
+        <p>تواصل معنا: flournitourism2026@gmail.com | واتساب: 201065859268+</p>
+    </footer>
+</body>
+</html>
