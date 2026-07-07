@@ -442,8 +442,353 @@
             gap: 15px;
             margin-bottom: 15px;
             color: var(--text-muted);
-            font-size: 13px;
+            </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="header-top">
+            <div class="header-top-content">
+                <div><i class="fas fa-envelope"></i> info@florintours.com</div>
+                <div class="header-top-links">
+                    <a href="#admin-panel"><i class="fas fa-lock"></i> لوحة الإدارة</a>
+                    <button class="lang-switch">EN</button>
+                </div>
+            </div>
+        </div>
+        <div class="header-main">
+            <div class="logo-container">
+                <div style="filter: drop-shadow(0px 0px 8px rgba(201, 169, 110, 0.55)); width:70px; height:70px;">
+                    <svg viewBox="0 0 100 100" width="100%" height="100%">
+                        <circle cx="50" cy="50" r="45" fill="none" stroke="url(#goldGradient)" stroke-width="2.5" stroke-dasharray="6 3"/>
+                        <path d="M25 45 C40 20, 60 20, 75 45 C60 35, 40 35, 25 45 Z" fill="url(#goldGradient)"/>
+                        <path d="M25 55 C40 75, 60 75, 75 55 C60 62, 40 62, 25 55 Z" fill="url(#goldGradient)"/>
+                        <polygon points="50,32 58,48 42,48" fill="#0D0D0D"/>
+                        <path d="M40 54 L65 54 L55 64 Z" fill="#0D0D0D"/>
+                        <defs>
+                            <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#A8894A" />
+                                <stop offset="50%" stop-color="#C9A96E" />
+                                <stop offset="100%" stop-color="#D4BC8B" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <div class="logo-text">
+                    <span class="logo-text-en">FLORIN TOURS</span>
+                    <span class="logo-text-ar">فلورين للسفر والسياحة</span>
+                </div>
+            </div>
+            <nav class="nav-menu">
+                <a href="#offers" class="nav-link">العروض اليومية</a>
+                <a href="#booking" class="nav-link">احجز الآن</a>
+                <a href="#admin-panel" class="nav-link">لوحة التحكم</a>
+                <button class="btn-login" onclick="openModal('login')">تسجيل دخول</button>
+                <button class="btn-signup" onclick="openModal('signup')">حساب جديد</button>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">اكتشف العالم مع فلورين</h1>
+            <p class="hero-subtitle">أفضل العروض اليومية للفنادق والرحلات السياحية بأعلى مستويات الفخامة</p>
+            
+            <div class="search-container">
+                <div class="search-tabs">
+                    <button class="search-tab active" onclick="switchTab(event, 'hotels')"><i class="fas fa-hotel"></i> فنادق</button>
+                    <button class="search-tab" onclick="switchTab(event, 'flights')"><i class="fas fa-plane"></i> رحلات بحرية</button>
+                </div>
+                <div class="search-form">
+                    <div class="form-group">
+                        <label class="form-label">الوجهة</label>
+                        <input type="text" class="form-input" placeholder="إلى أين تريد الذهاب؟">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">تاريخ الحجز</label>
+                        <input type="date" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">نوع الغرفة / الرحلة</label>
+                        <select class="form-select">
+                            <option>فردية</option>
+                            <option>مزدوجة</option>
+                            <option>جناح فاخر</option>
+                        </select>
+                    </div>
+                    <button class="btn-search" onclick="document.getElementById('offers').scrollIntoView({behavior:'smooth'})">بحث عن العروض</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="offers" class="offers-section">
+        <h2 class="section-title">العروض السياحية اليومية</h2>
+        <p class="section-subtitle">باقات حصرية مختارة بعناية لتجربة سفر لا تُنسى</p>
+        <div class="offers-grid">
+            <article class="offer-card">
+                <div class="offer-image">
+                    <span class="offer-badge">الأكثر مبيعاً</span>
+                </div>
+                <div class="offer-details">
+                    <h3 class="offer-title">إقامة بفندق 5 نجوم مطل على البحر</h3>
+                    <div class="offer-info">
+                        <span><i class="fas fa-moon"></i> 1 ليلة</span>
+                        <span><i class="fas fa-utensils"></i> شامل الإفطار</span>
+                    </div>
+                    <div class="offer-price">150$ <span>/ ليلة</span></div>
+                    <button class="btn-book" onclick="selectOffer('فندق 5 نجوم مطل على البحر')">احجز هذا العرض</button>
+                </div>
+            </article>
+            <article class="offer-card">
+                <div class="offer-image" style="background: linear-gradient(135deg, var(--dark-comfort), var(--gold-light));">
+                    <span class="offer-badge">عرض خاص</span>
+                </div>
+                <div class="offer-details">
+                    <h3 class="offer-title">رحلة بحرية باليخت مع الغوص</h3>
+                    <div class="offer-info">
+                        <span><i class="fas fa-clock"></i> يوم كامل</span>
+                        <span><i class="fas fa-fish"></i> معدات مجانية</span>
+                    </div>
+                    <div class="offer-price">80$ <span>/ فرد</span></div>
+                    <button class="btn-book" onclick="selectOffer('رحلة بحرية باليخت')">احجز هذا العرض</button>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <section id="booking" class="offers-section" style="max-width: 700px;">
+        <div style="background: var(--dark-card); padding: 40px; border-radius: 20px; border: 1px solid var(--border-dark);">
+            <h2 class="section-title" style="font-size: 24px; margin-bottom: 25px;">طلب حجز سريع</h2>
+            <form id="bookingForm" onsubmit="submitBooking(event)" class="modal-form">
+                <div class="form-group">
+                    <label class="form-label">الاسم الكامل</label>
+                    <input type="text" id="clientName" class="form-input" required placeholder="أدخل اسمك بالكامل">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">رقم الهاتف (واتساب)</label>
+                    <input type="tel" id="clientPhone" class="form-input" required placeholder="مثال: 010xxxxxxxx">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">العرض المطلوب</label>
+                    <select id="selectedOffer" class="form-select" required>
+                        <option value="">-- اختر العرض --</option>
+                        <option value="فندق 5 نجوم مطل على البحر">فندق 5 نجوم مطل على البحر</option>
+                        <option value="رحلة بحرية باليخت">رحلة بحرية باليخت</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">طريقة الدفع المفضلة</label>
+                    <select id="paymentMethod" class="form-select" required>
+                        <option value="فيزا">فيزا كارد (Visa)</option>
+                        <option value="فودافون كاش">فودافون كاش (Vodafone Cash)</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-book" style="padding: 15px; font-size:16px;">تأكيد الحجز المبدئي</button>
+            </form>
+            <div id="successMessage" class="success-message"></div>
+        </div>
+    </section>
+
+    <section id="admin-panel" class="features-section">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <h2 class="section-title" style="margin-bottom: 10px;">لوحة تحكم الإدارة</h2>
+            <p class="section-subtitle" style="margin-bottom: 30px; color: var(--text-muted);">يتم حفظ واستعراض الحجوزات الواردة من العملاء هنا تلقائياً.</p>
+            <div class="admin-table-container">
+                <table id="bookingsTable">
+                    <thead>
+                        <tr>
+                            <th>الاسم</th>
+                            <th>الهاتف</th>
+                            <th>العرض</th>
+                            <th>الدفع</th>
+                            <th>التاريخ والوقت</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bookingsTableBody">
+                        <tr>
+                            <td colspan="5" class="no-bookings" style="text-align: center; padding: 30px; color: var(--text-muted);">لا توجد حجوزات مسجلة حالياً.</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button id="clearBookings" class="btn-clear" onclick="clearAllBookings()" style="display: none;">مسح السجل بالكامل</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="features-section">
+        <div class="features-grid">
+            <div class="feature-item">
+                <div class="feature-icon" style="color: var(--gold-light);"><i class="fas fa-shield-alt"></i></div>
+                <h3 class="feature-title">أمان كامل</h3>
+                <p class="feature-text">حجوزات آمنة وموثوقة بنسبة 100% لجميع الرحلات.</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon" style="color: var(--gold-light);"><i class="fas fa-headset"></i></div>
+                <h3 class="feature-title">دعم 24/7</h3>
+                <p class="feature-text">فريق خدمة العملاء متواجد دائماً لمساعدتك في أي وقت.</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon" style="color: var(--gold-light);"><i class="fas fa-star"></i></div>
+                <h3 class="feature-title">أفضل الأسعار</h3>
+                <p class="feature-text">نضمن لك الحصول على أرقى الخدمات بأقل التكاليف المتاحة.</p>
+            </div>
+        </div>
+    </section>
+
+    <div id="authModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <h3 id="modalTitle" class="modal-title">تسجيل الدخول</h3>
+            <form class="modal-form" onsubmit="event.preventDefault(); closeModal();">
+                <div class="form-group">
+                    <label class="form-label">البريد الإلكتروني</label>
+                    <input type="email" class="form-input" required placeholder="name@example.com">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">كلمة المرور</label>
+                    <input type="password" class="form-input" required placeholder="••••••••">
+                </div>
+                <button type="submit" class="btn-book" style="margin-top: 10px;">تأكيد</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="chat-widget">
+        <button class="chat-button" onclick="toggleChat()"><i class="fas fa-comments" style="color: var(--dark-comfort);"></i></button>
+        <div id="chatWindow" class="chat-window">
+            <div class="chat-header">
+                <span>الدعم الفني المباشر</span>
+                <button onclick="toggleChat()" style="background:transparent; border:none; color:var(--dark-comfort); cursor:pointer; font-size:18px;">&times;</button>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+                <div class="message bot">مرحباً بك! كيف يمكن لفريق فلورين مساعدتك اليوم في تنظيم رحلتك؟</div>
+            </div>
+            <div class="chat-input-area">
+                <input type="text" id="chatInput" class="chat-input" placeholder="اكتب رسالتك هنا..." onkeypress="if(event.key === 'Enter') sendChatMessage()">
+                <button class="chat-send" onclick="sendChatMessage()"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>فلورين للسفر</h3>
+                <p style="color: var(--text-muted); font-size:14px;">بوابتك المفضلة لاستكشاف العالم وعيش تجارب سياحية فاخرة لا تُنسى.</p>
+            </div>
+            <div class="footer-column">
+                <h3>روابط سريعة</h3>
+                <ul class="footer-links">
+                    <li><a href="#offers">العروض الحالية</a></li>
+                    <li><a href="#booking">احجز رحلتك</a></li>
+                    <li><a href="#admin-panel">لوحة الإدارة</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 جميع الحقوق محفوظة لشركة فلورين للسفر والسياحة - flourin.com</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => { renderBookings(); });
+
+        function switchTab(event, tabType) {
+            document.querySelectorAll('.search-tab').forEach(t => t.classList.remove('active'));
+            event.currentTarget.classList.add('active');
         }
+
+        function openModal(type) {
+            const modal = document.getElementById('authModal');
+            const title = document.getElementById('modalTitle');
+            title.textContent = type === 'login' ? 'تسجيل الدخول' : 'إنشاء حساب جديد';
+            modal.classList.add('active');
+        }
+
+        function closeModal() { document.getElementById('authModal').classList.remove('active'); }
+
+        function toggleChat() { document.getElementById('chatWindow').classList.toggle('active'); }
+
+        function sendChatMessage() {
+            const input = document.getElementById('chatInput');
+            const text = input.value.trim();
+            if(!text) return;
+            
+            const area = document.getElementById('chatMessages');
+            area.innerHTML += `<div class="message user">${text}</div>`;
+            input.value = '';
+            area.scrollTop = area.scrollHeight;
+
+            setTimeout(() => {
+                area.innerHTML += `<div class="message bot">شكراً لتواصلك معنا. تم تحويل رسالتك إلى ممثل خدمة عملاء فلورين وسيجيبك في أقرب وقت.</div>`;
+                area.scrollTop = area.scrollHeight;
+            }, 1000);
+        }
+
+        function selectOffer(offerName) {
+            const select = document.getElementById('selectedOffer');
+            select.value = offerName;
+            document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
+            setTimeout(() => { document.getElementById('clientName').focus(); }, 6000);
+        }
+
+        function submitBooking(event) {
+            event.preventDefault();
+            const name = document.getElementById('clientName').value.trim();
+            const phone = document.getElementById('clientPhone').value.trim();
+            const offer = document.getElementById('selectedOffer').value;
+            const payment = document.getElementById('paymentMethod').value;
+
+            const booking = { name, phone, offer, payment, date: new Date().toLocaleString('ar-EG') };
+            let current = JSON.parse(localStorage.getItem('florin_sys_bookings')) || [];
+            current.push(booking);
+            localStorage.setItem('florin_sys_bookings', JSON.stringify(current));
+
+            renderBookings();
+
+            const msg = document.getElementById('successMessage');
+            msg.textContent = `شكراً لك ${name}، تم إرسال طلب حجزك المبدئي بنجاح وسيتم مراجعته بالإدارة.`;
+            msg.style.display = 'block';
+            document.getElementById('bookingForm').reset();
+            setTimeout(() => { msg.style.display = 'none'; }, 5000);
+        }
+
+        function renderBookings() {
+            const data = JSON.parse(localStorage.getItem('florin_sys_bookings')) || [];
+            const container = document.getElementById('bookingsTableBody');
+            const btn = document.getElementById('clearBookings');
+
+            if(data.length === 0) {
+                container.innerHTML = '<tr><td colspan="5" style="text-align: center; padding: 30px; color: var(--text-muted);">لا توجد حجوزات مسجلة حالياً.</td></tr>';
+                btn.style.display = 'none';
+                return;
+            }
+
+            btn.style.display = 'block';
+            container.innerHTML = '';
+            data.reverse().forEach(b => {
+                container.innerHTML += `
+                    <tr>
+                        <td style="font-weight:600; color:var(--text-light);">${b.name}</td>
+                        <td style="direction:ltr; text-align:right;">${b.phone}</td>
+                        <td style="color:var(--gold-light);">${b.offer}</td>
+                        <td><span class="offer-badge" style="position:static; padding:3px 10px; background:${b.payment === 'فيزا' ? 'var(--gold-matte)':'#E60000'}; color:${b.payment === 'فيزا' ? 'var(--dark-comfort)':'#fff'};">${b.payment}</span></td>
+                        <td style="font-size:12px; color:var(--text-muted);">${b.date}</td>
+                    </tr>
+                `;
+            });
+        }
+
+        function clearAllBookings() {
+            if(confirm('هل تريد حذف جميع الحجوزات المسجلة نهائياً من لوحة التحكم؟')) {
+                localStorage.removeItem('florin_sys_bookings');
+                renderBookings();
+            }
+        }
+    </script>
+</body>
+</html>
 
         .offer-price {
             font-size: 28px;
