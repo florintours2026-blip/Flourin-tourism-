@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم - فلورين للسفر والسياحة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2C3E50;
+            --gold: #D4A843;
+            --bg-color: #F4F6F9;
+            --white: #FFFFFF;
+            --text-dark: #333333;
+            --danger: #E74C3C;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; }
+        
+        body { background-color: var(--bg-color); color: var(--text-dark); display: flex; min-height: 100vh; }
+
+        /* القائمة الجانبية */
+        .sidebar { width: 250px; background-color: var(--primary); color: var(--white); padding: 20px 0; }
+        .sidebar h2 { text-align: center; color: var(--gold); margin-bottom: 30px; font-weight: 800; }
+        .sidebar ul { list-style: none; }
+        .sidebar ul li { padding: 15px 20px; border-bottom: 1px solid rgba(255,255,255,0.05); cursor: pointer; transition: 0.3s; }
+        .sidebar ul li:hover, .sidebar ul li.active { background-color: var(--gold); color: var(--white); }
+
+        /* المحتوى الرئيسي */
+        .main-content { flex: 1; padding: 30px; overflow-y: auto; }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; padding-bottom: 15px; border-bottom: 2px solid #E0E0E0; }
+        
+        /* الأقسام */
+        .section { display: none; background: var(--white); padding: 25px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 30px; }
+        .section.active { display: block; }
+        .section h3 { margin-bottom: 20px; color: var(--primary); border-right: 4px solid var(--gold); padding-right: 10px; }
+
+        /* النماذج */
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: 600; }
+        .form-group input, .form-group textarea { width: 100%; padding: 10px; border: 1px solid #CCC; border-radius: 5px; outline: none; }
+        .form-group input:focus, .form-group textarea:focus { border-color: var(--gold); }
+        
+        button { background-color: var(--gold); color: var(--white); border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 1rem; transition: 0.3s; }
+        button:hover { background-color: #B8912F; }
+        button.delete-btn { background-color: var(--danger); padding: 5px 10px; font-size: 0.8rem; }
+        button.delete-btn:hover { background-color: #C0392B; }
+
+        /* الجداول */
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        table th, table td { padding: 12px; text-align: right; border-bottom: 1px solid #EEE; }
+        table th { background-color: #F8F9FA; color: var(--primary); }
+        .logo-preview { max-width: 150px; margin-top: 15px; border-radius: 8px; border: 2px dashed #CCC; padding: 5px; display: block; }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <h2>إدارة فلورين</h2>
+        <ul>
+            <li class="active" onclick="switchTab('logo-section')">إعدادات الشعار (اللوقو)</li>
+            <li onclick="switchTab('offers-section')">إدارة العروض السياحية</li>
+            <li onclick="switchTab('visas-section')">إدارة التأشيرات (الفيز)</li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <div class="header">
+            <h1>لوحة التحكم الموحدة</h1>
+            <button onclick="clearData()" style="background-color: var(--danger);">مسح كافة البيانات واستعادة الافتراضي</button>
+        </div>
+
+        <!-- قسم اللوقو -->
+        <div id="logo-section" class="section active">
+            <h3>تغيير شعار الموقع</h3>
+            <div class="form-group">
+                <label>رابط صورة الشعار الجديد (URL)</label>
+                <input type="text" id="logoUrl" placeholder="أدخل رابط الصورة المباشر هنا...">
+            </div>
+            <button onclick="saveLogo()">حفظ الشعار</button>
+            <img id="currentLogoPreview" class="logo-preview" alt="معاينة الشعار الحالي">
+        </div>
+
+        <!-- قسم العروض -->
+        <div id="offers-section" class="section">
+            <h3>إضافة عرض سياحي جديد</h3>
+            <div class="form-group"><label>عنوان العرض</label><input type="text" id="offerTitle"></div>
+            <div class="form-group"><label>المدة</label><input type="text" id="offerDuration" placeholder="مثال: 7 أيام / 6 ليالي"></div>
+            <div class="form-group"><label>الشارة (اختياري)</label><input type="text" id="offerBadge" placeholder="مثال: الأكثر مبيعاً"></div>
+            <div class="form-group"><label>رابط الصورة</label><input type="text" id="offerImage"></div>
+            <div class="form-group"><label>المميزات (افصل بينها بفاصلة ،)</label><textarea id="offerFeatures" rows="3"></textarea></div>
+            <div class="form-group"><label>السعر</label><input type="text" id="offerPrice"></div>
+            <button onclick="addOffer()">إضافة العرض</button>
+
+            <h3 style="margin-top: 40px;">العروض الحالية</h3>
+            <table>
+                <thead><tr><th>العنوان</th><th>السعر</th><th>المدة</th><th>إجراء</th></tr></thead>
+                <tbody id="offersTableBody"></tbody>
+            </table>
+        </div>
+
+        <!-- قسم الفيز -->
+        <div id="visas-section" class="section">
+            <h3>إضافة تأشيرة جديدة</h3>
+            <div class="form-group"><label>اسم التأشيرة</label><input type="text" id="visaTitle"></div>
+            <div class="form-group"><label>مدة الاستخراج</label><input type="text" id="visaDuration"></div>
+            <div class="form-group"><label>الشارة (اختياري)</label><input type="text" id="visaBadge"></div>
+            <div class="form-group"><label>رابط الصورة</label><input type="text" id="visaImage"></div>
+            <div class="form-group"><label>المتطلبات (افصل بينها بفاصلة ،)</label><textarea id="visaFeatures" rows="3"></textarea></div>
+            <div class="form-group"><label>السعر</label><input type="text" id="visaPrice"></div>
+            <button onclick="addVisa()">إضافة التأشيرة</button>
+
+            <h3 style="margin-top: 40px;">التأشيرات الحالية</h3>
+            <table>
+                <thead><tr><th>اسم التأشيرة</th><th>السعر</th><th>مدة الاستخراج</th><th>إجراء</th></tr></thead>
+                <tbody id="visasTableBody"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // التهيئة وجلب البيانات المحفوظة أو استخدام مصفوفات فارغة
+        let offers = JSON.parse(localStorage.getItem('savedOffers')) || [];
+        let visas = JSON.parse(localStorage.getItem('savedVisas')) || [];
+        let savedLogo = localStorage.getItem('savedLogo') || '';
+
+        // التنقل بين الأقسام
+        function switchTab(tabId) {
+            document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+            document.querySelectorAll('.sidebar li').forEach(li => li.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // إعدادات الشعار
+        if(savedLogo) document.getElementById('currentLogoPreview').src = savedLogo;
+        function saveLogo() {
+            const url = document.getElementById('logoUrl').value;
+            if(url) {
+                localStorage.setItem('savedLogo', url);
+                document.getElementById('currentLogoPreview').src = url;
+                alert('تم حفظ الشعار بنجاح! قم بتحديث الصفحة الرئيسية لرؤية التغيير.');
+            }
+        }
+
+        // إضافة وعرض العروض
+        function addOffer() {
+            const offer = {
+                title: document.getElementById('offerTitle').value,
+                duration: document.getElementById('offerDuration').value,
+                badge: document.getElementById('offerBadge').value,
+                image: document.getElementById('offerImage').value,
+                features: document.getElementById('offerFeatures').value.split('،').map(item => item.trim()),
+                price: document.getElementById('offerPrice').value
+            };
+            offers.push(offer);
+            localStorage.setItem('savedOffers', JSON.stringify(offers));
+            renderTable('offersTableBody', offers, 'offers');
+            alert('تمت إضافة العرض!');
+        }
+
+        // إضافة وعرض التأشيرات
+        function addVisa() {
+            const visa = {
+                title: document.getElementById('visaTitle').value,
+                duration: document.getElementById('visaDuration').value,
+                badge: document.getElementById('visaBadge').value,
+                image: document.getElementById('visaImage').value,
+                features: document.getElementById('visaFeatures').value.split('،').map(item => item.trim()),
+                price: document.getElementById('visaPrice').value
+            };
+            visas.push(visa);
+            localStorage.setItem('savedVisas', JSON.stringify(visas));
+            renderTable('visasTableBody', visas, 'visas');
+            alert('تمت إضافة التأشيرة!');
+        }
+
+        // رسم الجداول
+        function renderTable(tbodyId, dataArray, type) {
+            const tbody = document.getElementById(tbodyId);
+            tbody.innerHTML = '';
+            dataArray.forEach((item, index) => {
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${item.title}</td>
+                        <td>${item.price}</td>
+                        <td>${item.duration}</td>
+                        <td><button class="delete-btn" onclick="deleteItem(${index}, '${type}')">حذف</button></td>
+                    </tr>
+                `;
+            });
+        }
+
+        // حذف عنصر
+        function deleteItem(index, type) {
+            if(type === 'offers') {
+                offers.splice(index, 1);
+                localStorage.setItem('savedOffers', JSON.stringify(offers));
+                renderTable('offersTableBody', offers, 'offers');
+            } else {
+                visas.splice(index, 1);
+                localStorage.setItem('savedVisas', JSON.stringify(visas));
+                renderTable('visasTableBody', visas, 'visas');
+            }
+        }
+
+        // مسح البيانات
+        function clearData() {
+            if(confirm('هل أنت متأكد من مسح جميع البيانات المخصصة؟ سيتم العودة للبيانات الافتراضية.')) {
+                localStorage.clear();
+                location.reload();
+            }
+        }
+
+        // التحميل الأولي للجداول
+        renderTable('offersTableBody', offers, 'offers');
+        renderTable('visasTableBody', visas, 'visas');
+    </script>
+</body>
+</html>
