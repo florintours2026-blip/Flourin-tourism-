@@ -256,13 +256,15 @@
             font-weight: 600;
             transition: background 0.3s;
         }
+<div class="logo-area" id="logo-container">
+    <img id="dynamic-logo" src="" alt="شعار الموقع" style="display: none; width: 55px; height: 55px; border-radius: 14px; object-fit: cover;">
+    <div class="logo-icon" id="default-logo-icon">✈</div>
+    <div class="logo-text">
+        <h1>فلورين</h1>
+        <span>للسفر والسياحة</span>
+    </div>
+</div>
 
-        .btn-card:hover {
-            background-color: var(--dark-color);
-        }
-    </style>
-</head>
-<body>
 
     <header>
         <div class="nav-container">
@@ -423,10 +425,19 @@
                         <input type="text" placeholder="أدخل اسمك الكريم" required>
                     </div>
                     <div class="form-group">
-                        <label>رقم الهاتف</label>
-                        <input type="tel" placeholder="05xxxxxxxx" required>
-                    </div>
-                    <div class="form-group">
+window.onload = () => {
+    renderCards(travelOffers, 'offers-container');
+    renderCards(visaOffers, 'visas-container');
+    
+    const savedLogo = localStorage.getItem('savedLogo');
+    if (savedLogo) {
+        document.getElementById('dynamic-logo').src = savedLogo;
+        document.getElementById('dynamic-logo').style.display = 'block';
+        document.getElementById('default-logo-icon').style.display = 'none';
+    }
+};
+
+
                         <label>نوع الخدمة</label>
                         <select required>
                             <option value="">اختر الخدمة...</option>
