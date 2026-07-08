@@ -3,394 +3,371 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>فلورين للسفر والسياحة</title>
+    <title>فلورين للسفر والسياحة - عروض سياحية وتأشيرات</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #D4A843;
-            --secondary-color: #8B912F;
-            --dark-color: #3D2E0A;
-            --bg-light: #FFFDF9;
-            --white: #ffffff;
-            --gray-light: #f4f4f4;
-            --shadow: 0 4px 15px rgba(212, 168, 67, 0.1);
+            --gold-matte: #D4A843;
+            --gold-light: #E8C876;
+            --gold-pale: #FDF6E8;
+            --white: #FFFFFF;
+            --off-white: #FFFAF0;
+            --text-dark: #2D2D2D;
+            --text-medium: #555555;
+            --text-light: #777777;
+            --border-gold: #E0C878;
+            --shadow-gold: rgba(212, 168, 67, 0.25);
+            --card-bg: #FFFFFF;
+            --hover-gold: #C49635;
         }
 
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Cairo', sans-serif;
+            box-sizing: border-box;
         }
 
         body {
-            background-color: var(--bg-light);
-            color: var(--dark-color);
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(180deg, #FFFDF7 0%, #FFFAF0 30%, #FFF8E7 100%);
+            color: var(--text-dark);
+            line-height: 1.7;
+            min-height: 100vh;
         }
 
-        /* الهيدر / شريط التنقل */
+        /* ============ الهيدر ============ */
         header {
-            background-color: var(--white);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            background: var(--white);
+            border-bottom: 3px solid var(--gold-matte);
+            padding: 0;
             position: sticky;
             top: 0;
-            z-index: 1000;
+            z-index: 100;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.06);
         }
 
-        .nav-container {
-            max-width: 1200px;
+        .header-inner {
+            max-width: 1100px;
             margin: 0 auto;
+            padding: 12px 20px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            padding: 15px 20px;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
         }
 
         .logo-area {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
-        .logo-text {
-            font-size: 24px;
-            font-weight: 800;
-            color: var(--primary-color);
-        }
-
-        .nav-links {
+        .logo-icon {
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, #D4A843, #B8912F);
+            border-radius: 14px;
             display: flex;
-            gap: 20px;
-            list-style: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: white;
+            box-shadow: 0 4px 15px var(--shadow-gold);
         }
 
-        .nav-links a {
-            text-decoration: none;
-            color: var(--dark-color);
+        .logo-text h1 {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #3D2E0A;
+            line-height: 1.2;
+        }
+
+        .logo-text span {
+            font-size: 0.75rem;
+            color: var(--gold-matte);
             font-weight: 600;
-            padding: 8px 16px;
-            border-radius: 20px;
+            letter-spacing: 1px;
+        }
+
+        nav {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--text-medium);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            padding: 10px 18px;
+            border-radius: 25px;
             transition: all 0.3s ease;
+            background: transparent;
+            white-space: nowrap;
         }
 
-        .nav-links a.active, .nav-links a:hover {
-            background-color: var(--primary-color);
-            color: var(--white);
+        nav a:hover, nav a.active {
+            background: var(--gold-matte);
+            color: white;
+            box-shadow: 0 4px 12px var(--shadow-gold);
         }
 
-        /* قسم الفورم الرئيسي */
-        .hero-form-section {
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 30px;
+        /* ============ القسم الترحيبي ============ */
+        .hero {
+            background: linear-gradient(135deg, #FFFDF7 0%, #FDF6E8 50%, #FFF8E1 100%);
+            padding: 60px 20px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-gold);
+        }
+
+        .hero h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #3D2E0A;
+            margin-bottom: 12px;
+        }
+
+        .hero .highlight {
+            color: var(--gold-matte);
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-medium);
+            max-width: 600px;
+            margin: 0 auto 25px;
+        }
+
+        /* ============ الحاوية الرئيسية ============ */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 35px;
+            margin-top: 20px;
+        }
+
+        .section-title h3 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #3D2E0A;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--gold-matte);
+            border-radius: 2px;
+        }
+
+        /* ============ بطاقات العروض والفيز ============ */
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+        }
+
+        .package-card {
+            background: var(--card-bg);
+            border: 1px solid #F0E4CC;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.35s ease;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .package-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 15px 40px var(--shadow-gold);
+            border-color: var(--gold-matte);
+        }
+
+        .package-image {
+            height: 200px;
+            background-color: #FDF6E8;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .package-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--gold-matte);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .package-info {
+            padding: 22px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .package-info h4 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #3D2E0A;
+            margin-bottom: 8px;
+        }
+
+        .package-info .duration {
+            color: var(--text-light);
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+        }
+
+        .package-info .features {
+            list-style: none;
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+
+        .package-info .features li {
+            font-size: 0.85rem;
+            color: var(--text-medium);
+            padding: 4px 0;
+            padding-right: 20px;
+            position: relative;
+        }
+
+        .package-info .features li::before {
+            content: '✓';
+            position: absolute;
+            right: 0;
+            color: var(--gold-matte);
+            font-weight: 700;
+        }
+
+        .package-price {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--gold-matte);
+            margin: 10px 0;
+        }
+
+        .btn-book {
+            display: block;
+            width: 100%;
+            padding: 13px;
+            background: var(--gold-matte);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .btn-book:hover {
+            background: var(--hover-gold);
+            box-shadow: 0 6px 20px var(--shadow-gold);
+        }
+
+        /* ============ نموذج الطلب ============ */
+        .order-section {
             background: var(--white);
-            border-radius: 16px;
-            box-shadow: var(--shadow);
+            border: 1px solid #F0E4CC;
+            border-radius: 20px;
+            padding: 35px;
+            margin-top: 40px;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.03);
         }
 
-        .form-row {
+        .form-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 20px;
+            gap: 18px;
         }
 
-        @media (max-width: 768px) {
-            .form-row { grid-template-columns: 1fr; }
+        @media (max-width: 600px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         .form-group {
             display: flex;
             flex-direction: column;
-            gap: 8px;
         }
 
-        .form-group label {
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            font-size: 0.9rem;
             font-weight: 700;
-            color: var(--dark-color);
+            color: #3D2E0A;
+            margin-bottom: 6px;
         }
 
-        .form-group input, .form-group select, .form-group textarea {
-            padding: 12px;
-            border: 1px solid #E0E0E0;
-            border-radius: 8px;
-            background-color: #FCFCFC;
-            font-size: 14px;
+        input, select, textarea {
+            padding: 13px 16px;
+            border: 2px solid #EDE4D0;
+            border-radius: 12px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 0.95rem;
+            background: #FFFDF9;
+            color: var(--text-dark);
+            transition: all 0.3s ease;
+        }
+
+        input:focus, select:focus, textarea:focus {
             outline: none;
-            transition: border-color 0.3s;
+            border-color: var(--gold-matte);
+            box-shadow: 0 0 0 3px var(--shadow-gold);
         }
-
-        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-            border-color: var(--primary-color);
-        }
-
-        .btn-submit {
-            width: 100%;
-            padding: 15px;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: var(--white);
-            border: none;
-            border-radius: 14px;
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .btn-submit:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(212, 168, 67, 0.3);
-        }
-
-        /* قسم الترحيب والتقديم */
-        .intro-section {
-            text-align: center;
-            padding: 60px 20px 40px;
-        }
-
-        .intro-section h1 {
-            font-size: 36px;
-            font-weight: 800;
-            margin-bottom: 15px;
-        }
-
-        .intro-section h1 span { color: var(--primary-color); }
-        .intro-section p { font-size: 18px; color: #666; }
-
-        /* الأقسام المشتركة للعروض والفيز */
-        .main-section {
-            max-width: 1200px;
-            margin: 0 auto 60px;
-            padding: 0 20px;
-        }
-
-        .section-title {
-            font-size: 28px;
-            font-weight: 800;
-            margin-bottom: 30px;
-            position: relative;
-            display: inline-block;
-            padding-bottom: 10px;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            width: 60px;
-            height: 4px;
-            background-color: var(--primary-color);
-            border-radius: 2px;
-        }
-
-        /* شبكة الكروت (Cards Grid) */
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .card {
-            background: var(--white);
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-            transition: transform 0.3s, box-shadow 0.3s;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(212, 168, 67, 0.2);
-        }
-
-        .card-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-
-        .card-content {
-            padding: 20px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .card-title {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-
-        .card-desc {
-            font-size: 14px;
-            color: #666;
-            margin-bottom: 15px;
-            line-height: 1.6;
-        }
-
-        .card-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 15px;
-        }
-
-        .card-price {
-            font-size: 18px;
-            font-weight: 800;
-            color: var(--secondary-color);
-        }
-
-        .btn-card {
-            padding: 8px 16px;
-            background-color: var(--primary-color);
-            color: var(--white);
-            text-decoration: none;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 600;
-            transition: background 0.3s;
-        }
-<div class="logo-area" id="logo-container">
-    <img id="dynamic-logo" src="" alt="شعار الموقع" style="display: none; width: 55px; height: 55px; border-radius: 14px; object-fit: cover;">
-    <div class="logo-icon" id="default-logo-icon">✈</div>
-    <div class="logo-text">
-        <h1>فلورين</h1>
-        <span>للسفر والسياحة</span>
-    </div>
-</div>
-
+    </style>
+</head>
+<body>
 
     <header>
-        <div class="nav-container">
+        <div class="header-inner">
             <div class="logo-area">
-                <span class="logo-text">فلورين</span>
+                <div class="logo-icon">✈</div>
+                <div class="logo-text">
+                    <h1>فلورين</h1>
+                    <span>للسفر والسياحة</span>
+                </div>
             </div>
-            <ul class="nav-links">
-                <li><a href="#" class="active">الرئيسية</a></li>
-                <li><a href="#visas">تأشيرات السفر</a></li>
-                <li><a href="#packages">البكجات السياحية</a></li>
-                <li><a href="#">تواصل معنا</a></li>
-            </ul>
+            <nav>
+                <a href="#offers" class="active">العروض السياحية</a>
+                <a href="#visas">تأشيرات السفر (فيز)</a>
+                <a href="#booking">احجز الآن</a>
+            </nav>
         </div>
     </header>
 
-    <section class="hero-form-section">
-        <form>
-            <div class="form-row">
-                <div class="form-group">
-                    <label>نوع الخدمة</label>
-                    <select>
-                        <option>اختر الخدمة...</option>
-                        <option>تأشيرة سفر (فيزا)</option>
-                        <option>بكج سياحي متكامل</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>الوجهة المطلوبة</label>
-                    <input type="text" placeholder="مثال: جورجيا، تأشيرة بريطانيا...">
-                </div>
-            </div>
-            <div class="form-group" style="margin-bottom: 20px;">
-                <label>ملاحظات إضافية</label>
-                <textarea rows="4" placeholder="اكتب تفاصيل طلبك هنا..."></textarea>
-            </div>
-            <button type="submit" class="btn-submit">إرسال الطلب</button>
-        </form>
-    </section>
-
-    <section class="intro-section">
-        <h1>اكتشف العالم مع <span>فلورين</span></h1>
-        <p>نقدم لك أفضل العروض السياحية إلى أجمل الوجهات العالمية بأفضل الأسعار وأعلى مستويات الخدمة</p>
-        <p style="margin-top: 10px; font-weight: bold; color: var(--primary-color);">☀️ عروض حصرية لهذا الموسم ☀️</p>
-    </section>
-
-    <section id="visas" class="main-section">
-        <h2 class="section-title">تأشيرات السفر والمعاملات (الفيز)</h2>
-        <div class="cards-grid">
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=cover&w=500&q=80" alt="تأشيرة بريطانيا" class="card-image">
-                <div class="card-content">
-                    <h3 class="card-title">تأشيرة المملكة المتحدة (بريطانيا)</h3>
-                    <p class="card-desc">تخليص كافه الأوراق وحجز المواعيد وتعبئة الأبلكيشن باحترافية لضمان أعلى نسبة قبول.</p>
-                    <div class="card-footer">
-                        <span class="card-price">عرض خاص</span>
-                        <a href="#" class="btn-card">قدم الآن</a>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1485738422979-f5c462d49f74?auto=format&fit=cover&w=500&q=80" alt="تأشيرة أمريكا" class="card-image">
-                <div class="card-content">
-                    <h3 class="card-title">تأشيرة الولايات المتحدة الأمريكية</h3>
-                    <p class="card-desc">إعداد ملف متكامل مع تحضير شامل للمقابلة الشخصية في السفارة خطوة بخطوة.</p>
-                    <div class="card-footer">
-                        <span class="card-price">تواصل معنا</span>
-                        <a href="#" class="btn-card">قدم الآن</a>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1471623322305-1e42b95ce336?auto=format&fit=cover&w=500&q=80" alt="تأشيرة الشنغن" class="card-image">
-                <div class="card-content">
-                    <h3 class="card-title">تأشيرة دول الشنغن الأوروبية</h3>
-                    <p class="card-desc">تأمين طبي معتمد، حجز طيران وفندق مبدئي، وتجهيز الملف لجميع دول أوروبا.</p>
-                    <div class="card-footer">
-                        <span class="card-price">أفضل سعر</span>
-                        <a href="#" class="btn-card">قدم الآن</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="packages" class="main-section">
-        <h2 class="section-title">البكجات السياحية المميزة</h2>
-        <div class="cards-grid">
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?auto=format&fit=cover&w=500&q=80" alt="بكج البرازيل" class="card-image">
-                <div class="card-content">
-                    <h3 class="card-title">برنامج سياحي متكامل - البرازيل</h3>
-                    <p class="card-desc">شامل الطيران الدولي، الفنادق 5 نجوم، الجولات السياحية مع مرشد عربي محترف.</p>
-                    <div class="card-footer">
-                        <span class="card-price">لفترة محدودة</span>
-                        <a href="#" class="btn-card">احجز الآن</a>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=cover&w=500&q=80" alt="بكج بالي" class="card-image">
-                <div class="card-content">
-                    <h3 class="card-title">منتجعات بالي الساحرة - إندونيسيا</h3>
-                    <p class="card-desc">رحلة الاسترخاء المثالية لشخصين شاملة الإقامة في فيلا خاصة مع مسبح وتوصيل مجاني.</p>
-                    <div class="card-footer">
-                        <span class="card-price">عرض العرسان</span>
-                        <a href="#" class="btn-card">احجز الآن</a>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=cover&w=500&q=80" alt="بكج جورجيا" class="card-image">
-                <div class="card-content">
-                    <h3 class="card-title">طبيعة جورجيا الخلابة - تبليسي وباتومي</h3>
-                    <p class="card-desc">رحلة عائلية ممتعة لمدة 8 أيام تغطي أجمل المعالم الطبيعية والجبلية بأسعار اقتصادية.</p>
-                    <div class="card-footer">
-                        <span class="card-price">شعبية كبرى</span>
-                        <a href="#" class="btn-card">احجز الآن</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-</body>
-</html>
-تسهيلات استخراج التأشيرات لضمان رحلة لا تُنسى.</p>
+    <div class="hero">
+        <h2>اكتشف العالم مع <span class="highlight">فلورين</span></h2>
+        <p>نقدم لك أفضل العروض السياحية وتسهيلات استخراج التأشيرات لضمان رحلة لا تُنسى.</p>
     </div>
 
     <div class="container">
@@ -424,24 +401,11 @@
                         <label>الاسم الكامل</label>
                         <input type="text" placeholder="أدخل اسمك الكريم" required>
                     </div>
-                    <div class=window.onload = () => {
-    renderCards(travelOffers, 'offers-container');
-    renderCards(visaOffers, 'visas-container');
-};window.onload = () => {
-    renderCards(travelOffers, 'offers-container');
-    renderCards(visaOffers, 'visas-container');
-};
-        
-
-    const savedLogo = localStorage.getItem('savedLogo');
-    if (savedLogo) {
-        document.getElementById('dynamic-logo').src = savedLogo;
-        document.getElementById('dynamic-logo').style.display = 'block';
-        document.getElementById('default-logo-icon').style.display = 'none';
-    }
-};
-
-
+                    <div class="form-group">
+                        <label>رقم الهاتف</label>
+                        <input type="tel" placeholder="05xxxxxxxx" required>
+                    </div>
+                    <div class="form-group">
                         <label>نوع الخدمة</label>
                         <select required>
                             <option value="">اختر الخدمة...</option>
@@ -558,576 +522,3 @@
     </script>
 </body>
 </html>
-0 0 4px rgba(212, 168, 67, 0.08);
-            background: white;
-        }
-
-        textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
-
-        .btn-submit {
-            width: 100%;
-            padding: 15px;
-            background: linear-gradient(135deg, #D4A843, #B8912F);
-            color: white;
-            border: none;
-            border-radius: 14px;
-            font-family: 'Cairo', sans-serif;
-            font-size: 1.1rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 10px;
-            box-shadow: 0 6px 20px var(--shadow-gold);
-        }
-
-        .btn-submit:hover {
-            background: linear-gradient(135deg, #C49635, #A07D25);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(212, 168, 67, 0.35);
-        }
-
-        /* ============ معلومات الاتصال ============ */
-        .contact-bar {
-            background: var(--white);
-            border-top: 1px solid #F0E4CC;
-            border-bottom: 1px solid #F0E4CC;
-            padding: 20px;
-            text-align: center;
-            margin-top: 40px;
-        }
-
-        .contact-bar .email {
-            color: var(--gold-matte);
-            font-weight: 700;
-            font-size: 1.05rem;
-            direction: ltr;
-            display: inline-block;
-        }
-
-        /* ============ نظام المحادثة ============ */
-        #chat-bubble {
-            position: fixed;
-            bottom: 25px;
-            left: 25px;
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #D4A843, #B8912F);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 26px;
-            cursor: pointer;
-            z-index: 1000;
-            box-shadow: 0 6px 25px rgba(212, 168, 67, 0.45);
-            transition: all 0.3s ease;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { box-shadow: 0 6px 25px rgba(212, 168, 67, 0.45); }
-            50% { box-shadow: 0 6px 35px rgba(212, 168, 67, 0.7); }
-        }
-
-        #chat-bubble:hover {
-            transform: scale(1.08);
-        }
-
-        #chat-window {
-            position: fixed;
-            bottom: 95px;
-            left: 25px;
-            width: 370px;
-            max-width: calc(100vw - 50px);
-            background: white;
-            border: 2px solid var(--border-gold);
-            border-radius: 18px;
-            display: none;
-            flex-direction: column;
-            z-index: 1000;
-            box-shadow: 0 15px 50px rgba(0,0,0,0.15);
-            overflow: hidden;
-        }
-
-        .chat-header {
-            background: linear-gradient(135deg, #D4A843, #B8912F);
-            color: white;
-            padding: 15px 20px;
-            font-weight: 700;
-            font-size: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .chat-header .close-chat {
-            background: rgba(255,255,255,0.25);
-            border: none;
-            color: white;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s;
-        }
-
-        .chat-header .close-chat:hover {
-            background: rgba(255,255,255,0.4);
-        }
-
-        .chat-body {
-            height: 280px;
-            padding: 15px;
-            overflow-y: auto;
-            background: #FFFDF9;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .chat-message {
-            max-width: 85%;
-            padding: 12px 16px;
-            border-radius: 16px;
-            font-size: 0.85rem;
-            line-height: 1.5;
-            animation: fadeIn 0.3s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(8px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .chat-message.bot {
-            background: #FDF6E8;
-            color: #3D2E0A;
-            align-self: flex-end;
-            border-bottom-left-radius: 4px;
-            border: 1px solid #F0E4CC;
-        }
-
-        .chat-message.user {
-            background: var(--gold-matte);
-            color: white;
-            align-self: flex-start;
-            border-bottom-right-radius: 4px;
-        }
-
-        .chat-footer {
-            display: flex;
-            padding: 12px;
-            gap: 10px;
-            border-top: 1px solid #F0E4CC;
-            background: white;
-        }
-
-        .chat-footer input {
-            flex-grow: 1;
-            padding: 12px 16px;
-            border: 2px solid #EDE4D0;
-            border-radius: 25px;
-            font-family: 'Cairo', sans-serif;
-            font-size: 0.9rem;
-            background: #FFFDF9;
-            margin-bottom: 0;
-        }
-
-        .chat-footer input:focus {
-            border-color: var(--gold-matte);
-            outline: none;
-        }
-
-        .chat-footer button {
-            background: var(--gold-matte);
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 25px;
-            font-family: 'Cairo', sans-serif;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s;
-            white-space: nowrap;
-        }
-
-        .chat-footer button:hover {
-            background: var(--hover-gold);
-        }
-
-        /* ============ الفوتر ============ */
-        footer {
-            background: var(--white);
-            border-top: 3px solid var(--gold-matte);
-            padding: 25px;
-            text-align: center;
-            color: var(--text-light);
-            font-size: 0.85rem;
-            margin-top: 50px;
-        }
-
-        footer .footer-brand {
-            color: var(--gold-matte);
-            font-weight: 700;
-        }
-
-        /* ============ رسالة النجاح ============ */
-        .success-message {
-            display: none;
-            background: #F0F9EB;
-            border: 2px solid #A8D88A;
-            color: #3D6B24;
-            padding: 16px 22px;
-            border-radius: 14px;
-            text-align: center;
-            font-weight: 600;
-            margin-top: 20px;
-            animation: fadeIn 0.4s ease;
-        }
-
-        /* ============ تجاوب ============ */
-        @media (max-width: 768px) {
-            .hero h2 {
-                font-size: 1.6rem;
-            }
-            .header-inner {
-                flex-direction: column;
-                text-align: center;
-            }
-            nav {
-                justify-content: center;
-            }
-            nav a {
-                font-size: 0.8rem;
-                padding: 8px 14px;
-            }
-            #chat-window {
-                width: calc(100vw - 40px);
-                left: 20px;
-                bottom: 85px;
-            }
-        }
-    </style>
-</head>
-<body>
-
-    <!-- ==================== الهيدر ==================== -->
-    <header>
-        <div class="header-inner">
-            <div class="logo-area">
-                <div class="logo-icon">✈</div>
-                <div class="logo-text">
-                    <h1>فلورين</h1>
-                    <span>للسفر والسياحة</span>
-                </div>
-            </div>
-            <nav>
-                <a href="#offers" class="active">العروض</a>
-                <a href="#order">احجز الآن</a>
-                <a href="#contact">تواصل معنا</a>
-            </nav>
-        </div>
-    </header>
-
-    <!-- ==================== القسم الترحيبي ==================== -->
-    <section class="hero">
-        <h2>اكتشف العالم مع <span class="highlight">فلورين</span></h2>
-        <p>نقدم لك أفضل العروض السياحية إلى أجمل الوجهات العالمية بأفضل الأسعار وأعلى مستويات الخدمة</p>
-        <div class="hero-badge">🌟 عروض حصرية لهذا الموسم</div>
-    </section>
-
-    <!-- ==================== العروض السياحية ==================== -->
-    <div class="container" id="offers">
-        <div class="section-title">
-            <h3>بكجاتنا السياحية المميزة</h3>
-            <p>اختر وجهتك المفضلة ودعنا نتولى كافة الترتيبات</p>
-        </div>
-
-        <div class="packages-grid">
-            <!-- عرض 1 -->
-            <div class="package-card">
-                <div class="package-image">
-                    🕌
-                    <span class="package-badge">الأكثر طلباً</span>
-                </div>
-                <div class="package-info">
-                    <h4>بكاج إسطنبول الذهبي</h4>
-                    <p class="duration">📅 7 أيام / 6 ليالي</p>
-                    <ul class="features">
-                        <li>تذاكر طيران ذهاب وعودة</li>
-                        <li>إقامة فندق 5 نجوم مع إفطار</li>
-                        <li>جولات سياحية في المدينة القديمة</li>
-                        <li>رحلة البوسفور البحرية</li>
-                        <li>تأمين سفر شامل</li>
-                    </ul>
-                    <div class="package-price">4,200 ريال <small>/ للشخص</small></div>
-                    <a href="#order" class="btn-book">احجز هذا العرض</a>
-                </div>
-            </div>
-
-            <!-- عرض 2 -->
-            <div class="package-card">
-                <div class="package-image">
-                    🏖
-                    <span class="package-badge">عرض الصيف</span>
-                </div>
-                <div class="package-info">
-                    <h4>بكاج شرم الشيخ الساحر</h4>
-                    <p class="duration">📅 5 أيام / 4 ليالي</p>
-                    <ul class="features">
-                        <li>تذاكر طيران مباشر</li>
-                        <li>منتجع شامل كافة الوجبات</li>
-                        <li>رحلات غوص وسنوركلينج</li>
-                        <li>جولة سفاري صحراوية</li>
-                        <li>استقبال خاص في المطار</li>
-                    </ul>
-                    <div class="package-price">3,600 ريال <small>/ للشخص</small></div>
-                    <a href="#order" class="btn-book">احجز هذا العرض</a>
-                </div>
-            </div>
-
-            <!-- عرض 3 -->
-            <div class="package-card">
-                <div class="package-image">
-                    🌴
-                    <span class="package-badge">شهر العسل</span>
-                </div>
-                <div class="package-info">
-                    <h4>بكاج المالديف الرومانسي</h4>
-                    <p class="duration">📅 6 أيام / 5 ليالي</p>
-                    <ul class="features">
-                        <li>تذاكر طيران درجة رجال الأعمال</li>
-                        <li>فيلا فوق الماء خاصة</li>
-                        <li>عشاء رومانسي على الشاطئ</li>
-                        <li>جلسة سبا للزوجين</li>
-                        <li>باقة ورود وشوكولاتة ترحيبية</li>
-                    </ul>
-                    <div class="package-price">11,500 ريال <small>/ للزوجين</small></div>
-                    <a href="#order" class="btn-book">احجز هذا العرض</a>
-                </div>
-            </div>
-
-            <!-- عرض 4 -->
-            <div class="package-card">
-                <div class="package-image">
-                    🗼
-                    <span class="package-badge">جديد</span>
-                </div>
-                <div class="package-info">
-                    <h4>بكاج كوالالمبور وسنغافورة</h4>
-                    <p class="duration">📅 10 أيام / 9 ليالي</p>
-                    <ul class="features">
-                        <li>تذاكر طيران متعدد الوجهات</li>
-                        <li>فنادق 4 نجوم في المدينتين</li>
-                        <li>جولة في برجي بتروناس</li>
-                        <li>تذاكر يونيفرسال ستوديو سنغافورة</li>
-                        <li>مواصلات خاصة بين المدن</li>
-                    </ul>
-                    <div class="package-price">7,800 ريال <small>/ للشخص</small></div>
-                    <a href="#order" class="btn-book">احجز هذا العرض</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ==================== نموذج الطلب ==================== -->
-    <div class="container" id="order">
-        <div class="order-section">
-            <div class="section-title">
-                <h3>نموذج طلب الحجز</h3>
-                <p>املأ البيانات التالية وسنتواصل معك خلال 24 ساعة</p>
-            </div>
-
-            <form id="bookingForm">
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label>الاسم الكامل <span class="required">*</span></label>
-                        <input type="text" id="fullName" placeholder="أدخل اسمك الكامل" required>
-                    </div>
-                    <div class="form-group">
-                        <label>رقم الجوال <span class="required">*</span></label>
-                        <input type="tel" id="phone" placeholder="05xxxxxxxx" required dir="ltr">
-                    </div>
-                    <div class="form-group">
-                        <label>البريد الإلكتروني</label>
-                        <input type="email" id="email" placeholder="example@email.com" dir="ltr">
-                    </div>
-                    <div class="form-group">
-                        <label>اختر البكاج <span class="required">*</span></label>
-                        <select id="package" required>
-                            <option value="">-- اختر البكاج المناسب --</option>
-                            <option value="istanbul">بكاج إسطنبول الذهبي - 4,200 ريال</option>
-                            <option value="sharm">بكاج شرم الشيخ الساحر - 3,600 ريال</option>
-                            <option value="maldives">بكاج المالديف الرومانسي - 11,500 ريال</option>
-                            <option value="malaysia">بكاج كوالالمبور وسنغافورة - 7,800 ريال</option>
-                            <option value="custom">بكاج مخصص (أخرى)</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>عدد المسافرين <span class="required">*</span></label>
-                        <input type="number" id="travelers" placeholder="عدد الأشخاص" min="1" value="1" required>
-                    </div>
-                    <div class="form-group">
-                        <label>التاريخ المفضل للسفر</label>
-                        <input type="date" id="travelDate">
-                    </div>
-                    <div class="form-group full">
-                        <label>ملاحظات إضافية</label>
-                        <textarea id="notes" placeholder="أي تفاصيل أو طلبات خاصة تود إضافتها..."></textarea>
-                    </div>
-                </div>
-                <button type="submit" class="btn-submit">📩 إرسال طلب الحجز</button>
-            </form>
-
-            <div class="success-message" id="successMsg">
-                ✅ تم استلام طلبك بنجاح! سنتواصل معك قريباً على الرقم المدخل.
-            </div>
-        </div>
-    </div>
-
-    <!-- ==================== شريط التواصل ==================== -->
-    <div class="contact-bar" id="contact">
-        <p style="font-weight:700; color:#3D2E0A; margin-bottom:5px;">📧 للتواصل المباشر</p>
-        <p class="email">flournitourism2026@gmail.com</p>
-    </div>
-
-    <!-- ==================== نظام المحادثة الذكي ==================== -->
-    <div id="chat-bubble" onclick="toggleChat()" title="تحدث معنا">💬</div>
-
-    <div id="chat-window">
-        <div class="chat-header">
-            <span>💬 خدمة العملاء - فلورين</span>
-            <button class="close-chat" onclick="toggleChat()">✕</button>
-        </div>
-        <div class="chat-body" id="chatBody">
-            <div class="chat-message bot">
-                مرحباً بك في فلورين للسفر والسياحة! 🌍<br>
-                كيف يمكنني مساعدتك اليوم؟ يمكنك السؤال عن:
-                <br>• العروض المتاحة
-                <br>• الأسعار والتفاصيل
-                <br>• طريقة الحجز
-            </div>
-        </div>
-        <div class="chat-footer">
-            <input type="text" id="chatInput" placeholder="اكتب رسالتك هنا..." onkeypress="handleChatEnter(event)">
-            <button onclick="sendMessage()">إرسال</button>
-        </div>
-    </div>
-
-    <!-- ==================== الفوتر ==================== -->
-    <footer>
-        <p>© 2026 جميع الحقوق محفوظة | <span class="footer-brand">فلورين للسفر والسياحة</span></p>
-        <p style="margin-top:5px;">نحن هنا لخدمتكم على مدار الساعة | رحلات آمنة وممتعة</p>
-    </footer>
-
-    <!-- ==================== السكريبتات ==================== -->
-    <script>
-        // ========== نظام المحادثة ==========
-        function toggleChat() {
-            const window = document.getElementById('chat-window');
-            window.style.display = window.style.display === 'flex' ? 'none' : 'flex';
-        }
-
-        function handleChatEnter(event) {
-            if (event.key === 'Enter') {
-                sendMessage();
-            }
-        }
-
-        function sendMessage() {
-            const input = document.getElementById('chatInput');
-            const message = input.value.trim();
-            if (!message) return;
-
-            const chatBody = document.getElementById('chatBody');
-
-            // إضافة رسالة المستخدم
-            const userMsg = document.createElement('div');
-            userMsg.className = 'chat-message user';
-            userMsg.textContent = message;
-            chatBody.appendChild(userMsg);
-
-            input.value = '';
-            chatBody.scrollTop = chatBody.scrollHeight;
-
-            // محاكاة رد البوت
-            setTimeout(() => {
-                const botMsg = document.createElement('div');
-                botMsg.className = 'chat-message bot';
-                botMsg.textContent = generateBotResponse(message);
-                chatBody.appendChild(botMsg);
-                chatBody.scrollTop = chatBody.scrollHeight;
-            }, 800);
-        }
-
-        function generateBotResponse(msg) {
-            const lower = msg.toLowerCase();
-
-            if (lower.includes('عرض') || lower.includes('بكاج') || lower.includes('بكج') || lower.includes('رحلة')) {
-                return 'لدينا عدة عروض مميزة:\n🏙 إسطنبول - 4,200 ريال (7 أيام)\n🏖 شرم الشيخ - 3,600 ريال (5 أيام)\n🌴 المالديف - 11,500 ريال (6 أيام)\n🗼 كوالالمبور وسنغافورة - 7,800 ريال (10 أيام)\n\nأي عرض يثير اهتمامك؟';
-            }
-            if (lower.includes('سعر') || lower.includes('تكلفة') || lower.includes('ريال') || lower.includes('كم')) {
-                return 'أسعارنا تبدأ من 3,600 ريال لبكاج شرم الشيخ وحتى 11,500 ريال لبكاج المالديف الفاخر. جميع البكجات تشمل الطيران والإقامة والجولات. هل تود معرفة تفاصيل عرض محدد؟';
-            }
-            if (lower.includes('حجز') || lower.includes('احجز') || lower.includes('طريقة') || lower.includes('كيف')) {
-                return 'للحجز، قم بتعبئة نموذج الطلب في الأسفل ببياناتك (الاسم، الجوال، البكاج المطلوب) وسنتواصل معك خلال 24 ساعة لتأكيد الحجز. يمكنك أيضاً مراسلتنا على:\n📧 flournitourism2026@gmail.com';
-            }
-            if (lower.includes('سلام') || lower.includes('مرحبا') || lower.includes('هلا') || lower.includes('اهلا')) {
-                return 'وعليكم السلام! مرحباً بك في فلورين للسفر والسياحة. كيف أقدر أخدمك اليوم؟';
-            }
-            if (lower.includes('شكرا') || lower.includes('شكراً') || lower.includes('تسلم')) {
-                return 'العفو! سعداء بخدمتك. إذا احتجت أي مساعدة أخرى، لا تتردد في التواصل معنا. رحلة سعيدة! ✈️';
-            }
-
-            return 'شكراً لتواصلك مع فلورين للسفر والسياحة. سأقوم بإيصال استفسارك لفريق خدمة العملاء. يمكنك أيضاً مراسلتنا مباشرة على:\n📧 flournitourism2026@gmail.com\n📞 أو تعبئة نموذج الحجز أدناه.';
-        }
-
-        // ========== نموذج الحجز ==========
-        document.getElementById('bookingForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            const fullName = document.getElementById('fullName').value.trim();
-            const phone = document.getElementById('phone').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const packageSelect = document.getElementById('package');
-            const packageName = packageSelect.options[packageSelect.selectedIndex].text;
-            const travelers = document.getElementById('travelers').value;
-            const travelDate = document.getElementById('travelDate').value;
-            const notes = document.getElementById('notes').value.trim();
-
-            if (!fullName || !phone || !packageSelect.value) {
-                alert('الرجاء تعبئة الحقول المطلوبة (الاسم، رقم الجوال، البكاج)');
-                return;
-            }
-
-            // تجميع البيانات
-            const bookingData = {
-                name: fullName,
-                phone: phone,
-                email: email,
-                package: packageName,
-                travelers: travelers,
-                date: travelDate,
-                notes: notes,
-                timestamp: new Date().toLocaleString('ar-SA')
-            };
-
-            console.log('بيانات الحجز:', bookingData);
-
-            // عرض رسالة النجاح
-            document.getElementById('successMsg').style.display =
-                    <h4>بكاج شرم الشيخ الساحر</h4>
-                    <p class="duration">📅 5 أيام / 4 ليالي</p>
-                    <ul class="features">
-                        <li>تذاكر طيران مباشر</li>
-                        <li>منتجع شامل كافة الوجبات</li>
-                        <li>رحلات غوص وسنوركلينج</li>
-                        <li>جولة سفاري صحراوية</li>
-        
