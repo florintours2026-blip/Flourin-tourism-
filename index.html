@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>فلورين للسفر والسياحة - عروض سياحية مميزة</title>
+    <title>فلورين للسفر والسياحة - عروض سياحية وتأشيرات</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -142,17 +142,6 @@
             margin: 0 auto 25px;
         }
 
-        .hero-badge {
-            display: inline-block;
-            background: var(--gold-matte);
-            color: white;
-            padding: 10px 25px;
-            border-radius: 30px;
-            font-weight: 700;
-            font-size: 0.9rem;
-            box-shadow: 0 4px 15px var(--shadow-gold);
-        }
-
         /* ============ الحاوية الرئيسية ============ */
         .container {
             max-width: 1100px;
@@ -163,6 +152,7 @@
         .section-title {
             text-align: center;
             margin-bottom: 35px;
+            margin-top: 20px;
         }
 
         .section-title h3 {
@@ -185,13 +175,7 @@
             border-radius: 2px;
         }
 
-        .section-title p {
-            color: var(--text-light);
-            margin-top: 12px;
-            font-size: 0.95rem;
-        }
-
-        /* ============ بطاقات العروض ============ */
+        /* ============ بطاقات العروض والفيز ============ */
         .packages-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -217,11 +201,9 @@
 
         .package-image {
             height: 200px;
-            background: linear-gradient(135deg, #FDF6E8, #F5E6C8);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 60px;
+            background-color: #FDF6E8;
+            background-size: cover;
+            background-position: center;
             position: relative;
         }
 
@@ -286,12 +268,6 @@
             margin: 10px 0;
         }
 
-        .package-price small {
-            font-size: 0.75rem;
-            color: var(--text-light);
-            font-weight: 400;
-        }
-
         .btn-book {
             display: block;
             width: 100%;
@@ -312,7 +288,6 @@
         .btn-book:hover {
             background: var(--hover-gold);
             box-shadow: 0 6px 20px var(--shadow-gold);
-            transform: translateY(-2px);
         }
 
         /* ============ نموذج الطلب ============ */
@@ -353,10 +328,6 @@
             margin-bottom: 6px;
         }
 
-        label .required {
-            color: #D4A843;
-        }
-
         input, select, textarea {
             padding: 13px 16px;
             border: 2px solid #EDE4D0;
@@ -371,7 +342,187 @@
         input:focus, select:focus, textarea:focus {
             outline: none;
             border-color: var(--gold-matte);
-            box-shadow: 0 0 0 4px rgba(212, 168, 67, 0.08);
+            box-shadow: 0 0 0 3px var(--shadow-gold);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-inner">
+            <div class="logo-area">
+                <div class="logo-icon">✈</div>
+                <div class="logo-text">
+                    <h1>فلورين</h1>
+                    <span>للسفر والسياحة</span>
+                </div>
+            </div>
+            <nav>
+                <a href="#offers" class="active">العروض السياحية</a>
+                <a href="#visas">تأشيرات السفر (فيز)</a>
+                <a href="#booking">احجز الآن</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="hero">
+        <h2>اكتشف العالم مع <span class="highlight">فلورين</span></h2>
+        <p>نقدم لك أفضل العروض السياحية وتسهيلات استخراج التأشيرات لضمان رحلة لا تُنسى.</p>
+    </div>
+
+    <div class="container">
+        
+        <!-- قسم العروض السياحية -->
+        <div class="section-title" id="offers">
+            <h3>أحدث العروض السياحية</h3>
+            <p>اختر وجهتك المفضلة واستمتع بأسعار تنافسية</p>
+        </div>
+        <div class="packages-grid" id="offers-container">
+            <!-- سيتم حقن العروض هنا بواسطة جافاسكريبت -->
+        </div>
+
+        <!-- قسم التأشيرات (الفيز) -->
+        <div class="section-title" id="visas">
+            <h3>تأشيرات السفر (الفيز)</h3>
+            <p>استخراج تأشيرات سياحية ودراسية بأسرع وقت</p>
+        </div>
+        <div class="packages-grid" id="visas-container">
+            <!-- سيتم حقن التأشيرات هنا بواسطة جافاسكريبت -->
+        </div>
+
+        <!-- قسم الحجز -->
+        <div class="order-section" id="booking">
+            <div class="section-title">
+                <h3>نموذج طلب حجز / استفسار</h3>
+            </div>
+            <form>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>الاسم الكامل</label>
+                        <input type="text" placeholder="أدخل اسمك الكريم" required>
+                    </div>
+                    <div class="form-group">
+                        <label>رقم الهاتف</label>
+                        <input type="tel" placeholder="05xxxxxxxx" required>
+                    </div>
+                    <div class="form-group">
+                        <label>نوع الخدمة</label>
+                        <select required>
+                            <option value="">اختر الخدمة...</option>
+                            <option value="offer">حجز عرض سياحي</option>
+                            <option value="visa">استخراج تأشيرة (فيزا)</option>
+                            <option value="other">استفسار عام</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>الوجهة المطلوبة</label>
+                        <input type="text" placeholder="مثال: جورجيا، تأشيرة بريطانيا...">
+                    </div>
+                    <div class="form-group full">
+                        <label>ملاحظات إضافية</label>
+                        <textarea rows="4" placeholder="اكتب تفاصيل طلبك هنا..."></textarea>
+                    </div>
+                    <div class="form-group full">
+                        <button type="submit" class="btn-book">إرسال الطلب</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    <!-- لوحة التحكم المصغرة (بيانات الموقع) -->
+    <script>
+        // 1. بيانات العروض السياحية (يمكنك تعديلها، إضافة عروض جديدة، أو تغيير الصور والأسعار من هنا)
+        const travelOffers = [
+            {
+                title: "عطلة في جورجيا",
+                duration: "7 أيام / 6 ليالي",
+                badge: "الأكثر مبيعاً",
+                image: "https://images.unsplash.com/photo-1541358101376-79f9024041d8?auto=format&fit=crop&w=600&q=80",
+                features: ["تذاكر الطيران ذهاب وعودة", "إقامة في فنادق 4 نجوم", "وجبة الإفطار يومياً", "جولات سياحية مع مرشد"],
+                price: "2,499 ريال"
+            },
+            {
+                title: "سحر المالديف",
+                duration: "5 أيام / 4 ليالي",
+                badge: "عرض خاص",
+                image: "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=600&q=80",
+                features: ["إقامة في فيلا فوق الماء", "استقبال وتوديع بالمطار", "جميع الوجبات (شامل)", "أنشطة بحرية مجانية"],
+                price: "5,800 ريال"
+            },
+            {
+                title: "استكشاف تركيا",
+                duration: "10 أيام / 9 ليالي",
+                badge: "جديد",
+                image: "https://images.unsplash.com/photo-1522083111822-42f275685d56?auto=format&fit=crop&w=600&q=80",
+                features: ["زيارة إسطنبول وطرابزون", "طيران داخلي", "فنادق ممتازة", "رحلة بحرية في البوسفور"],
+                price: "3,200 ريال"
+            }
+        ];
+
+        // 2. بيانات التأشيرات (يمكنك إضافة دول جديدة أو تعديل المتطلبات والأسعار)
+        const visaOffers = [
+            {
+                title: "تأشيرة الشنغن (أوروبا)",
+                duration: "مدة الاستخراج: 14-21 يوم عمل",
+                badge: "مطلوبة بكثرة",
+                image: "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=600&q=80",
+                features: ["تعبئة النماذج وتجهيز الملف", "حجز موعد البصمة", "حجوزات مبدئية (طيران وفندق)", "استشارات مجانية للمقابلة"],
+                price: "450 ريال"
+            },
+            {
+                title: "تأشيرة بريطانيا (UK)",
+                duration: "مدة الاستخراج: 15-30 يوم عمل",
+                badge: "سياحية",
+                image: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=600&q=80",
+                features: ["ترجمة المستندات المطلوبة", "تعبئة طلب التأشيرة بدقة", "رفع الأوراق على الموقع الرسمي", "متابعة حالة الطلب"],
+                price: "600 ريال"
+            },
+            {
+                title: "تأشيرة دبي (الإمارات)",
+                duration: "مدة الاستخراج: 2-4 أيام عمل",
+                badge: "سريعة",
+                image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=600&q=80",
+                features: ["تأشيرة إلكترونية بالكامل", "صلاحية دخول لمدة 30 يوم", "لا تتطلب حضور شخصي", "تأمين صحي مشمول"],
+                price: "350 ريال"
+            }
+        ];
+
+        // دالة مساعدة لإنشاء البطاقات ديناميكياً
+        function renderCards(dataArray, containerId) {
+            const container = document.getElementById(containerId);
+            dataArray.forEach(item => {
+                const featuresList = item.features.map(f => `<li>${f}</li>`).join('');
+                const cardHTML = `
+                    <div class="package-card">
+                        <div class="package-image" style="background-image: url('${item.image}')">
+                            ${item.badge ? `<span class="package-badge">${item.badge}</span>` : ''}
+                        </div>
+                        <div class="package-info">
+                            <h4>${item.title}</h4>
+                            <div class="duration">${item.duration}</div>
+                            <ul class="features">
+                                ${featuresList}
+                            </ul>
+                            <div class="package-price">${item.price}</div>
+                            <a href="#booking" class="btn-book">طلب الخدمة</a>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += cardHTML;
+            });
+        }
+
+        // تشغيل دوال العرض عند تحميل الصفحة
+        window.onload = () => {
+            renderCards(travelOffers, 'offers-container');
+            renderCards(visaOffers, 'visas-container');
+        };
+    </script>
+</body>
+</html>
+0 0 4px rgba(212, 168, 67, 0.08);
             background: white;
         }
 
