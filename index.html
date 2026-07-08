@@ -3,20 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Florin Tours - فلورين لخدمات السفر والسياحة</title>
+    <title>فلورين للسفر والسياحة - عروض سياحية مميزة</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* التنسيق المباشر لضمان عدم حدوث أي خطأ في الألوان والمظهر */
         :root {
-            --gold-matte: #A8894A;
-            --gold-light: #C9A96E;
-            --dark-bg: #0D0D0D;
-            --dark-card: #141414;
-            --text-light: #E0E0E0;
-            --text-muted: #999;
-            --border-dark: #2A2A2A;
+            --gold-matte: #D4A843;
+            --gold-light: #E8C876;
+            --gold-pale: #FDF6E8;
+            --white: #FFFFFF;
+            --off-white: #FFFAF0;
+            --text-dark: #2D2D2D;
+            --text-medium: #555555;
+            --text-light: #777777;
+            --border-gold: #E0C878;
+            --shadow-gold: rgba(212, 168, 67, 0.25);
+            --card-bg: #FFFFFF;
+            --hover-gold: #C49635;
         }
 
         * {
@@ -27,1377 +31,916 @@
 
         body {
             font-family: 'Cairo', sans-serif;
-            background-color: var(--dark-bg);
-            color: var(--text-light);
-            line-height: 1.6;
-            padding-bottom: 60px;
+            background: linear-gradient(180deg, #FFFDF7 0%, #FFFAF0 30%, #FFF8E7 100%);
+            color: var(--text-dark);
+            line-height: 1.7;
+            min-height: 100vh;
         }
 
-        /* شريط التنقل العلوي */
+        /* ============ الهيدر ============ */
         header {
-            background-color: var(--dark-card);
-            border-bottom: 2px solid var(--gold-matte);
-            padding: 15px 20px;
+            background: var(--white);
+            border-bottom: 3px solid var(--gold-matte);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+        }
+
+        .header-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 12px 20px;
             display: flex;
-            flex-direction: column;
             align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
             gap: 15px;
         }
 
-        .logo-container {
-            width: 100%;
-            max-width: 250px;
-            text-align: center;
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, #D4A843, #B8912F);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: white;
+            box-shadow: 0 4px 15px var(--shadow-gold);
+        }
+
+        .logo-text h1 {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #3D2E0A;
+            line-height: 1.2;
+        }
+
+        .logo-text span {
+            font-size: 0.75rem;
+            color: var(--gold-matte);
+            font-weight: 600;
+            letter-spacing: 1px;
         }
 
         nav {
             display: flex;
-            gap: 15px;
+            gap: 8px;
             flex-wrap: wrap;
-            justify-content: center;
         }
 
         nav a {
-            color: var(--text-light);
+            color: var(--text-medium);
             text-decoration: none;
-            font-size: 14px;
+            font-size: 0.9rem;
             font-weight: 600;
-            padding: 8px 16px;
-            border-radius: 8px;
-            transition: all 0.3s;
-            border: 1px solid transparent;
+            padding: 10px 18px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            background: transparent;
+            white-space: nowrap;
         }
 
         nav a:hover, nav a.active {
-            border-color: var(--gold-matte);
-            color: var(--gold-light);
-            background: rgba(168, 137, 74, 0.05);
+            background: var(--gold-matte);
+            color: white;
+            box-shadow: 0 4px 12px var(--shadow-gold);
         }
 
-        /* حاويات المحتوى والأقسام */
+        /* ============ القسم الترحيبي ============ */
+        .hero {
+            background: linear-gradient(135deg, #FFFDF7 0%, #FDF6E8 50%, #FFF8E1 100%);
+            padding: 60px 20px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-gold);
+        }
+
+        .hero h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #3D2E0A;
+            margin-bottom: 12px;
+        }
+
+        .hero .highlight {
+            color: var(--gold-matte);
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-medium);
+            max-width: 600px;
+            margin: 0 auto 25px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: var(--gold-matte);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 15px var(--shadow-gold);
+        }
+
+        /* ============ الحاوية الرئيسية ============ */
         .container {
-            max-width: 800px;
-            margin: 30px auto;
-            padding: 0 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 30px 20px;
         }
 
-        .card {
-            background: var(--dark-card);
-            border: 1px solid var(--border-dark);
-            border-radius: 16px;
-            padding: 25px;
-            margin-bottom: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        .section-title {
+            text-align: center;
+            margin-bottom: 35px;
         }
 
-        h2 {
-            color: var(--gold-light);
-            font-size: 1.4rem;
-            margin-bottom: 20px;
-            border-bottom: 1px solid var(--border-dark);
-            padding-bottom: 10px;
+        .section-title h3 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #3D2E0A;
+            position: relative;
+            display: inline-block;
         }
 
-        /* الحقول والنماذج */
-        label {
-            display: block;
-            font-size: 14px;
-            color: var(--text-muted);
+        .section-title h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--gold-matte);
+            border-radius: 2px;
+        }
+
+        .section-title p {
+            color: var(--text-light);
+            margin-top: 12px;
+            font-size: 0.95rem;
+        }
+
+        /* ============ بطاقات العروض ============ */
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+        }
+
+        .package-card {
+            background: var(--card-bg);
+            border: 1px solid #F0E4CC;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.35s ease;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .package-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 15px 40px var(--shadow-gold);
+            border-color: var(--gold-matte);
+        }
+
+        .package-image {
+            height: 200px;
+            background: linear-gradient(135deg, #FDF6E8, #F5E6C8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            position: relative;
+        }
+
+        .package-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--gold-matte);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .package-info {
+            padding: 22px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .package-info h4 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #3D2E0A;
             margin-bottom: 8px;
-            font-weight: 600;
+        }
+
+        .package-info .duration {
+            color: var(--text-light);
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+        }
+
+        .package-info .features {
+            list-style: none;
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+
+        .package-info .features li {
+            font-size: 0.85rem;
+            color: var(--text-medium);
+            padding: 4px 0;
+            padding-right: 20px;
+            position: relative;
+        }
+
+        .package-info .features li::before {
+            content: '✓';
+            position: absolute;
+            right: 0;
+            color: var(--gold-matte);
+            font-weight: 700;
+        }
+
+        .package-price {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--gold-matte);
+            margin: 10px 0;
+        }
+
+        .package-price small {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            font-weight: 400;
+        }
+
+        .btn-book {
+            display: block;
+            width: 100%;
+            padding: 13px;
+            background: var(--gold-matte);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .btn-book:hover {
+            background: var(--hover-gold);
+            box-shadow: 0 6px 20px var(--shadow-gold);
+            transform: translateY(-2px);
+        }
+
+        /* ============ نموذج الطلب ============ */
+        .order-section {
+            background: var(--white);
+            border: 1px solid #F0E4CC;
+            border-radius: 20px;
+            padding: 35px;
+            margin-top: 40px;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.03);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        @media (max-width: 600px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #3D2E0A;
+            margin-bottom: 6px;
+        }
+
+        label .required {
+            color: #D4A843;
         }
 
         input, select, textarea {
-            width: 100%;
-            background: var(--dark-bg);
-            border: 1px solid var(--border-dark);
-            color: var(--text-light);
-            padding: 12px;
-            border-radius: 10px;
+            padding: 13px 16px;
+            border: 2px solid #EDE4D0;
+            border-radius: 12px;
             font-family: 'Cairo', sans-serif;
-            font-size: 14px;
-            margin-bottom: 15px;
-            transition: all 0.3s;
+            font-size: 0.95rem;
+            background: #FFFDF9;
+            color: var(--text-dark);
+            transition: all 0.3s ease;
         }
 
         input:focus, select:focus, textarea:focus {
             outline: none;
-            border-color: var(--gold-light);
+            border-color: var(--gold-matte);
+            box-shadow: 0 0 0 4px rgba(212, 168, 67, 0.08);
+            background: white;
         }
 
-        button {
-            background: var(--gold-matte);
-            color: #1A1A1A;
-            border: none;
-            padding: 14px;
-            border-radius: 10px;
-            font-family: 'Cairo', sans-serif;
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .btn-submit {
             width: 100%;
-            transition: all 0.3s;
-        }
-
-        button:hover {
-            background: var(--gold-light);
-            transform: translateY(-2px);
-        }
-
-        /* شبكة عرض البكجات */
-        .packages-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-        }
-
-        @media (min-width: 600px) {
-            .packages-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        .package-card {
-            background: var(--dark-bg);
-            border: 1px solid var(--border-dark);
-            border-radius: 12px;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .package-price {
-            color: var(--gold-light);
-            font-weight: 700;
-            font-size: 1.2rem;
-            margin: 10px 0;
-        }
-
-        /* خيارات الدفع */
-        .payment-methods {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-
-        .pay-option {
-            background: var(--dark-bg);
-            border: 1px solid var(--border-dark);
             padding: 15px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            background: linear-gradient(135deg, #D4A843, #B8912F);
+            color: white;
+            border: none;
+            border-radius: 14px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
             cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            box-shadow: 0 6px 20px var(--shadow-gold);
         }
 
-        /* فقاعة المحادثة للذكاء الاصطناعي */
-        #ai-bubble {
+        .btn-submit:hover {
+            background: linear-gradient(135deg, #C49635, #A07D25);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(212, 168, 67, 0.35);
+        }
+
+        /* ============ معلومات الاتصال ============ */
+        .contact-bar {
+            background: var(--white);
+            border-top: 1px solid #F0E4CC;
+            border-bottom: 1px solid #F0E4CC;
+            padding: 20px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .contact-bar .email {
+            color: var(--gold-matte);
+            font-weight: 700;
+            font-size: 1.05rem;
+            direction: ltr;
+            display: inline-block;
+        }
+
+        /* ============ نظام المحادثة ============ */
+        #chat-bubble {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: var(--gold-matte);
-            width: 55px;
-            height: 55px;
+            bottom: 25px;
+            left: 25px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #D4A843, #B8912F);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
+            font-size: 26px;
             cursor: pointer;
-            box-shadow: 0 5px 15px rgba(168, 137, 74, 0.4);
             z-index: 1000;
+            box-shadow: 0 6px 25px rgba(212, 168, 67, 0.45);
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
         }
 
-        #ai-chatbox {
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 6px 25px rgba(212, 168, 67, 0.45); }
+            50% { box-shadow: 0 6px 35px rgba(212, 168, 67, 0.7); }
+        }
+
+        #chat-bubble:hover {
+            transform: scale(1.08);
+        }
+
+        #chat-window {
             position: fixed;
-            bottom: 85px;
-            right: 20px;
-            width: 320px;
-            max-width: calc(100vw - 40px);
-            background: var(--dark-card);
-            border: 1px solid var(--border-dark);
-            border-radius: 12px;
+            bottom: 95px;
+            left: 25px;
+            width: 370px;
+            max-width: calc(100vw - 50px);
+            background: white;
+            border: 2px solid var(--border-gold);
+            border-radius: 18px;
             display: none;
             flex-direction: column;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             z-index: 1000;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.15);
             overflow: hidden;
         }
 
         .chat-header {
-            background: var(--gold-matte);
-            color: #1A1A1A;
-            padding: 12px;
-            font-weight: 700;
-            text-align: center;
-        }
-
-        .chat-messages {
-            height: 200px;
-            padding: 15px;
-            overflow-y: auto;
-            font-size: 13px;
-        }
-
-        .chat-input-area {
-            display: flex;
-            padding: 10px;
-            border-top: 1px solid var(--border-dark);
-            gap: 8px;
-        }
-
-        .chat-input-area input {
-            margin-bottom: 0;
-            padding: 8px;
-        }
-
-        .chat-input-area button {
-            width: auto;
-            padding: 8px 15px;
-        }
-
-        footer {
-            text-align: center;
-            padding: 20px;
-            color: var(--text-muted);
-            font-size: 12px;
-            border-top: 1px solid var(--border-dark);
-            background: var(--dark-card);
-        }
-    </style>
-</head>
-<body>
-
-    <!-- الهيدر والشعار المطور -->
-    <header>
-        <div class="logo-container">
-            <!-- كود الـ SVG للشعار الذهبي المطور -->
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="auto" style="max-height: 100px;">
-                <defs>
-                    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#FFE082" />
-                        <stop offset="30%" stop-color="#D4AF37" />
-                        <stop offset="70%" stop-color="#AA7C11" />
-                        <stop offset="100%" stop-color="#5A450C" />
-                    </linearGradient>
-                    <linearGradient id="darkGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#2C2C2C" />
-                        <stop offset="100%" stop-color="#111111" />
-                    </linearGradient>
-                </defs>
-                <g id="globe-lines">
-                    <path d="M 120,350 C 120,430 380,430 380,350 C 380,270 120,270 120,350 Z" fill="none" stroke="url(#goldGrad)" stroke-width="8" />
-                    <path d="M 80,360 C 80,460 420,460 420,360" fill="none" stroke="url(#goldGrad)" stroke-width="12" stroke-linecap="round" />
-                    <path d="M 160,340 C 160,400 340,400 340,340" fill="none" stroke="url(#darkGrad)" stroke-width="15" />
-                </g>
-                <g id="ship" transform="translate(0, -10)">
-                    <path d="M 150,210 L 350,210 L 320,240 L 180,240 Z" fill="url(#darkGrad)" stroke="url(#goldGrad)" stroke-width="3" />
-                    <rect x="190" y="195" width="120" height="15" fill="url(#goldGrad)" rx="3" />
-                    <path d="M 245,190 Q 200,140 190,60 Q 240,110 245,190 Z" fill="url(#darkGrad)" stroke="url(#goldGrad)" stroke-width="2" />
-                    <path d="M 255,190 Q 285,120 270,80 Q 300,130 255,190 Z" fill="url(#darkGrad)" stroke="url(#goldGrad)" stroke-width="2" />
-                    <path d="M 260,190 Q 320,150 310,100 Q 330,160 260,190 Z" fill="url(#darkGrad)" stroke="url(#goldGrad)" stroke-width="2" />
-                    <path d="M 110,210 C 110,150 390,150 390,210" fill="none" stroke="url(#goldGrad)" stroke-width="8" />
-                </g>
-                <g id="text-area">
-                    <line x1="50" y1="260" x2="450" y2="260" stroke="url(#goldGrad)" stroke-width="5" stroke-linecap="round" />
-                    <line x1="50" y1="320" x2="450" y2="320" stroke="url(#goldGrad)" stroke-width="5" stroke-linecap="round" />
-                    <text x="250" y="290" font-family="'Georgia', serif" font-size="28" font-weight="bold" fill="url(#goldGrad)" text-anchor="middle">Florin Tours Agency</text>
-                    <text x="250" y="312" font-family="'Cairo', sans-serif" font-size="16" font-weight="bold" fill="url(#goldGrad)" text-anchor="middle">فلورين لخدمات السفر والسياحة</text>
-                </g>
-                <g id="airplane" transform="translate(240, 340) rotate(-15)">
-                    <path d="M -30,0 L 40,-10 L 60,0 L 40,10 L -30,0 Z" fill="url(#goldGrad)" />
-                    <path d="M 10,-8 L -10,-40 L 5,-40 L 25,-8 Z" fill="url(#goldGrad)" />
-                    <path d="M 10,8 L -10,40 L 5,40 L 25,8 Z" fill="url(#goldGrad)" />
-                    <path d="M -25,0 L -40,-15 L -30,-15 L -15,0 Z" fill="url(#goldGrad)" />
-                </g>
-            </svg>
-        </div>
-        <nav>
-            <a href="#packages-section" class="active">العروض والبكجات</a>
-            <a href="#booking-section">حجز الطيران والفنادق</a>
-            <a href="#passport-section">بيانات الجواز</a>
-            <a href="#payment-section">تأكيد الدفع</a>
-        </nav>
-    </header>
-
-    <div class="container">
-        
-        <!-- قسم البكجات والعروض -->
-        <section id="packages-section" class="card">
-            <h2>البكجات السياحية والعروض الحالية</h2>
-            <div style="margin-bottom: 20px;">
-                <label>تصفية حسب الفئة العمرية (نظام الطيران العالمي):</label>
-                <select id="age-filter" onchange="filterPackages()">
-                    <option value="all">كل الفئات العمرية</option>
-                    <option value="adult">بالغين (12+ سنة)</option>
-                    <option value="child">أطفال (2-12 سنة)</option>
-                    <option value="infant">رضع (تحت سنتين)</option>
-                </select>
-            </div>
-
-            <div class="packages-grid" id="packages-container">
-                <!-- يتم التوليد ديناميكياً -->
-            </div>
-        </section>
-
-        <!-- قسم الحجز والطيران والفنادق -->
-        <section id="booking-section" class="card">
-            <h2>حجز الطيران، الفنادق والمنتجعات</h2>
-            <form onsubmit="event.preventDefault(); alert('تم حفظ تفاصيل الحجز المبدئي بنجاح!');">
-                <label>نوع الحجز المفضل:</label>
-                <select>
-                    <option>بكج سياحي كامل شامل الخدمات</option>
-                    <option>حجز طيران فقط</option>
-                    <option>فنادق ومنتجعات فقط</option>
-                </select>
-
-                <label>الوجهة المقصودة:</label>
-                <input type="text" placeholder="مثال: ماليزيا، تركيا، القاهرة" required>
-
-                <label>تاريخ الذهاب المتوقع:</label>
-                <input type="date" required>
-
-                <button type="submit">تأكيد خيارات الحجز</button>
-            </form>
-        </section>
-
-        <!-- قسم بيانات الجواز والذكاء الاصطناعي -->
-        <section id="passport-section" class="card">
-            <h2>إدخال بيانات جواز سفر المسافرين</h2>
-            <div style="background: rgba(168,137,74,0.05); border: 1px dashed var(--gold-matte); padding: 15px; border-radius: 10px; margin-bottom: 20px; text-align: center;">
-                <label style="color: var(--gold-light); cursor: pointer;">
-                    📷 ارفع صورة جواز السفر لقراءتها تلقائياً بالذكاء الاصطناعي
-                    <input type="file" accept="image/*" style="display: none;" onchange="simulateAIOCR(this)">
-                </label>
-            </div>
-            
-            <form id="passport-form">
-                <label>الاسم الكامل بالإنجليزية (مطابق للجواز):</label>
-                <input type="text" id="pass-name" placeholder="الاسم الكامل" required>
-
-                <label>رقم جواز السفر:</label>
-                <input type="text" id="pass-num" placeholder="رقم الجواز" required>
-
-                <label>الجنسية:</label>
-                <input type="text" id="pass-nation" placeholder="الجنسية" required>
-                
-                <button type="button" onclick="alert('تم حفظ بيانات الجواز بنجاح!')">حفظ بيانات الجواز</button>
-            </form>
-        </section>
-
-        <!-- قسم الدفع الإلكتروني -->
-        <section id="payment-section" class="card">
-            <h2>تأكيد الحجز والدفع الإلكتروني الآمن</h2>
-            <div class="payment-methods">
-                <label class="pay-option">
-                    <input type="radio" name="pay-method" checked>
-                    <span>**تطبيق بنكك** (حساب رقم: 1234567)</span>
-                </label>
-                <label class="pay-option">
-                    <input type="radio" name="pay-method">
-                    <span>**فودافون كاش** (رقم المحفظة: 01065859268)</span>
-                </label>
-                <label class="pay-option">
-                    <input type="radio" name="pay-method">
-                    <span>**بطاقة مصرفية** (فيزا / ماستر كارد)</span>
-                </label>
-            </div>
-            <button onclick="alert('تم إرسال طلب الحجز بنجاح! سنتواصل معك عبر الواتساب لتأكيد الاستلام خلال دقائق.')">تأكيد وإرسال طلب الدفع</button>
-        </section>
-
-    </div>
-
-    <!-- فقاعة الذكاء الاصطناعي للاستفسارات -->
-    <div id="ai-bubble" onclick="toggleChat()">💬</div>
-    <div id="ai-chatbox">
-        <div class="chat-header">مساعد فلورين الذكي AI</div>
-        <div class="chat-messages" id="chat-messages">
-            <p style="color: var(--gold-light);"><b>مساعد فلورين:</b> مرحباً بك! كيف يمكنني مساعدتك في حجز عطلتك السياحية اليوم؟</p>
-        </div>
-        <div class="chat-input-area">
-            <input type="text" id="chat-input" placeholder="اكتب استفسارك هنا...">
-            <button onclick="sendChatMessage()">إرسال</button>
-        </div>
-    </div>
-
-    <footer>
-        <p>جميع الحقوق محفوظة © Florin Tours 2026</p>
-        <p>الايميل: flournitourism2026@gmail.com | واتساب: 201065859268+</p>
-    </footer>
-
-    <script>
-        // مصفوفة البكجات السياحية المدمجة
-        const packages = [
-            { title: "عطلة جزر المالديف الفاخرة", price: "1200$", desc: "شامل الطيران الدولي، الفندق والمنتجع الفاخر مع وجبات الإفطار.", type: "adult" },
-            { title: "رحلة ديزني لاند باريس العائلية", price: "850$", desc: "بكج مخصص للعائلات شامل تذاكر الدخول للألعاب والإقامة.", type: "child" },
-            { title: "عروض رحلات الرضع الخاصة", price: "150$", desc: "تأمين مقعد طيران خاص مريح وخدمات رعاية الرضع طوال الرحلة.", type: "infant" }
-        ];
-
-        function displayPackages(list) {
-            const container = document.getElementById('packages-container');
-            container.innerHTML = '';
-            list.forEach(pkg => {
-                container.innerHTML += `
-                    <div class="package-card">
-                        <div>
-                            <h3 style="color: var(--text-light); font-size: 1.1rem;">${pkg.title}</h3>
-                            <p style="font-size: 13px; color: var(--text-muted); margin-top: 5px;">${pkg.desc}</p>
-                        </div>
-                        <div>
-                            <div class="package-price">${pkg.price}</div>
-                            <button onclick="location.href='#booking-section'" style="padding: 8px; font-size: 13px;">احجز الآن</button>
-                        </div>
-                    </div>
-                `;
-            });
-        }
-
-        function filterPackages() {
-            const val = document.getElementById('age-filter').value;
-            if (val === 'all') {
-                displayPackages(packages);
-            } else {
-                displayPackages(packages.filter(p => p.type === val));
-            }
-        }
-
-        // محاكاة ميزة الـ OCR لقراءة الجواز بالذكاء الاصطناعي
-        function simulateAIOCR(input) {
-            if(input.files && input.files[0]) {
-                alert("جاري فحص وقراءة جواز السفر بالذكاء الاصطناعي لـ Florin Tours...");
-                setTimeout(() => {
-                    document.getElementById('pass-name').value = "MOHAMED AHMED AL-SUDANI";
-                    document.getElementById('pass-num').value = "P09876543";
-                    document.getElementById('pass-nation').value = "سوداني";
-                    alert("تمت قراءة الجواز بنجاح وبدون أي خطأ إملائي!");
-                }, 2000);
-            }
-        }
-
-        // تفعيل شات بوت الذكاء الاصطناعي
-        function toggleChat() {
-            const chat = document.getElementById('ai-chatbox');
-            chat.style.display = chat.style.display === 'flex' ? 'none' : 'flex';
-        }
-
-        function sendChatMessage() {
-            const input = document.getElementById('chat-input');
-            const msgs = document.getElementById('chat-messages');
-            if(!input.value) return;
-
-            msgs.innerHTML += `<p style="margin-top:8px;"><b>أنت:</b> ${input.value}</p>`;
-            const userMsg = input.value;
-            input.value = '';
-
-            setTimeout(() => {
-                msgs.innerHTML += `<p style="color: var(--gold-light); margin-top:8px;"><b>مساعد فلورين:</b> يسعدنا اهتمامك بـ "${userMsg}". للحصول على حجز مخصص وتأكيد فوري، تواصل معنا مباشرة عبر واتساب على الرقم 201065859268+ لتسهيل جميع إجراءاتك!</p>`;
-                msgs.scrollTop = msgs.scrollHeight;
-            }, 1000);
-        }
-
-        // تشغيل البكجات عند فتح الصفحة
-        window.onload = () => {
-            displayPackages(packages);
-        };
-    </script>
-</body>
-</html>           </div>
-                <div class="offer-details">
-                    <h3 class="offer-title">رحلة بحرية باليخت مع الغوص</h3>
-                    <div class="offer-info">
-                        <span><i class="fas fa-clock"></i> يوم كامل</span>
-                        <span><i class="fas fa-fish"></i> معدات مجانية</span>
-                    </div>
-                    <div class="offer-price">80$ <span>/ فرد</span></div>
-                    <button class="btn-book" onclick="selectOffer('رحلة بحرية باليخت')">احجز هذا العرض</button>
-                </div>
-            </article>
-        </div>
-    </section>
-
-    <section id="booking" class="offers-section" style="max-width: 700px;">
-        <div style="background: var(--dark-card); padding: 40px; border-radius: 20px; border: 1px solid var(--border-dark);">
-            <h2 class="section-title" style="font-size: 24px; margin-bottom: 25px;">طلب حجز سريع</h2>
-            <form id="bookingForm" onsubmit="submitBooking(event)" class="modal-form">
-                <div class="form-group">
-                    <label class="form-label">الاسم الكامل</label>
-                    <input type="text" id="clientName" class="form-input" required placeholder="أدخل اسمك بالكامل">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">رقم الهاتف (واتساب)</label>
-                    <input type="tel" id="clientPhone" class="form-input" required placeholder="مثال: 010xxxxxxxx">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">العرض المطلوب</label>
-                    <select id="selectedOffer" class="form-select" required>
-                        <option value="">-- اختر العرض --</option>
-                        <option value="فندق 5 نجوم مطل على البحر">فندق 5 نجوم مطل على البحر</option>
-                        <option value="رحلة بحرية باليخت">رحلة بحرية باليخت</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">طريقة الدفع المفضلة</label>
-                    <select id="paymentMethod" class="form-select" required>
-                        <option value="فيزا">فيزا كارد (Visa)</option>
-                        <option value="فودافون كاش">فودافون كاش (Vodafone Cash)</option>
-                    </select>
-                </div>
-                <button type="submit" class="btn-book" style="padding: 15px; font-size:16px;">تأكيد الحجز المبدئي</button>
-            </form>
-            <div id="successMessage" class="success-message"></div>
-        </div>
-    </section>
-
-    <section id="admin-panel" class="features-section">
-        <div style="max-width: 1200px; margin: 0 auto;">
-            <h2 class="section-title" style="margin-bottom: 10px;">لوحة تحكم الإدارة</h2>
-            <p class="section-subtitle" style="margin-bottom: 30px; color: var(--text-muted);">يتم حفظ واستعراض الحجوزات الواردة من العملاء هنا تلقائياً.</p>
-            <div class="admin-table-container">
-                <table id="bookingsTable">
-                    <thead>
-                        <tr>
-                            <th>الاسم</th>
-                            <th>الهاتف</th>
-                            <th>العرض</th>
-                            <th>الدفع</th>
-                            <th>التاريخ والوقت</th>
-                        </tr>
-                    </thead>
-                    <tbody id="bookingsTableBody">
-                        <tr>
-                            <td colspan="5" class="no-bookings" style="text-align: center; padding: 30px; color: var(--text-muted);">لا توجد حجوزات مسجلة حالياً.</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <button id="clearBookings" class="btn-clear" onclick="clearAllBookings()" style="display: none;">مسح السجل بالكامل</button>
-            </div>
-        </div>
-    </section>
-
-    <section class="features-section">
-        <div class="features-grid">
-            <div class="feature-item">
-                <div class="feature-icon" style="color: var(--gold-light);"><i class="fas fa-shield-alt"></i></div>
-                <h3 class="feature-title">أمان كامل</h3>
-                <p class="feature-text">حجوزات آمنة وموثوقة بنسبة 100% لجميع الرحلات.</p>
-            </div>
-            <div class="feature-item">
-                <div class="feature-icon" style="color: var(--gold-light);"><i class="fas fa-headset"></i></div>
-                <h3 class="feature-title">دعم 24/7</h3>
-                <p class="feature-text">فريق خدمة العملاء متواجد دائماً لمساعدتك في أي وقت.</p>
-            </div>
-            <div class="feature-item">
-                <div class="feature-icon" style="color: var(--gold-light);"><i class="fas fa-star"></i></div>
-                <h3 class="feature-title">أفضل الأسعار</h3>
-                <p class="feature-text">نضمن لك الحصول على أرقى الخدمات بأقل التكاليف المتاحة.</p>
-            </div>
-        </div>
-    </section>
-
-    <div id="authModal" class="modal">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeModal()">&times;</button>
-            <h3 id="modalTitle" class="modal-title">تسجيل الدخول</h3>
-            <form class="modal-form" onsubmit="event.preventDefault(); closeModal();">
-                <div class="form-group">
-                    <label class="form-label">البريد الإلكتروني</label>
-                    <input type="email" class="form-input" required placeholder="name@example.com">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">كلمة المرور</label>
-                    <input type="password" class="form-input" required placeholder="••••••••">
-                </div>
-                <button type="submit" class="btn-book" style="margin-top: 10px;">تأكيد</button>
-            </form>
-        </div>
-    </div>
-
-    <div class="chat-widget">
-        <button class="chat-button" onclick="toggleChat()"><i class="fas fa-comments" style="color: var(--dark-comfort);"></i></button>
-        <div id="chatWindow" class="chat-window">
-            <div class="chat-header">
-                <span>الدعم الفني المباشر</span>
-                <button onclick="toggleChat()" style="background:transparent; border:none; color:var(--dark-comfort); cursor:pointer; font-size:18px;">&times;</button>
-            </div>
-            <div class="chat-messages" id="chatMessages">
-                <div class="message bot">مرحباً بك! كيف يمكن لفريق فلورين مساعدتك اليوم في تنظيم رحلتك؟</div>
-            </div>
-            <div class="chat-input-area">
-                <input type="text" id="chatInput" class="chat-input" placeholder="اكتب رسالتك هنا..." onkeypress="if(event.key === 'Enter') sendChatMessage()">
-                <button class="chat-send" onclick="sendChatMessage()"><i class="fas fa-paper-plane"></i></button>
-            </div>
-        </div>
-    </div>
-
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-column">
-                <h3>فلورين للسفر</h3>
-                <p style="color: var(--text-muted); font-size:14px;">بوابتك المفضلة لاستكشاف العالم وعيش تجارب سياحية فاخرة لا تُنسى.</p>
-            </div>
-            <div class="footer-column">
-                <h3>روابط سريعة</h3>
-                <ul class="footer-links">
-                    <li><a href="#offers">العروض الحالية</a></li>
-                    <li><a href="#booking">احجز رحلتك</a></li>
-                    <li><a href="#admin-panel">لوحة الإدارة</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>© 2026 جميع الحقوق محفوظة لشركة فلورين للسفر والسياحة - flourin.com</p>
-        </div>
-    </footer>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => { renderBookings(); });
-
-        function switchTab(event, tabType) {
-            document.querySelectorAll('.search-tab').forEach(t => t.classList.remove('active'));
-            event.currentTarget.classList.add('active');
-        }
-
-        function openModal(type) {
-            const modal = document.getElementById('authModal');
-            const title = document.getElementById('modalTitle');
-            title.textContent = type === 'login' ? 'تسجيل الدخول' : 'إنشاء حساب جديد';
-            modal.classList.add('active');
-        }
-
-        function closeModal() { document.getElementById('authModal').classList.remove('active'); }
-
-        function toggleChat() { document.getElementById('chatWindow').classList.toggle('active'); }
-
-        function sendChatMessage() {
-            const input = document.getElementById('chatInput');
-            const text = input.value.trim();
-            if(!text) return;
-            
-            const area = document.getElementById('chatMessages');
-            area.innerHTML += `<div class="message user">${text}</div>`;
-            input.value = '';
-            area.scrollTop = area.scrollHeight;
-
-            setTimeout(() => {
-                area.innerHTML += `<div class="message bot">شكراً لتواصلك معنا. تم تحويل رسالتك إلى ممثل خدمة عملاء فلورين وسيجيبك في أقرب وقت.</div>`;
-                area.scrollTop = area.scrollHeight;
-            }, 1000);
-        }
-
-        function selectOffer(offerName) {
-            const select = document.getElementById('selectedOffer');
-            select.value = offerName;
-            document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
-            setTimeout(() => { document.getElementById('clientName').focus(); }, 6000);
-        }
-
-        function submitBooking(event) {
-            event.preventDefault();
-            const name = document.getElementById('clientName').value.trim();
-            const phone = document.getElementById('clientPhone').value.trim();
-            const offer = document.getElementById('selectedOffer').value;
-            const payment = document.getElementById('paymentMethod').value;
-
-            const booking = { name, phone, offer, payment, date: new Date().toLocaleString('ar-EG') };
-            let current = JSON.parse(localStorage.getItem('florin_sys_bookings')) || [];
-            current.push(booking);
-            localStorage.setItem('florin_sys_bookings', JSON.stringify(current));
-
-            renderBookings();
-
-            const msg = document.getElementById('successMessage');
-            msg.textContent = `شكراً لك ${name}، تم إرسال طلب حجزك المبدئي بنجاح وسيتم مراجعته بالإدارة.`;
-            msg.style.display = 'block';
-            document.getElementById('bookingForm').reset();
-            setTimeout(() => { msg.style.display = 'none'; }, 5000);
-        }
-
-        function renderBookings() {
-            const data = JSON.parse(localStorage.getItem('florin_sys_bookings')) || [];
-            const container = document.getElementById('bookingsTableBody');
-            const btn = document.getElementById('clearBookings');
-
-            if(data.length === 0) {
-                container.innerHTML = '<tr><td colspan="5" style="text-align: center; padding: 30px; color: var(--text-muted);">لا توجد حجوزات مسجلة حالياً.</td></tr>';
-                btn.style.display = 'none';
-                return;
-            }
-
-            btn.style.display = 'block';
-            container.innerHTML = '';
-            data.reverse().forEach(b => {
-                container.innerHTML += `
-                    <tr>
-                        <td style="font-weight:600; color:var(--text-light);">${b.name}</td>
-                        <td style="direction:ltr; text-align:right;">${b.phone}</td>
-                        <td style="color:var(--gold-light);">${b.offer}</td>
-                        <td><span class="offer-badge" style="position:static; padding:3px 10px; background:${b.payment === 'فيزا' ? 'var(--gold-matte)':'#E60000'}; color:${b.payment === 'فيزا' ? 'var(--dark-comfort)':'#fff'};">${b.payment}</span></td>
-                        <td style="font-size:12px; color:var(--text-muted);">${b.date}</td>
-                    </tr>
-                `;
-            });
-        }
-
-        function clearAllBookings() {
-            if(confirm('هل تريد حذف جميع الحجوزات المسجلة نهائياً من لوحة التحكم؟')) {
-                localStorage.removeItem('florin_sys_bookings');
-                renderBookings();
-            }
-        }
-    </script>
-</body>
-</html>
-
-        .offer-price {
-            font-size: 28px;
-            font-weight: 700;
-            color: var(--gold-light);
-            margin-bottom: 15px;
-        }
-
-        .offer-price span {
-            font-size: 14px;
-            color: var(--text-muted);
-        }
-
-        .btn-book {
-            width: 100%;
-            background: var(--gold-matte);
-            color: var(--dark-comfort);
-            border: none;
-            padding: 12px;
-            border-radius: 10px;
-            font-family: 'Cairo', sans-serif;
-            font-size: 15px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .btn-book:hover {
-            background: var(--gold-light);
-        }
-
-        /* Features Section */
-        .features-section {
-            background: var(--dark-card);
-            padding: 60px 20px;
-            margin: 50px 0;
-            border-top: 2px solid var(--gold-matte);
-            border-bottom: 2px solid var(--gold-matte);
-        }
-
-        .features-grid {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-        }
-
-        .feature-item {
-            text-align: center;
-            padding: 30px;
-        }
-
-        .feature-icon {
-            font-size: 40px;
-            margin-bottom: 15px;
-        }
-
-        .feature-title {
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--gold-light);
-            margin-bottom: 10px;
-        }
-
-        .feature-text {
-            font-size: 14px;
-            color: var(--text-muted);
-        }
-
-        /* Footer */
-        .footer {
-            background: var(--dark-comfort);
-            padding: 50px 20px 20px;
-            border-top: 2px solid var(--gold-matte);
-        }
-
-        .footer-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-
-        .footer-column h3 {
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--gold-light);
-            margin-bottom: 20px;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 10px;
-        }
-
-        .footer-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 14px;
-            transition: color 0.3s;
-        }
-
-        .footer-links a:hover {
-            color: var(--gold-light);
-        }
-
-        .footer-bottom {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding-top: 20px;
-            border-top: 1px solid var(--border-dark);
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 13px;
-        }
-
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal.active {
-            display: flex;
-        }
-
-        .modal-content {
-            background: var(--dark-card);
-            border-radius: 20px;
-            padding: 40px;
-            max-width: 500px;
-            width: 90%;
-            border: 1px solid var(--border-dark);
-            position: relative;
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: transparent;
-            border: none;
-            color: var(--text-muted);
-            font-size: 24px;
-            cursor: pointer;
-            transition: color 0.3s;
-        }
-
-        .modal-close:hover {
-            color: var(--gold-light);
-        }
-
-        .modal-title {
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--text-light);
-            margin-bottom: 25px;
-            text-align: center;
-        }
-
-        .modal-form {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        /* Chat Widget */
-        .chat-widget {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 1500;
-        }
-
-        .chat-button {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: var(--gold-matte);
-            border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            box-shadow: 0 5px 20px rgba(168, 137, 74, 0.4);
-            transition: all 0.3s;
-        }
-
-        .chat-button:hover {
-            transform: scale(1.1);
-            background: var(--gold-light);
-        }
-
-        .chat-window {
-            display: none;
-            position: absolute;
-            bottom: 80px;
-            right: 0;
-            width: 350px;
-            height: 500px;
-            background: var(--dark-card);
-            border-radius: 15px;
-            border: 1px solid var(--border-dark);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-            flex-direction: column;
-        }
-
-        .chat-window.active {
-            display: flex;
-        }
-
-        .chat-header {
-            background: var(--gold-matte);
-            color: var(--dark-comfort);
+            background: linear-gradient(135deg, #D4A843, #B8912F);
+            color: white;
             padding: 15px 20px;
-            border-radius: 15px 15px 0 0;
             font-weight: 700;
+            font-size: 1rem;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
         }
 
-        .chat-messages {
-            flex: 1;
-            padding: 20px;
+        .chat-header .close-chat {
+            background: rgba(255,255,255,0.25);
+            border: none;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .chat-header .close-chat:hover {
+            background: rgba(255,255,255,0.4);
+        }
+
+        .chat-body {
+            height: 280px;
+            padding: 15px;
             overflow-y: auto;
+            background: #FFFDF9;
             display: flex;
             flex-direction: column;
             gap: 10px;
         }
 
-        .message {
-            max-width: 80%;
-            padding: 10px 15px;
-            border-radius: 15px;
-            font-size: 14px;
+        .chat-message {
+            max-width: 85%;
+            padding: 12px 16px;
+            border-radius: 16px;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            animation: fadeIn 0.3s ease;
         }
 
-        .message.bot {
-            background: var(--dark-bg);
-            color: var(--text-light);
-            align-self: flex-start;
-            border-bottom-left-radius: 5px;
-        }
-
-        .message.user {
-            background: var(--gold-matte);
-            color: var(--dark-comfort);
-            align-self: flex-end;
-            border-bottom-right-radius: 5px;
-        }
-
-        .chat-input-area {
-            padding: 15px;
-            border-top: 1px solid var(--border-dark);
-            display: flex;
-            gap: 10px;
-        }
-
-        .chat-input {
-            flex: 1;
-            background: var(--dark-bg);
-            border: 1px solid var(--border-dark);
-            color: var(--text-light);
-            padding: 10px 15px;
-            border-radius: 25px;
-            font-family: 'Cairo', sans-serif;
-            font-size: 14px;
-        }
-
-        .chat-send {
-            background: var(--gold-matte);
-            color: var(--dark-comfort);
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 18px;
-            transition: all 0.3s;
-        }
-
-        .chat-send:hover {
-            background: var(--gold-light);
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero-title {
-                font-size: 32px;
-            }
-            
-            .search-form {
-                grid-template-columns: 1fr;
-            }
-            
-            .offers-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .nav-menu {
-                display: none;
-            }
-            
-            .chat-window {
-                width: 300px;
-                height: 400px;
-                right: -10px;
-            }
-        }
-
-        /* Animations */
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(8px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-               </style>
-</head>
-<body>
-
-     <header class="header">
-        <div class="header-top">
-            <div class="header-top-content">
-                <div>مرحباً بكم في فلورين لخدمات السفر والسياحة</div>
-                <div class="header-top-links">
-                    <a href="#">المساعدة</a>
-                    <a href="#">اتصل بنا</a>
-                    <button class="lang-switch">English</button>
-                </div>
-            </div>
-        </div>
-        <div class="header-main">
-                                    <!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Florin Tours - شعار SVG احترافي</title>
-    <style>
-        :root {
-            --gold-matte: #A8894A;
-            --dark-bg: #0D0D0D;
+        .chat-message.bot {
+            background: #FDF6E8;
+            color: #3D2E0A;
+            align-self: flex-end;
+            border-bottom-left-radius: 4px;
+            border: 1px solid #F0E4CC;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        .chat-message.user {
+            background: var(--gold-matte);
+            color: white;
+            align-self: flex-start;
+            border-bottom-right-radius: 4px;
         }
 
-        body {
-            font-family: Arial, sans-serif;
-            background: var(--dark-bg);
+        .chat-footer {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            padding: 20px;
+            padding: 12px;
+            gap: 10px;
+            border-top: 1px solid #F0E4CC;
+            background: white;
         }
 
-        .logo-wrapper {
+        .chat-footer input {
+            flex-grow: 1;
+            padding: 12px 16px;
+            border: 2px solid #EDE4D0;
+            border-radius: 25px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 0.9rem;
+            background: #FFFDF9;
+            margin-bottom: 0;
+        }
+
+        .chat-footer input:focus {
+            border-color: var(--gold-matte);
+            outline: none;
+        }
+
+        .chat-footer button {
+            background: var(--gold-matte);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        .chat-footer button:hover {
+            background: var(--hover-gold);
+        }
+
+        /* ============ الفوتر ============ */
+        footer {
+            background: var(--white);
+            border-top: 3px solid var(--gold-matte);
+            padding: 25px;
             text-align: center;
-            max-width: 450px;
-            width: 100%;
+            color: var(--text-light);
+            font-size: 0.85rem;
+            margin-top: 50px;
         }
 
-        .logo-wrapper svg {
-            width: 100%;
-            max-width: 400px;
-            height: auto;
-            display: block;
-            margin: 0 auto;
-            filter: drop-shadow(0 4px 20px rgba(168, 137, 74, 0.3));
-            transition: filter 0.3s ease;
-        }
-
-        .logo-wrapper svg:hover {
-            filter: drop-shadow(0 6px 30px rgba(168, 137, 74, 0.5));
-        }
-
-        .logo-fallback {
-            display: none;
+        footer .footer-brand {
             color: var(--gold-matte);
-            font-size: 28px;
-            font-weight: bold;
-            letter-spacing: 2px;
-            padding: 20px;
-            border: 2px solid var(--gold-matte);
-            border-radius: 12px;
-            background: rgba(168, 137, 74, 0.1);
+            font-weight: 700;
         }
 
-        /* احتياطي في حال فشل تحميل SVG */
-        @media (prefers-reduced-motion: reduce) {
-            .logo-wrapper svg {
-                transition: none;
+        /* ============ رسالة النجاح ============ */
+        .success-message {
+            display: none;
+            background: #F0F9EB;
+            border: 2px solid #A8D88A;
+            color: #3D6B24;
+            padding: 16px 22px;
+            border-radius: 14px;
+            text-align: center;
+            font-weight: 600;
+            margin-top: 20px;
+            animation: fadeIn 0.4s ease;
+        }
+
+        /* ============ تجاوب ============ */
+        @media (max-width: 768px) {
+            .hero h2 {
+                font-size: 1.6rem;
+            }
+            .header-inner {
+                flex-direction: column;
+                text-align: center;
+            }
+            nav {
+                justify-content: center;
+            }
+            nav a {
+                font-size: 0.8rem;
+                padding: 8px 14px;
+            }
+            #chat-window {
+                width: calc(100vw - 40px);
+                left: 20px;
+                bottom: 85px;
             }
         }
     </style>
 </head>
 <body>
 
-    <div class="logo-wrapper">
-        <!-- الشعار الرئيسي SVG -->
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" 
-             role="img" 
-             aria-labelledby="florinTitle florinDesc"
-             style="width: 100%; max-width: 400px; height: auto; display: block;">
-            
-            <!-- عناوين ووصف لإمكانية الوصول -->
-            <title id="florinTitle">شعار Florin Tours</title>
-            <desc id="florinDesc">شعار شركة فلورين تورز للسياحة والسفر يتضمن يخت شراعي وطائرة وكرة أرضية بتصميم ذهبي فاخر</desc>
-            
-            <defs>
-                <!-- تدرجات ذهبية حقيقية لمحاكاة ألوان الشعار الأصلي -->
-                <linearGradient id="primaryGold" x1="0%" y1="100%" x2="100%" y2="0%">
-                    <stop offset="0%" stop-color="#8a6f3e" />
-                    <stop offset="30%" stop-color="#c5a059" />
-                    <stop offset="50%" stop-color="#f3dc9a" />
-                    <stop offset="70%" stop-color="#c5a059" />
-                    <stop offset="100%" stop-color="#9a7b41" />
-                </linearGradient>
-                
-                <linearGradient id="darkNavy" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#23272a" />
-                    <stop offset="100%" stop-color="#111315" />
-                </linearGradient>
+    <!-- ==================== الهيدر ==================== -->
+    <header>
+        <div class="header-inner">
+            <div class="logo-area">
+                <div class="logo-icon">✈</div>
+                <div class="logo-text">
+                    <h1>فلورين</h1>
+                    <span>للسفر والسياحة</span>
+                </div>
+            </div>
+            <nav>
+                <a href="#offers" class="active">العروض</a>
+                <a href="#order">احجز الآن</a>
+                <a href="#contact">تواصل معنا</a>
+            </nav>
+        </div>
+    </header>
 
-                <!-- تدرج إضافي للتأثيرات الضوئية -->
-                <linearGradient id="goldShine" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#f3dc9a" stop-opacity="0.8" />
-                    <stop offset="50%" stop-color="#c5a059" stop-opacity="0.5" />
-                    <stop offset="100%" stop-color="#8a6f3e" stop-opacity="0.2" />
-                </linearGradient>
-            </defs>
+    <!-- ==================== القسم الترحيبي ==================== -->
+    <section class="hero">
+        <h2>اكتشف العالم مع <span class="highlight">فلورين</span></h2>
+        <p>نقدم لك أفضل العروض السياحية إلى أجمل الوجهات العالمية بأفضل الأسعار وأعلى مستويات الخدمة</p>
+        <div class="hero-badge">🌟 عروض حصرية لهذا الموسم</div>
+    </section>
 
-            <g id="Florin-Logo-Graphic">
-                <!-- الجزء العلوي: الكرة الأرضية الخلفية والانحناءات الدائرية -->
-                <path d="M235,395 C205,340 315,250 500,250 C685,250 795,340 765,395 C730,345 625,275 500,275 C375,275 270,345 235,395 Z" 
-                      fill="url(#primaryGold)" />
-                <path d="M205,460 C230,420 330,390 500,390 C670,390 770,420 795,460 C755,430 645,410 500,410 C355,410 245,430 205,460 Z" 
-                      fill="url(#darkNavy)" />
+    <!-- ==================== العروض السياحية ==================== -->
+    <div class="container" id="offers">
+        <div class="section-title">
+            <h3>بكجاتنا السياحية المميزة</h3>
+            <p>اختر وجهتك المفضلة ودعنا نتولى كافة الترتيبات</p>
+        </div>
 
-                <!-- اليخت والسفينة الشراعية بتفاصيلها كاملة -->
-                <!-- الأشرعة الخلفية -->
-                <path d="M375,130 C370,220 405,345 455,365 C410,340 335,260 375,130 Z" 
-                      fill="url(#primaryGold)" />
-                <path d="M380,145 C380,225 410,340 450,360 C415,335 350,265 380,145 Z" 
-                      fill="url(#darkNavy)" />
-                
-                <!-- الشراع الرئيسي الكبير -->
-                <path d="M385,45 C370,180 470,320 565,315 C480,285 410,180 385,45 Z" 
-                      fill="url(#darkNavy)" />
-                <path d="M400,120 L405,310 L395,310 Z" 
-                      fill="url(#primaryGold)" />
-                <path d="M440,125 C435,190 480,280 550,295 C490,265 450,195 440,125 Z" 
-                      fill="url(#primaryGold)" />
-                <path d="M443,135 C440,195 480,275 540,290 C485,260 450,200 443,135 Z" 
-                      fill="url(#darkNavy)" />
+        <div class="packages-grid">
+            <!-- عرض 1 -->
+            <div class="package-card">
+                <div class="package-image">
+                    🕌
+                    <span class="package-badge">الأكثر طلباً</span>
+                </div>
+                <div class="package-info">
+                    <h4>بكاج إسطنبول الذهبي</h4>
+                    <p class="duration">📅 7 أيام / 6 ليالي</p>
+                    <ul class="features">
+                        <li>تذاكر طيران ذهاب وعودة</li>
+                        <li>إقامة فندق 5 نجوم مع إفطار</li>
+                        <li>جولات سياحية في المدينة القديمة</li>
+                        <li>رحلة البوسفور البحرية</li>
+                        <li>تأمين سفر شامل</li>
+                    </ul>
+                    <div class="package-price">4,200 ريال <small>/ للشخص</small></div>
+                    <a href="#order" class="btn-book">احجز هذا العرض</a>
+                </div>
+            </div>
 
-                <!-- الشراع الصغير الأمامي -->
-                <path d="M515,200 C505,250 540,310 580,310 C550,295 520,250 515,200 Z" 
-                      fill="url(#primaryGold)" />
-                <path d="M520,210 C512,250 540,300 572,305 C548,290 525,250 520,210 Z" 
-                      fill="url(#darkNavy)" />
+            <!-- عرض 2 -->
+            <div class="package-card">
+                <div class="package-image">
+                    🏖
+                    <span class="package-badge">عرض الصيف</span>
+                </div>
+                <div class="package-info">
+                    <h4>بكاج شرم الشيخ الساحر</h4>
+                    <p class="duration">📅 5 أيام / 4 ليالي</p>
+                    <ul class="features">
+                        <li>تذاكر طيران مباشر</li>
+                        <li>منتجع شامل كافة الوجبات</li>
+                        <li>رحلات غوص وسنوركلينج</li>
+                        <li>جولة سفاري صحراوية</li>
+                        <li>استقبال خاص في المطار</li>
+                    </ul>
+                    <div class="package-price">3,600 ريال <small>/ للشخص</small></div>
+                    <a href="#order" class="btn-book">احجز هذا العرض</a>
+                </div>
+            </div>
 
-                <!-- جسم اليخت والنوافذ -->
-                <path d="M305,395 L590,300 L680,280 L610,345 L320,425 Z" 
-                      fill="url(#darkNavy)" />
-                <path d="M295,400 L590,305 L675,285 L600,355 L310,430 Z" 
-                      fill="url(#primaryGold)" />
-                
-                <!-- نوافذ اليخت -->
-                <path d="M312,418 L370,398 L372,408 L316,423 Z" 
-                      fill="url(#goldShine)" />
-                <path d="M385,393 L440,375 L442,385 L387,403 Z" 
-                      fill="url(#goldShine)" />
-                <path d="M455,370 L510,352 L512,362 L457,380 Z" 
-                      fill="url(#goldShine)" />
-                
-                <!-- الشريط الدائري الملتف حول اليخت (الحلقات الذهبية) -->
-                <path d="M205,465 C210,410 450,310 700,320 C760,322 785,340 780,360 C710,350 420,410 205,465 Z" 
-                      fill="url(#primaryGold)" />
-                <path d="M220,460 C250,420 440,335 690,335 C740,335 760,350 750,365 C680,360 420,415 220,460 Z" 
-                      fill="url(#darkNavy)" />
+            <!-- عرض 3 -->
+            <div class="package-card">
+                <div class="package-image">
+                    🌴
+                    <span class="package-badge">شهر العسل</span>
+                </div>
+                <div class="package-info">
+                    <h4>بكاج المالديف الرومانسي</h4>
+                    <p class="duration">📅 6 أيام / 5 ليالي</p>
+                    <ul class="features">
+                        <li>تذاكر طيران درجة رجال الأعمال</li>
+                        <li>فيلا فوق الماء خاصة</li>
+                        <li>عشاء رومانسي على الشاطئ</li>
+                        <li>جلسة سبا للزوجين</li>
+                        <li>باقة ورود وشوكولاتة ترحيبية</li>
+                    </ul>
+                    <div class="package-price">11,500 ريال <small>/ للزوجين</small></div>
+                    <a href="#order" class="btn-book">احجز هذا العرض</a>
+                </div>
+            </div>
 
-                <!-- الخطوط العرضية المستقيمة التي يتوسطها الاسم -->
-                <rect x="115" y="465" width="770" height="15" 
-                      fill="url(#primaryGold)" />
-                <rect x="115" y="660" width="770" height="15" 
-                      fill="url(#primaryGold)" />
-
-                <!-- الجزء السفلي: انحناءات الكرة الأرضية والطائرة -->
-                <!-- الدوائر السفلية المظلمة والذهبية المتداخلة -->
-                <path d="M185,685 C240,840 420,945 615,930 C760,920 840,840 850,775 C770,890 530,940 310,840 C190,785 175,720 185,685 Z" 
-                      fill="url(#primaryGold)" />
-                <path d="M205,705 C250,830 410,915 590,910 C720,905 800,830 815,775 C740,865 520,905 320,820 C220,775 200,730 205,705 Z" 
-                      fill="url(#darkNavy)" />
-                <path d="M150,775 C190,870 340,895 490,845 C320,885 190,840 150,775 Z" 
-                      fill="url(#goldShine)" />
-
-                <!-- الطائرة المحلقة مع مسارها الانسيابي الذهبي -->
-                <!-- مسار الطائرة -->
-                <path d="M135,800 C220,870 420,830 540,790 C420,820 240,840 135,800 Z" 
-                      fill="url(#primaryGold)" />
-                
-                <!-- جسم وجناح الطائرة بدقة -->
-                <path d="M475,775 L520,795 L720,680 L750,670 L650,740 L675,850 L645,840 L615,760 L545,785 L540,815 L515,810 L522,790 L475,775 Z" 
-                      fill="url(#darkNavy)" />
-                <path d="M480,770 L525,790 L715,675 L740,668 L645,735 L665,840 L640,830 L610,755 L540,780 L535,805 L515,802 L520,785 L480,770 Z" 
-                      fill="url(#primaryGold)" />
-            </g>
-        </svg>
-
-        <!-- احتياطي في حال فشل تحميل SVG -->
-        <div class="logo-fallback" id="logoFallback">
-            FLORIN TOURS
+            <!-- عرض 4 -->
+            <div class="package-card">
+                <div class="package-image">
+                    🗼
+                    <span class="package-badge">جديد</span>
+                </div>
+                <div class="package-info">
+                    <h4>بكاج كوالالمبور وسنغافورة</h4>
+                    <p class="duration">📅 10 أيام / 9 ليالي</p>
+                    <ul class="features">
+                        <li>تذاكر طيران متعدد الوجهات</li>
+                        <li>فنادق 4 نجوم في المدينتين</li>
+                        <li>جولة في برجي بتروناس</li>
+                        <li>تذاكر يونيفرسال ستوديو سنغافورة</li>
+                        <li>مواصلات خاصة بين المدن</li>
+                    </ul>
+                    <div class="package-price">7,800 ريال <small>/ للشخص</small></div>
+                    <a href="#order" class="btn-book">احجز هذا العرض</a>
+                </div>
+            </div>
         </div>
     </div>
 
-    <script>
-        // التحقق من دعم SVG وعرض البديل إذا لزم الأمر
-        document.addEventListener('DOMContentLoaded', function() {
-            const svgElement = document.querySelector('svg');
-            const fallbackElement = document.getElementById('logoFallback');
-            
-            // التحقق من وجود SVG وعرضه بشكل صحيح
-            if (!svgElement || !document.implementation.hasFeature("http://www.w3.org/TR/SVG11/feature#Image", "1.1")) {
-                if (fallbackElement) {
-                    fallbackElement.style.display = 'block';
-                }
-                if (svgElement) {
-                    svgElement.style.display = 'none';
-                }
-            }
-
-            // إضافة معالج أخطاء للـ SVG
-            if (svgElement) {
-                svgElement.addEventListener('error', function() {
-                    if (fallbackElement) {
-                        fallbackElement.style.display = 'block';
-                    }
-                    svgElement.style.display = 'none';
-                });
-            }
-        });
-    </script>
-
-</body>
-</html>
-
-                    <span class="offer-badge">شامل الطيران</span>
-                </div>
-                <div class="offer-details">
-                    <h3 class="offer-title">رحلة جزر المالديف الساحرة</h3>
-                    <div class="offer-info">
-                        <span>🕒 5 أيام / 4 ليالي</span>
-                        <span>⭐ 5 نجوم</span>
-                    </div>
-                    <div class="offer-price">1,200 <span>$</span></div>
-                    <button class="btn-book">احجز رحلتك الآن</button>
-                </div>
+    <!-- ==================== نموذج الطلب ==================== -->
+    <div class="container" id="order">
+        <div class="order-section">
+            <div class="section-title">
+                <h3>نموذج طلب الحجز</h3>
+                <p>املأ البيانات التالية وسنتواصل معك خلال 24 ساعة</p>
             </div>
 
-            <div class="offer-card">
-                <div class="offer-image" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(20,20,20,0.8)), url('https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?q=80&w=600&auto=format&fit=crop');">
-                    <span class="offer-badge">الأكثر مبيعاً</span>
-                </div>
-                <div class="offer-details">
-                    <h3 class="offer-title">أسبوع في عاصمة الضباب لندن</h3>
-                    <div class="offer-info">
-                        <span>🕒 7 أيام / 6 ليالي</span>
-                        <span>⭐ 4 نجوم</span>
+            <form id="bookingForm">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>الاسم الكامل <span class="required">*</span></label>
+                        <input type="text" id="fullName" placeholder="أدخل اسمك الكامل" required>
                     </div>
-                    <div class="offer-price">1,550 <span>$</span></div>
-                    <button class="btn-book">احجز رحلتك الآن</button>
+                    <div class="form-group">
+                        <label>رقم الجوال <span class="required">*</span></label>
+                        <input type="tel" id="phone" placeholder="05xxxxxxxx" required dir="ltr">
+                    </div>
+                    <div class="form-group">
+                        <label>البريد الإلكتروني</label>
+                        <input type="email" id="email" placeholder="example@email.com" dir="ltr">
+                    </div>
+                    <div class="form-group">
+                        <label>اختر البكاج <span class="required">*</span></label>
+                        <select id="package" required>
+                            <option value="">-- اختر البكاج المناسب --</option>
+                            <option value="istanbul">بكاج إسطنبول الذهبي - 4,200 ريال</option>
+                            <option value="sharm">بكاج شرم الشيخ الساحر - 3,600 ريال</option>
+                            <option value="maldives">بكاج المالديف الرومانسي - 11,500 ريال</option>
+                            <option value="malaysia">بكاج كوالالمبور وسنغافورة - 7,800 ريال</option>
+                            <option value="custom">بكاج مخصص (أخرى)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>عدد المسافرين <span class="required">*</span></label>
+                        <input type="number" id="travelers" placeholder="عدد الأشخاص" min="1" value="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label>التاريخ المفضل للسفر</label>
+                        <input type="date" id="travelDate">
+                    </div>
+                    <div class="form-group full">
+                        <label>ملاحظات إضافية</label>
+                        <textarea id="notes" placeholder="أي تفاصيل أو طلبات خاصة تود إضافتها..."></textarea>
+                    </div>
                 </div>
-            </div>
+                <button type="submit" class="btn-submit">📩 إرسال طلب الحجز</button>
+            </form>
 
-            <div class="offer-card">
-                <div class="offer-image" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(20,20,20,0.8)), url('https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?q=80&w=600&auto=format&fit=crop');">
-                    <span class="offer-badge">عرض خاص</span>
-                </div>
-                <div class="offer-details">
-                    <h3 class="offer-title">سحر الشرق في اسطنبول تركيا</h3>
-                    <div class="offer-info">
-                        <span>🕒 6 أيام / 5 ليالي</span>
-                        <span>⭐ 5 نجوم</span>
-                    </div>
-                    <div class="offer-price">850 <span>$</span></div>
-                    <button class="btn-book">احجز رحلتك الآن</button>
-                </div>
-            </div>
-
-            <div class="offer-card">
-                <div class="offer-image" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(20,20,20,0.8)), url('https://images.unsplash.com/photo-1552832230-c0197dd311b5?q=80&w=600&auto=format&fit=crop');">
-                    <span class="offer-badge">عشاق التاريخ</span>
-                </div>
-                <div class="offer-details">
-                    <h3 class="offer-title">إجازة تاريخية في روما إيطاليا</h3>
-                    <div class="offer-info">
-                        <span>🕒 5 أيام / 4 ليالي</span>
-                        <span>⭐ 4 نجوم</span>
-                    </div>
-                    <div class="offer-price">1,100 <span>$</span></div>
-                    <button class="btn-book">احجز رحلتك الآن</button>
-                </div>
+            <div class="success-message" id="successMsg">
+                ✅ تم استلام طلبك بنجاح! سنتواصل معك قريباً على الرقم المدخل.
             </div>
         </div>
-    </section>
+    </div>
 
+    <!-- ==================== شريط التواصل ==================== -->
+    <div class="contact-bar" id="contact">
+        <p style="font-weight:700; color:#3D2E0A; margin-bottom:5px;">📧 للتواصل المباشر</p>
+        <p class="email">flournitourism2026@gmail.com</p>
+    </div>
 
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-column">
-                <h3>عن فلورين</h3>
-                <p style="color: var(--text-muted); font-size: 14px;">وكالة فلورين لخدمات السفر والسياحة تقدم حلول سفر متكاملة ورحلات ترفيهية مميزة حول العالم بأعلى معايير الجودة.</p>
-            </div>
-            <div class="footer-column">
-                <h3>روابط سريعة</h3>
-                <ul class="footer-links">
-                    <li><a href="#">من نحن</a></li>
-                    <li><a href="#">شروط الخدمة</a></li>
-                    <li><a href="#">سياسة الخصوصية</a></li>
-                </ul>
+    <!-- ==================== نظام المحادثة الذكي ==================== -->
+    <div id="chat-bubble" onclick="toggleChat()" title="تحدث معنا">💬</div>
+
+    <div id="chat-window">
+        <div class="chat-header">
+            <span>💬 خدمة العملاء - فلورين</span>
+            <button class="close-chat" onclick="toggleChat()">✕</button>
+        </div>
+        <div class="chat-body" id="chatBody">
+            <div class="chat-message bot">
+                مرحباً بك في فلورين للسفر والسياحة! 🌍<br>
+                كيف يمكنني مساعدتك اليوم؟ يمكنك السؤال عن:
+                <br>• العروض المتاحة
+                <br>• الأسعار والتفاصيل
+                <br>• طريقة الحجز
             </div>
         </div>
-        <div class="footer-bottom">
-            &copy; 2026 جميع الحقوق محفوظة لشركة Florin Tours Agency.
+        <div class="chat-footer">
+            <input type="text" id="chatInput" placeholder="اكتب رسالتك هنا..." onkeypress="handleChatEnter(event)">
+            <button onclick="sendMessage()">إرسال</button>
         </div>
+    </div>
+
+    <!-- ==================== الفوتر ==================== -->
+    <footer>
+        <p>© 2026 جميع الحقوق محفوظة | <span class="footer-brand">فلورين للسفر والسياحة</span></p>
+        <p style="margin-top:5px;">نحن هنا لخدمتكم على مدار الساعة | رحلات آمنة وممتعة</p>
     </footer>
-    </body>
-</html>
 
+    <!-- ==================== السكريبتات ==================== -->
+    <script>
+        // ========== نظام المحادثة ==========
+        function toggleChat() {
+            const window = document.getElementById('chat-window');
+            window.style.display = window.style.display === 'flex' ? 'none' : 'flex';
+        }
 
+        function handleChatEnter(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            if (!message) return;
+
+            const chatBody = document.getElementById('chatBody');
+
+            // إضافة رسالة المستخدم
+            const userMsg = document.createElement('div');
+            userMsg.className = 'chat-message user';
+            userMsg.textContent = message;
+            chatBody.appendChild(userMsg);
+
+            input.value = '';
+            chatBody.scrollTop = chatBody.scrollHeight;
+
+            // محاكاة رد البوت
+            setTimeout(() => {
+                const botMsg = document.createElement('div');
+                botMsg.className = 'chat-message bot';
+                botMsg.textContent = generateBotResponse(message);
+                chatBody.appendChild(botMsg);
+                chatBody.scrollTop = chatBody.scrollHeight;
+            }, 800);
+        }
+
+        function generateBotResponse(msg) {
+            const lower = msg.toLowerCase();
+
+            if (lower.includes('عرض') || lower.includes('بكاج') || lower.includes('بكج') || lower.includes('رحلة')) {
+                return 'لدينا عدة عروض مميزة:\n🏙 إسطنبول - 4,200 ريال (7 أيام)\n🏖 شرم الشيخ - 3,600 ريال (5 أيام)\n🌴 المالديف - 11,500 ريال (6 أيام)\n🗼 كوالالمبور وسنغافورة - 7,800 ريال (10 أيام)\n\nأي عرض يثير اهتمامك؟';
+            }
+            if (lower.includes('سعر') || lower.includes('تكلفة') || lower.includes('ريال') || lower.includes('كم')) {
+                return 'أسعارنا تبدأ من 3,600 ريال لبكاج شرم الشيخ وحتى 11,500 ريال لبكاج المالديف الفاخر. جميع البكجات تشمل الطيران والإقامة والجولات. هل تود معرفة تفاصيل عرض محدد؟';
+            }
+            if (lower.includes('حجز') || lower.includes('احجز') || lower.includes('طريقة') || lower.includes('كيف')) {
+                return 'للحجز، قم بتعبئة نموذج الطلب في الأسفل ببياناتك (الاسم، الجوال، البكاج المطلوب) وسنتواصل معك خلال 24 ساعة لتأكيد الحجز. يمكنك أيضاً مراسلتنا على:\n📧 flournitourism2026@gmail.com';
+            }
+            if (lower.includes('سلام') || lower.includes('مرحبا') || lower.includes('هلا') || lower.includes('اهلا')) {
+                return 'وعليكم السلام! مرحباً بك في فلورين للسفر والسياحة. كيف أقدر أخدمك اليوم؟';
+            }
+            if (lower.includes('شكرا') || lower.includes('شكراً') || lower.includes('تسلم')) {
+                return 'العفو! سعداء بخدمتك. إذا احتجت أي مساعدة أخرى، لا تتردد في التواصل معنا. رحلة سعيدة! ✈️';
+            }
+
+            return 'شكراً لتواصلك مع فلورين للسفر والسياحة. سأقوم بإيصال استفسارك لفريق خدمة العملاء. يمكنك أيضاً مراسلتنا مباشرة على:\n📧 flournitourism2026@gmail.com\n📞 أو تعبئة نموذج الحجز أدناه.';
+        }
+
+        // ========== نموذج الحجز ==========
+        document.getElementById('bookingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const fullName = document.getElementById('fullName').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const packageSelect = document.getElementById('package');
+            const packageName = packageSelect.options[packageSelect.selectedIndex].text;
+            const travelers = document.getElementById('travelers').value;
+            const travelDate = document.getElementById('travelDate').value;
+            const notes = document.getElementById('notes').value.trim();
+
+            if (!fullName || !phone || !packageSelect.value) {
+                alert('الرجاء تعبئة الحقول المطلوبة (الاسم، رقم الجوال، البكاج)');
+                return;
+            }
+
+            // تجميع البيانات
+            const bookingData = {
+                name: fullName,
+                phone: phone,
+                email: email,
+                package: packageName,
+                travelers: travelers,
+                date: travelDate,
+                notes: notes,
+                timestamp: new Date().toLocaleString('ar-SA')
+            };
+
+            console.log('بيانات الحجز:', bookingData);
+
+            // عرض رسالة النجاح
+            document.getElementById('successMsg').style.display =
+                    <h4>بكاج شرم الشيخ الساحر</h4>
+                    <p class="duration">📅 5 أيام / 4 ليالي</p>
+                    <ul class="features">
+                        <li>تذاكر طيران مباشر</li>
+                        <li>منتجع شامل كافة الوجبات</li>
+                        <li>رحلات غوص وسنوركلينج</li>
+                        <li>جولة سفاري صحراوية</li>
+        
