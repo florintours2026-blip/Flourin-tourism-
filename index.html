@@ -45,7 +45,7 @@
         header { background: var(--header-bg); border-bottom: 3px solid var(--gold-matte); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 20px rgba(0,0,0,0.06); transition: background 0.3s; }
         .header-inner { max-width: 1200px; margin: 0 auto; padding: 10px 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 15px; }
         
-        /* صياغة كود اللوجو الجديد والمعدل */
+        /* صياغة كود اللوجو */
         .logo-area { display: flex; align-items: center; gap: 12px; }
         .florin-logo { max-width: 100%; height: auto; width: 140px; object-fit: contain; transition: transform 0.3s ease; }
         .florin-logo:hover { transform: scale(1.05); }
@@ -116,13 +116,10 @@
     <header>
         <div class="header-inner">
             <div class="logo-area">
-                <!-- كود اللوجو الصوري في مكانه الصحيح برمجياً -->
                 <img src="12063.jpg" alt="شعار فلورين لخدمات السفر والسياحة" class="florin-logo" onerror="this.src='logo.jpg'">
             </div>
             <div class="controls">
-                <!-- زر التبديل المضاف للوضع الليلي والنهاري -->
                 <button class="theme-toggle-btn" id="themeToggle" onclick="toggleTheme()">🌙</button>
-                
                 <select id="currencySelector" onchange="updatePrices()">
                     <option value="USD">الدولار ($)</option>
                     <option value="SAR">الريال السعودي (SAR)</option>
@@ -141,15 +138,12 @@
         <p data-i18n="heroDesc">أفضل العروض السياحية وتسهيلات التأشيرات لرحلة لا تُنسى.</p>
     </div>
 
-    <!-- العروض السياحية -->
     <div class="section-title"><h3 data-i18n="offersTitle">العروض السياحية</h3></div>
     <div class="horizontal-scroll" id="offersContainer"></div>
 
-    <!-- التأشيرات -->
     <div class="section-title"><h3 data-i18n="visasTitle">تأشيرات السفر (الفيز)</h3></div>
     <div class="horizontal-scroll" id="visasContainer"></div>
 
-    <!-- نموذج بيانات العميل (الدفع والحجز) -->
     <div class="form-container" id="booking-section">
         <h2 data-i18n="formTitle">نموذج الحجز الشامل</h2>
         <form id="bookingForm">
@@ -317,4 +311,125 @@
                 phone: "電話番号", paymentMethod: "支払方法",
                 flightFormTitle: "航空券の予約", tripType: "旅行の種類", flightFrom: "出発地（空港名/コード）",
                 flightTo: "目的地（空港名/コード）", flightTime: "希望するフライト時間", adults: "大人（12歳以上）",
-                children: "子供（2-12歳）", infants: "幼児（2歳未満）", airlineChoice: "航空会社の選択
+                children: "子供（2-12歳）", infants: "幼児（2歳未満）", airlineChoice: "航空会社の選択",
+                submitFlight: "検索して予約", bookBtn: "今すぐ予約", heroTitle: "フローレンで世界を発見", heroDesc: "忘れられない旅のための最高の旅行パッケージとビザ施設。",
+                formTitle: "総合予約フォーム",
+                items: {
+                    off1: { title: "ジョージアの休日", badge: "ベストセラー" }, off2: { title: "モルディブの魔法", badge: "特別" }, off3: { title: "トルコを探索", badge: "新着" },
+                    visa1: { title: "UAEビザ（1ヶ月）", badge: "速い" }, visa2: { title: "UAEビザ（2ヶ月）", badge: "人気" },
+                    visa3: { title: "エジプト治安承認", badge: "保証付き" }, visa4: { title: "インドネシアビザ", badge: "観光" }
+                }
+            }
+        };
+
+        function formatPrice(priceUSD) {
+            const converted = (priceUSD * exchangeRates[currentCurrency]).toFixed(0);
+            const symbols = { USD: '$', SAR: ' SAR', EGP: ' EGP', SDG: ' SDG' };
+            return converted + symbols[currentCurrency];
+        }
+
+        function renderCards() {
+            const t = translations[currentLang];
+            const createCard = (item) => `
+                <div class="card">
+                    <div class="card-img" style="background-image: url('${item.img}')">
+                        <span class="card-badge">${t.items[item.id].badge}</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-title">${t.items[item.id].title}</div>
+                        <div class="card-price">${formatPrice(item.priceUSD)}</div>
+                        <button class="btn-book">${t.bookBtn}</button>
+                    </div>
+                </div>`;
+            
+            document.getElementById('offersContainer').innerHTML = offersData.map(createCard).join('');
+            document.getElementById('visasContainer').innerHTML = visasData.map(createCard).join('');
+        }
+
+        function updatePrices() {
+            currentCurrency = document.getElementById('currencySelector').value;
+            renderCards();
+        }
+
+        function changeLang(lang) {
+            currentLang = lang;
+            const t = translations[lang];
+            document.documentElement.lang = lang;
+            document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (t[key]) el.innerText = t[key];
+            });
+            renderCards();
+        }
+
+        function toggleAirlineInput() {
+            const specificRadio = document.querySelector('input[name="airline_type"][value="specific"]');
+            const airlineInput = document.getElementById('specificAirlineInput');
+            if (specificRadio.checked) {
+                airlineInput.classList.remove('hidden');
+            } else {
+                airlineInput.classList.add('hidden');
+                airlineInput.value = '';
+            }
+        }
+
+        // دالة تبديل الوضع الليلي / الفاتح
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const toggleBtn = document.getElementById('themeToggle');
+            if (currentTheme === 'dark') {
+                document.documentElement.removeAttribute('data-theme');
+                toggleBtn.innerText = '🌙';
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                toggleBtn.innerText = '☀️';
+            }
+        }
+
+        // مستمع حدث إرسال نموذج الحجز
+        document.getElementById('bookingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const selectedTripType = document.querySelector('input[name="trip"]:checked').value;
+            const selectedAirlineType = document.querySelector('input[name="airline_type"]:checked').value;
+            
+            const data = {
+                الاسم: document.getElementById('firstName').value + ' ' + document.getElementById('lastName').value,
+                الهاتف: document.getElementById('countryCode').value + ' ' + document.getElementById('phone').value,
+                الميلاد: document.getElementById('dob').value,
+                الجواز: document.getElementById('passportNum').value,
+                الاصدار: document.getElementById('passportIssue').value,
+                الانتهاء: document.getElementById('passportExpiry').value,
+                نوع_الرحلة: selectedTripType,
+                من: document.getElementById('flightFrom').value,
+                إلى: document.getElementById('flightTo').value,
+                الوقت: document.getElementById('flightTime').value,
+                بالغين: document.getElementById('adults').value,
+                أطفال: document.getElementById('children').value,
+                رضع: document.getElementById('infants').value,
+                خط_الطيران: selectedAirlineType === 'specific' ? document.getElementById('specificAirlineInput').value : 'كافة الخطوط',
+                الدفع: document.getElementById('paymentMethod').value
+            };
+
+            const whatsappNumber = "249969862218";
+            let whatsappMsg = `*طلب حجز طيران جديد*%0A%0A*بيانات العميل*%0A- الاسم: ${data.الاسم}%0A- الهاتف: ${data.الهاتف}%0A- الميلاد: ${data.الميلاد}%0A- رقم الجواز: ${data.الجواز}%0A- إصدار: ${data.الاصدار}%0A- انتهاء: ${data.الانتهاء}%0A%0A*الرحلة*%0A- من ${data.من} إلى ${data.إلى}%0A- النوع: ${data.نوع_الرحلة} | الوقت: ${data.الوقت}%0A- مسافرين: ${data.بالغين} بالغ، ${data.أطفال} طفل، ${data.رضع} رضيع%0A- الطيران: ${data.خط_الطيران}%0A%0A*الدفع*: ${data.الدفع}`;
+            const whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${whatsappMsg}`;
+
+            fetch("https://formsubmit.co/ajax/flournitourism2026@gmail.com", {
+                method: "POST",
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                body: JSON.stringify(data)
+            }).then(response => response.json()).then(result => {
+                alert("تم إرسال الطلب! سيتم تحويلك لواتساب.");
+                window.open(whatsappUrl, '_blank');
+                document.getElementById('bookingForm').reset();
+            }).catch(error => {
+                alert("تم تجهيز الطلب. سيتم تحويلك لواتساب.");
+                window.open(whatsappUrl, '_blank');
+            });
+        });
+
+        window.onload = renderCards;
+    </script>
+</body>
+</html>
