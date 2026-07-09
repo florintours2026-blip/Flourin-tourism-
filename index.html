@@ -425,12 +425,29 @@
 <body>
 
     <header>
-        <div class="header-inner">
-            <div class="logo-area">
-                <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=100&q=80" alt="شعار فلورين" class="logo-img">
-                <div class="logo-text">
-                    <h1>فلورين للسفر والسياحة</h1>
-                </div>
+                    <div class="controls">
+                <!-- قائمة العملات المتعددة -->
+                <select id="currency-select" onchange="updateCurrency()">
+                    <option value="USD">الدولار ($)</option>
+                    <option value="SAR">الريال السعودي (SAR)</option>
+                    <option value="AED">الدرهم الإماراتي (AED)</option>
+                    <option value="EGP">الجنيه المصري (EGP)</option>
+                    <option value="SDG">الجنيه السوداني (SDG)</option>
+                </select>
+                
+                <!-- قائمة اللغات المتعددة -->
+                <select id="lang-select" onchange="updateLanguage()">
+                    <option value="ar">العربية (AR)</option>
+                    <option value="en">English (EN)</option>
+                    <option value="ja">日本語 (JA)</option>
+                    <option value="zh">中文 (ZH)</option>
+                    <option value="tr">Türkçe (TR)</option>
+                    <option value="de">Deutsch (DE)</option>
+                </select>
+                
+                <button class="theme-btn" onclick="toggleDarkMode()">🌙 الوضع الداكن</button>
+            </div>
+
             </div>
             
             <div class="controls">
@@ -511,33 +528,135 @@
             </div>
         </div>
 
-        <!-- صفحة تحديد نوع الرحلة -->
+                <!-- صفحة تحديد نوع الرحلة والمحرك الذكي -->
         <div id="trip-page" class="page">
             <div class="section-title">
-                <h3>تحديد نوع الرحلة</h3>
-                <p style="color: var(--text-medium);">يرجى تحديد نوع الحجز المفضل لديك لتضمينه في طلب الحجز</p>
+                <h3 id="txt-trip-title">تحديد تفاصيل الرحلة</h3>
+                <p id="txt-trip-subtitle" style="color: var(--text-medium);">يرجى اختيار نوع الخدمة وتعبئة البيانات المطلوبة بدقة</p>
             </div>
             
-            <div class="trip-type-container">
-                <div class="trip-card" id="trip-flight" onclick="selectTripType('حجز الطيران')">
+            <div class="trip-type-container" style="margin-bottom: 30px;">
+                <div class="trip-card" id="trip-flight" onclick="toggleTripForm('flight')">
                     <div class="icon">✈️</div>
-                    <h4>حجز الطيران</h4>
-                    <p>حجز تذاكر طيران دولية وداخلية بأفضل الأسعار والمسارات المباشرة.</p>
+                    <h4 id="txt-flight-tab">حجز الطيران</h4>
+                    <p id="txt-flight-tab-desc">تذاكر دولية وداخلية بأفضل الأسعار</p>
                 </div>
                 
-                <div class="trip-card" id="trip-hotel" onclick="selectTripType('حجوزات الفنادق')">
+                <div class="trip-card" id="trip-hotel" onclick="toggleTripForm('hotel')">
                     <div class="icon">🏨</div>
-                    <h4>حجوزات الفنادق</h4>
-                    <p>إقامة فاخرة ومريحة في أفضل الفنادق العالمية المعتمدة وبأسعار تنافسية.</p>
-                </div>
-                
-                <div class="trip-card" id="trip-resort" onclick="selectTripType('حجوزات الرحلات السياحية والمنتجعات')">
-                    <div class="icon">🏖️</div>
-                    <h4>الرحلات السياحية والمنتجعات</h4>
-                    <p>برامج ترفيهية متكاملة وإقامة مميزة في أرقى المنتجعات السياحية العالمية.</p>
+                    <h4 id="txt-hotel-tab">حجوزات الفنادق</h4>
+                    <p id="txt-hotel-tab-desc">إقامة مريحة في أرقى الفنادق العالمية</p>
                 </div>
             </div>
+
+            <!-- نموذج تفاصيل حجز الطيران المتقدم -->
+            <div id="flight-form-container" class="form-container" style="display: none; border-color: var(--gold-matte);">
+                <h3 style="color: var(--gold-matte); margin-bottom: 20px;" id="txt-flight-head">تفاصيل حجز الطيران</h3>
+                
+                <!-- الصف الأول: نوع الرحلة -->
+                <div class="row">
+                    <div class="col">
+                        <label id="lbl-flight-type">نوع الرحلة *</label>
+                        <select id="flightType" required>
+                            <option value="ذهاب فقط">ذهاب فقط</option>
+                            <option value="ذهاب وإياب">ذهاب وإياب</option>
+                            <option value="وجهات متعددة">وجهات متعددة</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- الصف الثاني: وجهات السفر (كافة دول العالم عبر قائمة ذكية) -->
+                <div class="row">
+                    <div class="col">
+                        <label id="lbl-dep-country">الدولة التي تسافر منها (بلد المغادرة) *</label>
+                        <input type="text" id="depCountry" list="countries-list" required placeholder="اكتب بلد المغادرة...">
+                    </div>
+                    <div class="col">
+                        <label id="lbl-arr-country">الدولة المراد الوصول إليها (وجهة السفر) *</label>
+                        <input type="text" id="arrCountry" list="countries-list" required placeholder="اكتب وجهة الوصول...">
+                    </div>
+                </div>
+
+                <!-- الصف الثالث: تحديد الطيران أو السعر -->
+                <div class="row">
+                    <div class="col">
+                        <label id="lbl-airline-opt">تفضيل خطوط الطيران *</label>
+                        <select id="airlineOption" onchange="toggleAirlineInput()" required>
+                            <option value="ارخص طيران">عرض من أرخص خط طيران إلى الأغلى</option>
+                            <option value="طيران مخصص">تحديد خطوط طيران مخصصة (كتابة الاسم أو الكود)</option>
+                        </select>
+                    </div>
+                    <div class="col" id="custom-airline-col" style="display: none;">
+                        <label id="lbl-custom-airline">اسم شركة الطيران أو كود الـ IATA *</label>
+                        <input type="text" id="customAirline" list="airlines-list" placeholder="مثال: TK (التركية) أو Emirates...">
+                    </div>
+                </div>
+
+                <!-- الصف الرابع: عدد المسافرين وفئاتهم العمرية -->
+                <div class="row">
+                    <div class="col">
+                        <label id="lbl-adults">البالغون (12 سنة فأكثر) *</label>
+                        <input type="number" id="passAdults" value="1" min="1" required>
+                    </div>
+                    <div class="col">
+                        <label id="lbl-children">الأطفال (2 - 12 سنة)</label>
+                        <input type="number" id="passChildren" value="0" min="0">
+                    </div>
+                    <div class="col">
+                        <label id="lbl-infants">الرضع (من يوم إلى سنتين)</label>
+                        <input type="number" id="passInfants" value="0" min="0">
+                    </div>
+                </div>
+
+                <button type="button" class="submit-btn" style="background-color: var(--gold-matte);" onclick="saveFlightDetails()" id="btn-save-flight">تأكيد تفاصيل الطيران</button>
+            </div>
+
+            <!-- نموذج تفاصيل حجز الفنادق المتقدم -->
+            <div id="hotel-form-container" class="form-container" style="display: none; border-color: var(--gold-matte);">
+                <h3 style="color: var(--gold-matte); margin-bottom: 20px;" id="txt-hotel-head">تفاصيل حجز الفندق</h3>
+                
+                <div class="row">
+                    <div class="col">
+                        <label id="lbl-hotel-country">الدولة المراد الحجز فيها (الوجهة السياحية) *</label>
+                        <input type="text" id="hotelCountry" list="countries-list" required placeholder="اكتب الدولة أو المدينة الفندقية...">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <label id="lbl-checkin">تاريخ الدخول (Check-in) *</label>
+                        <input type="date" id="hotelCheckIn" required>
+                    </div>
+                    <div class="col">
+                        <label id="lbl-checkout">تاريخ الخروج (Check-out) *</label>
+                        <input type="date" id="hotelCheckOut" required>
+                    </div>
+                </div>
+
+                <button type="button" class="submit-btn" style="background-color: var(--gold-matte);" onclick="saveHotelDetails()" id="btn-save-hotel">تأكيد تفاصيل الفندق</button>
+            </div>
         </div>
+
+        <!-- قوائم البيانات الذكية المساعدة (Datalists) لجميع دول العالم وشركات الطيران الكبرى -->
+        <datalist id="countries-list">
+            <!-- الدول العربية والأكثر طلباً -->
+            <option value="السودان"><option value="مصر"><option value="الإمارات العربية المتحدة"><option value="المملكة العربية السعودية">
+            <option value="قطر"><option value="سلطنة عمان"><option value="البحرين"><option value="الكويت"><option value="الأردن">
+            <option value="لبنان"><option value="تركيا"><option value="ماليزيا"><option value="جزر المالديف"><option value="جزر القمر">
+            <!-- دول العالم الكبرى -->
+            <option value="الولايات المتحدة الأمريكية"><option value="المملكة المتحدة"><option value="ألمانيا"><option value="فرنسا">
+            <option value="إيطاليا"><option value="إسبانيا"><option value="سويسرا"><option value="اليابان"><option value="الصين">
+            <option value="روسيا"><option value="كندا"><option value="أستراليا"><option value="البرازيل"><option value="الهند">
+            <!-- يمكن للمستخدم كتابة أي دولة أخرى بحرية تامة بفضل ميزة حقل الإدخال الحر المصاحب للقائمة -->
+        </datalist>
+
+        <datalist id="airlines-list">
+            <option value="EK - طيران الإمارات"><option value="QR - الخطوط الجوية القطرية"><option value="SV - الخطوط السعودية">
+            <option value="MS - مصر للطيران"><option value="TK - الخطوط الجوية التركية"><option value="SD - الخطوط الجوية السودانية">
+            <option value="WY - الطيران العماني"><option value="EY - الاتحاد للطيران"><option value="GF - طيران الخليج">
+            <option value="LH - لوفتهانزا الألمانية"><option value="BA - الخطوط الجوية البريطانية"><option value="AF - الخطوط الجوية الفرنسية">
+        </datalist>
+
                 <!-- صفحة البكجات السياحية -->
         <div id="packages-page" class="page">
             <div class="section-title">
@@ -856,6 +975,246 @@
                 window.location.href = mailtoUrl;
             }, 1000);
         }
+                // أسعار تحويل العملات الافتراضية مقابل الدولار الأمريكي كأساس
+        const currencyRates = {
+            USD: 1,
+            SAR: 3.75,
+            AED: 3.67,
+            EGP: 48.50,
+            SDG: 600.00
+        };
+
+        const currencySymbols = {
+            USD: '$',
+            SAR: 'ريال',
+            AED: 'درهم',
+            EGP: 'جنيه مصري',
+            SDG: 'جنيه سوداني'
+        };
+
+        // مصفوفة الترجمة للغات الستة المدعومة
+        const translations = {
+            ar: {
+                tripTitle: "تحديد تفاصيل الرحلة",
+                tripSubtitle: "يرجى اختيار نوع الخدمة وتعبئة البيانات المطلوبة بدقة",
+                flightTab: "حجز الطيران",
+                hotelTab: "حجوزات الفنادق",
+                flightHead: "تفاصيل حجز الطيران",
+                hotelHead: "تفاصيل حجز الفندق",
+                flightType: "نوع الرحلة *",
+                depCountry: "الدولة التي تسافر منها (بلد المغادرة) *",
+                arrCountry: "الدولة المراد الوصول إليها (وجهة السفر) *",
+                airlineOpt: "تفضيل خطوط الطيران *",
+                customAirline: "اسم شركة الطيران أو كود الـ IATA *",
+                adults: "البالغون (12 سنة فأكثر) *",
+                children: "الأطفال (2 - 12 سنة)",
+                infants: "الرضع (من يوم إلى سنتين)",
+                saveFlight: "تأكيد تفاصيل الطيران",
+                saveHotel: "تأكيد تفاصيل الفندق"
+            },
+            en: {
+                tripTitle: "Select Trip Details",
+                tripSubtitle: "Please choose a service and fill in the required details accurately",
+                flightTab: "Flight Booking",
+                hotelTab: "Hotel Bookings",
+                flightHead: "Flight Booking Details",
+                hotelHead: "Hotel Booking Details",
+                flightType: "Trip Type *",
+                depCountry: "Departure Country *",
+                arrCountry: "Destination Country *",
+                airlineOpt: "Airline Preference *",
+                customAirline: "Airline Name or IATA Code *",
+                adults: "Adults (12+ years) *",
+                children: "Children (2-12 years)",
+                infants: "Infants (1 day - 2 years)",
+                saveFlight: "Confirm Flight Details",
+                saveHotel: "Confirm Hotel Details"
+            },
+            ja: {
+                tripTitle: "旅行の詳細設定",
+                tripSubtitle: "サービスを選択し、必要な詳細を正確に入力してください",
+                flightTab: "航空券予約",
+                hotelTab: "ホテル予約",
+                flightHead: "航空券予約の詳細",
+                hotelHead: "ホテル予約の詳細",
+                flightType: "旅行タイプ *",
+                depCountry: "出発国 *",
+                arrCountry: "目的地 *",
+                airlineOpt: "航空会社の希望 *",
+                customAirline: "航空会社名またはIATAコード *",
+                adults: "大人 (12歳以上) *",
+                children: "子供 (2-12歳)",
+                infants: "乳幼児 (1日-2歳)",
+                saveFlight: "フライト詳細を確認",
+                saveHotel: "ホテルの詳細を確認"
+            },
+            zh: {
+                tripTitle: "选择行程细节",
+                tripSubtitle: "请选择服务并准确填写所需细节",
+                flightTab: "机票预订",
+                hotelTab: "酒店预订",
+                flightHead: "机票预订细节",
+                hotelHead: "酒店预订细节",
+                flightType: "行程类型 *",
+                depCountry: "出发国家 *",
+                arrCountry: "目的地国家 *",
+                airlineOpt: "航空公司偏好 *",
+                customAirline: "航空公司名称或IATA代码 *",
+                adults: "成人 (12岁以上) *",
+                children: "儿童 (2-12岁)",
+                infants: "婴儿 (1天-2岁)",
+                saveFlight: "确认机票细节",
+                saveHotel: "确认酒店细节"
+            },
+            tr: {
+                tripTitle: "Seyahat Detaylarını Seçin",
+                tripSubtitle: "Lütfen bir hizmet seçin ve gerekli bilgileri doğru bir şekilde doldurun",
+                flightTab: "Uçak Rezervasyonu",
+                hotelTab: "Otel Rezervasyonu",
+                flightHead: "Uçak Rezervasyonu Detayları",
+                hotelHead: "Otel Rezervasyonu Detayları",
+                flightType: "Uçuş Tipi *",
+                depCountry: "Kalkış Ülkesi *",
+                arrCountry: "Varış Ülkesi *",
+                airlineOpt: "Havayolu Tercihi *",
+                customAirline: "Havayolu Adı veya IATA Kodu *",
+                adults: "Yetişkin (12+ Yaş) *",
+                children: "Çocuk (2-12 Yaş)",
+                infants: "Bebek (1 Gün - 2 Yaş)",
+                saveFlight: "Uçuş Detaylarını Onayla",
+                saveHotel: "Otel Detaylarını Onayla"
+            },
+            de: {
+                tripTitle: "Reisedetails auswählen",
+                tripSubtitle: "Bitte wählen Sie einen Service und füllen Sie die Details genau aus",
+                flightTab: "Flugbuchung",
+                hotelTab: "Hotelbuchung",
+                flightHead: "Details zur Flugbuchung",
+                hotelHead: "Details zur Hotelbuchung",
+                flightType: "Reisetyp *",
+                depCountry: "Abflugsland *",
+                arrCountry: "Zielland *",
+                airlineOpt: "Fluggesellschafts-Präferenz *",
+                customAirline: "Fluggesellschaft Name oder IATA-Code *",
+                adults: "Erwachsene (12+ Jahre) *",
+                children: "Kinder (2-12 Jahre)",
+                infants: "Kleinkinder (1 Tag - 2 Jahre)",
+                saveFlight: "Flugdetails bestätigen",
+                saveHotel: "Hoteldetails bestätigen"
+            }
+        };
+
+        // دوال التحكم بالنماذج الجديدة
+        function toggleTripForm(type) {
+            document.querySelectorAll('.trip-card').forEach(card => card.classList.remove('selected'));
+            document.getElementById('flight-form-container').style.display = 'none';
+            document.getElementById('hotel-form-container').style.display = 'none';
+
+            if (type === 'flight') {
+                document.getElementById('trip-flight').classList.add('selected');
+                document.getElementById('flight-form-container').style.display = 'block';
+            } else if (type === 'hotel') {
+                document.getElementById('trip-hotel').classList.add('selected');
+                document.getElementById('hotel-form-container').style.display = 'block';
+            }
+        }
+
+        function toggleAirlineInput() {
+            const opt = document.getElementById('airlineOption').value;
+            const customCol = document.getElementById('custom-airline-col');
+            if (opt === 'طيران مخصص') {
+                customCol.style.display = 'block';
+                document.getElementById('customAirline').setAttribute('required', 'required');
+            } else {
+                customCol.style.display = 'none';
+                document.getElementById('customAirline').removeAttribute('required');
+            }
+        }
+
+        // حفظ وتأكيد تفاصيل الطيران لنموذج العميل
+        function saveFlightDetails() {
+            const type = document.getElementById('flightType').value;
+            const dep = document.getElementById('depCountry').value.trim();
+            const arr = document.getElementById('arrCountry').value.trim();
+            const airOpt = document.getElementById('airlineOption').value;
+            const customAir = document.getElementById('customAirline').value.trim();
+            const ad = document.getElementById('passAdults').value;
+            const ch = document.getElementById('passChildren').value;
+            const inf = document.getElementById('passInfants').value;
+
+            if (!dep || !arr) {
+                alert('يرجى تحديد بلدي المغادرة والوصول أولاً.');
+                return;
+            }
+
+            let airlineText = airOpt === 'ارخص طيران' ? 'أرخص خطوط طيران متاحة' : `طيران مخصص: ${customAir}`;
+            let summary = `حجز طيران (${type}) من [${dep}] إلى [${arr}] | ${airlineText} | المسافرين: بالغين(${ad}) أطفال(${ch}) رضع(${inf})`;
+            
+            document.getElementById('selectedService').value = summary;
+            alert('تم تأكيد وحفظ تفاصيل الطيران بنجاح ونقلها لنموذج الحجز.');
+            showPage('customer-page');
+        }
+
+        // حفظ وتأكيد تفاصيل الفندق لنموذج العميل
+        function saveHotelDetails() {
+            const country = document.getElementById('hotelCountry').value.trim();
+            const checkIn = document.getElementById('hotelCheckIn').value;
+            const checkOut = document.getElementById('hotelCheckOut').value;
+
+            if (!country || !checkIn || !checkOut) {
+                alert('يرجى تعبئة كافة حقول حجز الفندق المطلوبة.');
+                return;
+            }
+
+            let summary = `حجز فندق في [${country}] | دخول: ${checkIn} | خروج: ${checkOut}`;
+            document.getElementById('selectedService').value = summary;
+            alert('تم تأكيد وحفظ تفاصيل الفندق بنجاح ونقلها لنموذج الحجز.');
+            showPage('customer-page');
+        }
+
+        // تحديث العملات بالصفحة ديناميكياً
+        function updateCurrency() {
+            const currency = document.getElementById('currency-select').value;
+            const rate = currencyRates[currency];
+            const symbol = currencySymbols[currency];
+
+            // أسعار الباقات بالدولار وتحويلها ديناميكياً
+            const basePrices = [1200, 850, 650, 400, 350, 900, 950, 780, 300, 700];
+            const priceElements = document.querySelectorAll('#packages-page .card-price');
+            
+            priceElements.forEach((el, index) => {
+                if(index < basePrices.length) {
+                    let calculated = Math.round(basePrices[index] * rate);
+                    el.innerHTML = `ابتداءً من ${calculated} ${symbol}`;
+                }
+            });
+        }
+
+        // تحديث اللغات بالصفحة ديناميكياً
+        function updateLanguage() {
+            const lang = document.getElementById('lang-select').value;
+            const trans = translations[lang];
+
+            if (trans) {
+                document.getElementById('txt-trip-title').innerText = trans.tripTitle;
+                document.getElementById('txt-trip-subtitle').innerText = trans.tripSubtitle;
+                document.getElementById('txt-flight-tab').innerText = trans.flightTab;
+                document.getElementById('txt-hotel-tab').innerText = trans.hotelTab;
+                document.getElementById('txt-flight-head').innerText = trans.flightHead;
+                document.getElementById('txt-hotel-head').innerText = trans.hotelHead;
+                document.getElementById('lbl-flight-type').innerText = trans.flightType;
+                document.getElementById('lbl-dep-country').innerText = trans.depCountry;
+                document.getElementById('lbl-arr-country').innerText = trans.arrCountry;
+                document.getElementById('lbl-airline-opt').innerText = trans.airlineOpt;
+                document.getElementById('lbl-custom-airline').innerText = trans.customAirline;
+                document.getElementById('lbl-adults').innerText = trans.adults;
+                document.getElementById('lbl-children').innerText = trans.children;
+                document.getElementById('lbl-infants').innerText = trans.infants;
+                document.getElementById('btn-save-flight').innerText = trans.saveFlight;
+                document.getElementById('btn-save-hotel').innerText = trans.saveHotel;
+            }
+                }
+                
     </script>
 </body>
 </html>
