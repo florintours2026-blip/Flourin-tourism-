@@ -49,12 +49,17 @@
         .card-price { font-size: 1.4rem; font-weight: 800; color: var(--gold-matte); margin: 15px 0; }
         .btn-book { text-align: center; padding: 10px; background: var(--gold-matte); color: white; text-decoration: none; border-radius: 8px; font-weight: bold; transition: 0.3s; margin-top: auto; }
         .btn-book:hover { background: #C49635; }
+/* نموذج الحجز الشامل */
+.form-container { max-width: 900px; margin: 40px auto; background: var(--white); padding: 30px; border-radius: 15px; border: 1px solid #F0E4CC; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+.form-container h2 { text-align: center; color: var(--gold-matte); margin-bottom: 30px; border-bottom: 2px solid #eee; padding-bottom: 10px; font-size: 1.6rem; }
+.form-section-title { font-size: 1.2rem; color: #2C3E50; margin: 25px 0 15px; font-weight: 700; background: #f8f9fa; padding: 10px; border-right: 4px solid var(--gold-matte); }
+.row { display: flex; flex-wrap: wrap; gap: 15px; margin-bottom: 15px; }
+.col { flex: 1; min-width: 200px; }
+.col label { display: block; margin-bottom: 5px; font-weight: 600; font-size: 0.9rem; }
+.col input, .col select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-family: 'Cairo', sans-serif; box-sizing: border-box; }
+.col input:focus, .col select:focus { border-color: var(--gold-matte); outline: none; }
+.hidden { display: none; }
 
-        /* نموذج الحجز */
-        .booking-form { max-width: 800px; margin: 40px auto; background: var(--white); padding: 30px; border-radius: 15px; border: 1px solid #F0E4CC; }
-        .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; margin-bottom: 8px; font-weight: bold; }
-        .form-group input, .form-group select { width: 100%; padding: 12px; border: 1px solid #E0C878; border-radius: 8px; outline: none; }
     </style>
 </head>
 <body>
@@ -87,23 +92,90 @@
         <p data-i18n="heroDesc">أفضل العروض السياحية وتسهيلات التأشيرات لرحلة لا تُنسى.</p>
     </div>
 
-    <!-- قسم العروض السياحية (تمرير أفقي) -->
-    <div class="section-title">
-        <h3 data-i18n="offersTitle">أحدث العروض السياحية</h3>
-    </div>
-    <div class="horizontal-scroll" id="offersContainer"></div>
-
-    <!-- قسم التأشيرات (تمرير أفقي) -->
-    <div class="section-title">
-        <h3 data-i18n="visasTitle">تأشيرات السفر (الفيز)</h3>
-    </div>
-    <div class="horizontal-scroll" id="visasContainer"></div>
-
-    <!-- نموذج الحجز -->
-    <div class="booking-form">
-        <div class="section-title">
-            <h3 data-i18n="formTitle">نموذج طلب حجز</h3>
+<!-- نموذج الحجز الشامل -->
+<div class="form-container" id="booking-section">
+    <h2 data-i18n="formTitle">نموذج الحجز الشامل</h2>
+    <form id="bookingForm">
+        <div class="form-section-title">بيانات العميل وجواز السفر</div>
+        <div class="row">
+            <div class="col"><label>الاسم الأول</label><input type="text" id="firstName" required></div>
+            <div class="col"><label>الاسم الأخير</label><input type="text" id="lastName" required></div>
         </div>
+        <div class="row">
+            <div class="col"><label>تاريخ الميلاد</label><input type="date" id="dob" required></div>
+            <div class="col"><label>رقم الهاتف (مع رمز الدولة)</label><input type="tel" id="phone" placeholder="+249..." required></div>
+        </div>
+        <div class="row">
+            <div class="col"><label>رقم الجواز</label><input type="text" id="passportNum" required></div>
+            <div class="col"><label>تاريخ استخراج الجواز</label><input type="date" id="passportIssue" required></div>
+            <div class="col"><label>تاريخ انتهاء الجواز</label><input type="date" id="passportExpiry" required></div>
+        </div>
+
+        <div class="form-section-title">تفاصيل رحلة الطيران</div>
+        <div class="row">
+            <div class="col">
+                <label>نوع الرحلة</label>
+                <select id="tripType" required>
+                    <option value="ذهاب فقط">ذهاب فقط</option>
+                    <option value="ذهاب وإياب">ذهاب وإياب</option>
+                    <option value="وجهات متعددة">وجهات متعددة</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col"><label>من (المطار / الكود)</label><input type="text" id="flightFrom" placeholder="مثال: الخرطوم KRT" required></div>
+            <div class="col"><label>إلى (المطار / الكود)</label><input type="text" id="flightTo" placeholder="مثال: دبي DXB" required></div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>وقت الرحلة المفضل</label>
+                <select id="flightTime">
+                    <option value="صباح">صباح</option>
+                    <option value="ظهر">ظهر</option>
+                    <option value="عصر">عصر</option>
+                    <option value="مساء">مساء</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col"><label>بالغ (12+ سنة)</label><input type="number" id="adults" min="1" value="1" required></div>
+            <div class="col"><label>طفل (2-12 سنة)</label><input type="number" id="children" min="0" value="0"></div>
+            <div class="col"><label>رضيع (0-2 سنة)</label><input type="number" id="infants" min="0" value="0"></div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>خط الطيران</label>
+                <select id="airlineType" onchange="toggleCustomAirline()">
+                    <option value="كافة الخطوط">عرض كافة الخطوط المتاحة</option>
+                    <option value="تحديد مخصص">تحديد مخصص (كتابة اسم أو كود الشركة)</option>
+                </select>
+            </div>
+            <div class="col hidden" id="customAirlineDiv">
+                <label>اسم أو كود شركة الطيران</label>
+                <input type="text" id="customAirline" placeholder="مثال: Emirates أو EK">
+            </div>
+        </div>
+
+        <div class="form-section-title">نظام الدفع</div>
+        <div class="row">
+            <div class="col">
+                <label>طريقة الدفع المفضلة</label>
+                <select id="paymentMethod" required>
+                    <option value="فيزا">فيزا (Visa)</option>
+                    <option value="ماستر كارد">ماستر كارد (MasterCard)</option>
+                    <option value="حساب بنكي">حساب بنكي</option>
+                    <option value="بنكك">تطبيق بنكك</option>
+                    <option value="بنك أم درمان الوطني">بنك أم درمان الوطني</option>
+                    <option value="فودافون كاش">فودافون كاش</option>
+                    <option value="ماي كاشي">ماي كاشي (MyKashy)</option>
+                </select>
+            </div>
+        </div>
+
+        <button type="submit" class="btn-book" style="width: 100%; border: none; font-size: 1.2rem; cursor: pointer; padding: 15px; margin-top: 15px;">إرسال الطلب واعتماد الحجز</button>
+    </form>
+</div>
+
         <div class="form-group">
             <label data-i18n="formName">الاسم الكامل</label>
             <input type="text">
@@ -122,7 +194,7 @@
             USD: 1,
             SAR: 3.75,
             EGP: 48.0,
-            SDG: 600.0 // سعر تقريبي للجنيه السوداني
+            SDG: 6000.0 // سعر تقريبي للجنيه السوداني
         };
 
         let currentCurrency = 'USD';
@@ -161,6 +233,55 @@
                 }
             },
             en: {
+                // وظائف نموذج الحجز الشامل
+function toggleCustomAirline() {
+    const type = document.getElementById('airlineType').value;
+    const customDiv = document.getElementById('customAirlineDiv');
+    if (type === 'تحديد مخصص') {
+        customDiv.classList.remove('hidden');
+    } else {
+        customDiv.classList.add('hidden');
+    }
+}
+
+document.getElementById('bookingForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const data = {
+        الاسم: document.getElementById('firstName').value + ' ' + document.getElementById('lastName').value,
+        الهاتف: document.getElementById('phone').value,
+        الميلاد: document.getElementById('dob').value,
+        الجواز: document.getElementById('passportNum').value,
+        الاصدار: document.getElementById('passportIssue').value,
+        الانتهاء: document.getElementById('passportExpiry').value,
+        نوع_الرحلة: document.getElementById('tripType').value,
+        من: document.getElementById('flightFrom').value,
+        إلى: document.getElementById('flightTo').value,
+        الوقت: document.getElementById('flightTime').value,
+        بالغين: document.getElementById('adults').value,
+        أطفال: document.getElementById('children').value,
+        رضع: document.getElementById('infants').value,
+        خط_الطيران: document.getElementById('airlineType').value === 'تحديد مخصص' ? document.getElementById('customAirline').value : 'كافة الخطوط',
+        الدفع: document.getElementById('paymentMethod').value
+    };
+
+    const whatsappNumber = "249969862218";
+    let whatsappMsg = `*طلب حجز طيران جديد*%0A%0A*بيانات العميل*%0A- الاسم: ${data.الاسم}%0A- الهاتف: ${data.الهاتف}%0A- الميلاد: ${data.الميلاد}%0A- رقم الجواز: ${data.الجواز}%0A- إصدار: ${data.الاصدار}%0A- انتهاء: ${data.الانتهاء}%0A%0A*الرحلة*%0A- من ${data.من} إلى ${data.إلى}%0A- النوع: ${data.نوع_الرحلة} | الوقت: ${data.الوقت}%0A- مسافرين: ${data.بالغين} بالغ، ${data.أطفال} طفل، ${data.رضع} رضيع%0A- الطيران: ${data.خط_الطيران}%0A%0A*الدفع*: ${data.الدفع}`;
+    const whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${whatsappMsg}`;
+
+    fetch("https://formsubmit.co/ajax/flournitourism2026@gmail.com", {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(data)
+    }).then(response => response.json()).then(result => {
+        alert("تم إرسال الطلب! سيتم تحويلك لواتساب.");
+        window.open(whatsappUrl, '_blank');
+        document.getElementById('bookingForm').reset();
+    }).catch(error => {
+        alert("تم تجهيز الطلب. سيتم تحويلك لواتساب.");
+        window.open(whatsappUrl, '_blank');
+    });
+});
+
                 logoTitle: "Floren", logoSub: "Travel & Tourism",
                 heroTitle: "Discover the World with Floren", heroDesc: "The best travel packages and visa facilities for an unforgettable journey.",
                 offersTitle: "Latest Travel Packages", visasTitle: "Travel Visas",
