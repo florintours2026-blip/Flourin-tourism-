@@ -76,6 +76,7 @@
         .card-badge { position: absolute; top: 10px; right: 10px; background: var(--gold-matte); color: white; padding: 4px 12px; border-radius: 15px; font-size: 0.8rem; font-weight: bold; }
         .card-content { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
         .card-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 5px; }
+        .card-details { font-size: 0.85rem; color: var(--text-medium); margin-top: 5px; line-height: 1.4; flex-grow: 1; }
         .card-price { font-size: 1.4rem; font-weight: 800; color: var(--gold-matte); margin: 15px 0; }
         .btn-book { text-align: center; padding: 10px; background: var(--gold-matte); color: white; text-decoration: none; border-radius: 8px; font-weight: bold; margin-top: auto; cursor: pointer; border: none; width: 100%; transition: 0.3s; }
         .btn-book:hover { background: #C49635; }
@@ -257,18 +258,26 @@
         let currentCurrency = 'USD';
         let currentLang = 'ar';
 
-        // بيانات العروض والفيز
+        // بيانات العروض السياحية المحدثة (10 عروض شاملة الفنادق والطيران والرحلات والتنقلات مع صور فخمة)
         const offersData = [
-            { id: 'off1', priceUSD: 666, img: 'https://images.unsplash.com/photo-1541358101376-79f9024041d8?w=500' },
-            { id: 'off2', priceUSD: 1546, img: 'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=500' },
-            { id: 'off3', priceUSD: 853, img: 'https://images.unsplash.com/photo-1522083111822-42f275685d56?w=500' }
+            { id: 'off1', priceUSD: 650, img: 'https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=500', desc: 'فنادق 5 نجوم، طيران ذهاب وعودة، جولات سياحية، وتنقلات فاخرة بسيارة خاصة.' },
+            { id: 'off2', priceUSD: 950, img: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=500', desc: 'منتجع شاطئي فاخر، تذاكر الطيران، رحلات سفاري بحرية، واستقبال وتوديع بالمطار.' },
+            { id: 'off3', priceUSD: 1500, img: 'https://images.unsplash.com/photo-1439066615861-d1af74d74000?w=500', desc: 'فيلا مائية خاصة، طيران داخلي ودولي، جولات بحرية، وتنقلات عبر القارب السريع.' },
+            { id: 'off4', priceUSD: 400, img: 'https://images.unsplash.com/photo-1539650116574-8efeb43e2750?w=500', desc: 'إقامة في أفخم منتجعات خليج نعمة، تذاكر طيران، رحلات غوص وسفاري، وتوصيل مجاني.' },
+            { id: 'off5', priceUSD: 350, img: 'https://images.unsplash.com/photo-1516690561799-46d8f74f9abf?w=500', desc: 'فنادق ريفية ساحرة، طيران، رحلات ومغامرات جبلية وبحرية، وكافة التنقلات.' },
+            { id: 'off6', priceUSD: 300, img: 'https://images.unsplash.com/photo-1541358101376-79f9024041d8?w=500', desc: 'إقامة بإطلالة مباشرة على البحر، رحلات استكشافية للمعالم التاريخية والتنقلات.' },
+            { id: 'off7', priceUSD: 380, img: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=500', desc: 'شاليهات ومنتجعات عالمية، تذاكر السفر، رحلات ترفيهية، وتوصيل VIP من وإلى الموقع.' },
+            { id: 'off8', priceUSD: 1100, img: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500', desc: 'منتجعات استوائية بكر، حجوزات طيران كاملة، رحلات استكشاف الجزيرة، وتأجير سيارات.' },
+            { id: 'off9', priceUSD: 780, img: 'https://images.unsplash.com/photo-1596422846543-75c6fc18a523?w=500', desc: 'فندق قريب من البرجين، طيران مريح، رحلات للمدن الترفيهية، والمواصلات مؤمنة.' },
+            { id: 'off10', priceUSD: 1350, img: 'https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=500', desc: 'فنادق عصرية راقية، تذاكر طيران دولية، جولات بالقطار السريع، ومرشد سياحي مخصص.' }
         ];
 
+        // بيانات الفيز والتأشيرات المحدثة بدقة مع صور الخلفيات والأعلام
         const visasData = [
-            { id: 'visa1', priceUSD: 204, img: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=500' },
-            { id: 'visa2', priceUSD: 354, img: 'https://images.unsplash.com/photo-1582672060624-cb814c817531?w=500' },
-            { id: 'visa3', priceUSD: 290, img: 'https://images.unsplash.com/photo-1539650116574-8efeb43e2750?w=500' },
-            { id: 'visa4', priceUSD: 300, img: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=500' }
+            { id: 'visa1_1', priceUSD: 218, img: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=500', desc: 'تأشيرة سياحية لمدة شهر - صورة برج خليفة مع علم الإمارات في الخلفية.' },
+            { id: 'visa1_2', priceUSD: 327, img: 'https://images.unsplash.com/photo-1526478806334-5fa4888439ff?w=500', desc: 'تأشيرة سياحية لمدة شهرين - صورة برج خليفة مع علم الإمارات في الخلفية.' },
+            { id: 'visa2', priceUSD: 560, img: 'https://images.unsplash.com/photo-1565552645632-d725f8bfc19a?w=500', desc: 'تأشيرة عمرة صالحة لمدة 3 أشهر - صورة الكعبة المشرفة مع علم السعودية.' },
+            { id: 'visa3', priceUSD: 290, img: 'https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?w=500', desc: 'موافقة أمنية لدخول مصر - صورة الأهرامات وفي منتصفها أبو الهول وخلفها علم مصر.' }
         ];
 
         const translations = {
@@ -283,153 +292,6 @@
                 submitFlight: "بحث وحجز الرحلة", bookBtn: "طلب الخدمة", heroTitle: "اكتشف العالم مع فلورين", heroDesc: "أفضل العروض السياحية وتسهيلات التأشيرات لرحلة لا تُنسى.",
                 formTitle: "نموذج الحجز الشامل",
                 items: {
-                    off1: { title: "عطلة في جورجيا", badge: "الأكثر مبيعاً" }, off2: { title: "سحر المالديف", badge: "عرض خاص" }, off3: { title: "استكشاف تركيا", badge: "جديد" },
-                    visa1: { title: "تأشيرة الإمارات (شهر)", badge: "سريعة" }, visa2: { title: "تأشيرة الإمارات (شهرين)", badge: "مطلوبة" },
-                    visa3: { title: "موافقة أمنية - مصر", badge: "مضمونة" }, visa4: { title: "تأشيرة إندونيسيا", badge: "سياحية" }
-                }
-            },
-            en: {
-                offersTitle: "Travel Packages", visasTitle: "Travel Visas",
-                customerFormTitle: "Customer & Payment Details", firstName: "First Name", lastName: "Last Name",
-                dob: "Date of Birth", passNum: "Passport Number", passIssue: "Passport Issue Date", passExpiry: "Passport Expiry Date",
-                phone: "Phone Number", paymentMethod: "Payment Method",
-                flightFormTitle: "Flight Booking", tripType: "Trip Type", flightFrom: "From (Airport Name/Code)",
-                flightTo: "To (Airport Name/Code)", flightTime: "Preferred Flight Time", adults: "Adult (12+ years)",
-                children: "Child (2-12 years)", infants: "Infant (Under 2 years)", airlineChoice: "Airline Selection",
-                submitFlight: "Search & Book Flight", bookBtn: "Book Now", heroTitle: "Discover the World with Floren", heroDesc: "The best travel packages and visa facilities for an unforgettable journey.",
-                formTitle: "Comprehensive Booking Form",
-                items: {
-                    off1: { title: "Georgia Holiday", badge: "Best Seller" }, off2: { title: "Maldives Magic", badge: "Special" }, off3: { title: "Explore Turkey", badge: "New" },
-                    visa1: { title: "UAE Visa (1 Month)", badge: "Fast" }, visa2: { title: "UAE Visa (2 Months)", badge: "Popular" },
-                    visa3: { title: "Egypt Security Approval", badge: "Guaranteed" }, visa4: { title: "Indonesia Visa", badge: "Tourist" }
-                }
-            },
-            ja: {
-                offersTitle: "旅行パッケージ", visasTitle: "旅行ビザ",
-                customerFormTitle: "顧客と支払いの詳細", firstName: "名", lastName: "姓",
-                dob: "生年月日", passNum: "パスポート番号", passIssue: "パスポート発行日", passExpiry: "パスポート有効期限",
-                phone: "電話番号", paymentMethod: "支払方法",
-                flightFormTitle: "航空券の予約", tripType: "旅行の種類", flightFrom: "出発地（空港名/コード）",
-                flightTo: "目的地（空港名/コード）", flightTime: "希望するフライト時間", adults: "大人（12歳以上）",
-                children: "子供（2-12歳）", infants: "幼児（2歳未満）", airlineChoice: "航空会社の選択",
-                submitFlight: "検索して予約", bookBtn: "今すぐ予約", heroTitle: "フローレンで世界を発見", heroDesc: "忘れられない旅のための最高の旅行パッケージとビザ施設。",
-                formTitle: "総合予約フォーム",
-                items: {
-                    off1: { title: "ジョージアの休日", badge: "ベストセラー" }, off2: { title: "モルディブの魔法", badge: "特別" }, off3: { title: "トルコを探索", badge: "新着" },
-                    visa1: { title: "UAEビザ（1ヶ月）", badge: "速い" }, visa2: { title: "UAEビザ（2ヶ月）", badge: "人気" },
-                    visa3: { title: "エジプト治安承認", badge: "保証付き" }, visa4: { title: "インドネシアビザ", badge: "観光" }
-                }
-            }
-        };
-
-        function formatPrice(priceUSD) {
-            const converted = (priceUSD * exchangeRates[currentCurrency]).toFixed(0);
-            const symbols = { USD: '$', SAR: ' SAR', EGP: ' EGP', SDG: ' SDG' };
-            return converted + symbols[currentCurrency];
-        }
-
-        function renderCards() {
-            const t = translations[currentLang];
-            const createCard = (item) => `
-                <div class="card">
-                    <div class="card-img" style="background-image: url('${item.img}')">
-                        <span class="card-badge">${t.items[item.id].badge}</span>
-                    </div>
-                    <div class="card-content">
-                        <div class="card-title">${t.items[item.id].title}</div>
-                        <div class="card-price">${formatPrice(item.priceUSD)}</div>
-                        <button class="btn-book">${t.bookBtn}</button>
-                    </div>
-                </div>`;
-            
-            document.getElementById('offersContainer').innerHTML = offersData.map(createCard).join('');
-            document.getElementById('visasContainer').innerHTML = visasData.map(createCard).join('');
-        }
-
-        function updatePrices() {
-            currentCurrency = document.getElementById('currencySelector').value;
-            renderCards();
-        }
-
-        function changeLang(lang) {
-            currentLang = lang;
-            const t = translations[lang];
-            document.documentElement.lang = lang;
-            document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                const key = el.getAttribute('data-i18n');
-                if (t[key]) el.innerText = t[key];
-            });
-            renderCards();
-        }
-
-        function toggleAirlineInput() {
-            const specificRadio = document.querySelector('input[name="airline_type"][value="specific"]');
-            const airlineInput = document.getElementById('specificAirlineInput');
-            if (specificRadio.checked) {
-                airlineInput.classList.remove('hidden');
-            } else {
-                airlineInput.classList.add('hidden');
-                airlineInput.value = '';
-            }
-        }
-
-        // دالة تبديل الوضع الليلي / الفاتح
-        function toggleTheme() {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            const toggleBtn = document.getElementById('themeToggle');
-            if (currentTheme === 'dark') {
-                document.documentElement.removeAttribute('data-theme');
-                toggleBtn.innerText = '🌙';
-            } else {
-                document.documentElement.setAttribute('data-theme', 'dark');
-                toggleBtn.innerText = '☀️';
-            }
-        }
-
-        // مستمع حدث إرسال نموذج الحجز
-        document.getElementById('bookingForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const selectedTripType = document.querySelector('input[name="trip"]:checked').value;
-            const selectedAirlineType = document.querySelector('input[name="airline_type"]:checked').value;
-            
-            const data = {
-                الاسم: document.getElementById('firstName').value + ' ' + document.getElementById('lastName').value,
-                الهاتف: document.getElementById('countryCode').value + ' ' + document.getElementById('phone').value,
-                الميلاد: document.getElementById('dob').value,
-                الجواز: document.getElementById('passportNum').value,
-                الاصدار: document.getElementById('passportIssue').value,
-                الانتهاء: document.getElementById('passportExpiry').value,
-                نوع_الرحلة: selectedTripType,
-                من: document.getElementById('flightFrom').value,
-                إلى: document.getElementById('flightTo').value,
-                الوقت: document.getElementById('flightTime').value,
-                بالغين: document.getElementById('adults').value,
-                أطفال: document.getElementById('children').value,
-                رضع: document.getElementById('infants').value,
-                خط_الطيران: selectedAirlineType === 'specific' ? document.getElementById('specificAirlineInput').value : 'كافة الخطوط',
-                الدفع: document.getElementById('paymentMethod').value
-            };
-
-            const whatsappNumber = "249969862218";
-            let whatsappMsg = `*طلب حجز طيران جديد*%0A%0A*بيانات العميل*%0A- الاسم: ${data.الاسم}%0A- الهاتف: ${data.الهاتف}%0A- الميلاد: ${data.الميلاد}%0A- رقم الجواز: ${data.الجواز}%0A- إصدار: ${data.الاصدار}%0A- انتهاء: ${data.الانتهاء}%0A%0A*الرحلة*%0A- من ${data.من} إلى ${data.إلى}%0A- النوع: ${data.نوع_الرحلة} | الوقت: ${data.الوقت}%0A- مسافرين: ${data.بالغين} بالغ، ${data.أطفال} طفل، ${data.رضع} رضيع%0A- الطيران: ${data.خط_الطيران}%0A%0A*الدفع*: ${data.الدفع}`;
-            const whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${whatsappMsg}`;
-
-            fetch("https://formsubmit.co/ajax/flournitourism2026@gmail.com", {
-                method: "POST",
-                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                body: JSON.stringify(data)
-            }).then(response => response.json()).then(result => {
-                alert("تم إرسال الطلب! سيتم تحويلك لواتساب.");
-                window.open(whatsappUrl, '_blank');
-                document.getElementById('bookingForm').reset();
-            }).catch(error => {
-                alert("تم تجهيز الطلب. سيتم تحويلك لواتساب.");
-                window.open(whatsappUrl, '_blank');
-            });
-        });
-
-        window.onload = renderCards;
-    </script>
-</body>
-</html>
+                    off1: { title: "سحر تركيا المتكامل", badge: "موصى به" }, off2: { title: "طبيعة زنزبار الاستوائية", badge: "مظهر فخم" }, off3: { title: "فخامة جزر المالديف", badge: "VIP" },
+                    off4: { title: "شرم الشيخ الترفيهية", badge: "الأكثر طلباً" }, off5: { title: "جمال دهب الساحر", badge: "مغامرة" }, off6: { title: "عروس البحر الإسكندرية", badge: "عروض الصيف" },
+                    off7: { title: "استجمام العين السخنة", badge: "استرخاء" }, off8: { title: "أسرار جزر القمر", badge: "جديد وحصري" }, off9: { title: "كواللمبور النابضة بالحياة", badge: "عا
