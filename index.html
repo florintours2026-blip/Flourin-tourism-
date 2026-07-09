@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
+            /* ألوان الوضع الفاتح (الافتراضي) */
             --gold-matte: #D4A843;
             --gold-light: #E8C876;
             --white: #FFFFFF;
@@ -22,6 +23,7 @@
             --section-bg: #f8f9fa;
         }
 
+        /* ألوان الوضع الداكن */
         body.dark-mode {
             --white: #1E1E1E;
             --bg-gradient-1: #121212;
@@ -36,119 +38,218 @@
             --section-bg: #2A2A2A;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; }
-
-        body {
-            background: linear-gradient(180deg, var(--bg-gradient-1) 0%, var(--bg-gradient-2) 30%, var(--bg-gradient-3) 100%);
-            color: var(--text-dark);
-            overflow-x: hidden;
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            font-family: 'Cairo', sans-serif; 
+        }
+        
+        body { 
+            background: linear-gradient(180deg, var(--bg-gradient-1) 0%, var(--bg-gradient-2) 30%, var(--bg-gradient-3) 100%); 
+            color: var(--text-dark); 
+            overflow-x: hidden; 
             transition: background 0.3s, color 0.3s;
         }
 
-        header {
-            background: var(--white);
-            border-bottom: 3px solid var(--gold-matte);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 20px var(--shadow-color);
+        /* الهيدر وأدوات التحكم */
+        header { 
+            background: var(--white); 
+            border-bottom: 3px solid var(--gold-matte); 
+            position: sticky; 
+            top: 0; 
+            z-index: 100; 
+            box-shadow: 0 2px 20px var(--shadow-color); 
             transition: background 0.3s;
         }
-        .header-inner { max-width: 1200px; margin: 0 auto; padding: 10px 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 15px; }
-
-        .logo-area { display: flex; align-items: center; gap: 12px; }
-        .logo-img { width: 50px; height: 50px; object-fit: contain; border-radius: 8px; }
-        .logo-text h1 { font-size: 1.3rem; font-weight: 800; color: var(--text-dark); line-height: 1.1; }
-
-        .controls { display: flex; gap: 10px; align-items: center; }
-        select, .lang-btn, .theme-btn {
-            padding: 8px 12px;
-            border: 1px solid var(--gold-light);
-            border-radius: 6px;
-            background: var(--input-bg);
+        
+        .header-inner { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 10px 20px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            flex-wrap: wrap; 
+            gap: 15px; 
+        }
+        
+        /* قسم الشعار */
+        .logo-area { 
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+        }
+        
+        .logo-img { 
+            width: 70px; 
+            height: auto; 
+            object-fit: contain; 
+            border-radius: 8px; 
+        }
+        
+        .logo-text h1 { 
+            font-size: 1.3rem; 
+            font-weight: 800; 
+            color: var(--text-dark); 
+            line-height: 1.1; 
+        }
+        
+        .controls { 
+            display: flex; 
+            gap: 10px; 
+            align-items: center; 
+        }
+        
+        select, .lang-btn, .theme-btn { 
+            padding: 8px 12px; 
+            border: 1px solid var(--gold-light); 
+            border-radius: 6px; 
+            background: var(--input-bg); 
             color: var(--text-dark);
-            cursor: pointer;
-            font-weight: 600;
-            outline: none;
+            cursor: pointer; 
+            font-weight: 600; 
+            outline: none; 
             transition: 0.3s;
         }
-        .lang-btn:hover, select:hover, .theme-btn:hover { background: var(--gold-light); color: #fff; }
+        
+        .lang-btn:hover, select:hover, .theme-btn:hover { 
+            background: var(--gold-light); 
+            color: #fff; 
+        }
 
-        .nav-tabs {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            flex-wrap: wrap;
-            padding: 15px 20px;
+        /* شريط التنقل الرئيسي */
+        nav {
             background: var(--white);
             border-bottom: 1px solid var(--border-color);
-            transition: background 0.3s;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            padding: 10px;
         }
-        .nav-tab {
+
+        nav button {
             padding: 10px 20px;
-            border: 2px solid var(--gold-matte);
-            border-radius: 25px;
-            background: transparent;
-            color: var(--gold-matte);
-            cursor: pointer;
+            border: none;
+            background: none;
+            color: var(--text-dark);
             font-weight: 700;
-            font-size: 1rem;
-            transition: all 0.3s;
-            font-family: 'Cairo', sans-serif;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: 0.3s;
         }
-        .nav-tab:hover, .nav-tab.active {
+
+        nav button.active, nav button:hover {
             background: var(--gold-matte);
-            color: #fff;
+            color: white;
         }
 
-        .hero { text-align: center; padding: 50px 20px; }
-        .hero h2 { font-size: 2.2rem; margin-bottom: 15px; color: var(--text-dark); }
-        .hero p { color: var(--text-medium); font-size: 1.1rem; }
+        /* القسم الترحيبي */
+        .hero { 
+            text-align: center; 
+            padding: 40px 20px; 
+        }
+        
+        .hero h2 { 
+            font-size: 2.2rem; 
+            margin-bottom: 15px; 
+            color: var(--text-dark); 
+        }
+        
+        .hero p { 
+            color: var(--text-medium); 
+            font-size: 1.1rem; 
+        }
 
-        .page { display: none; }
-        .page.active { display: block; }
+        /* الحاوية العامة للصفحات */
+        .page-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
 
-        .form-container {
-            max-width: 900px;
-            margin: 40px auto;
-            background: var(--white);
-            padding: 30px;
-            border-radius: 15px;
-            border: 1px solid var(--border-color);
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* نموذج الحجز الشامل */
+        .form-container { 
+            max-width: 900px; 
+            margin: 20px auto; 
+            background: var(--white); 
+            padding: 30px; 
+            border-radius: 15px; 
+            border: 1px solid var(--border-color); 
             box-shadow: 0 4px 15px var(--shadow-color);
             transition: background 0.3s, border-color 0.3s;
         }
-        .form-container h2 { text-align: center; color: var(--gold-matte); margin-bottom: 30px; border-bottom: 2px solid var(--border-color); padding-bottom: 10px; font-size: 1.6rem; }
-        .form-section-title {
-            font-size: 1.2rem;
-            color: var(--text-dark);
-            margin: 25px 0 15px;
-            font-weight: 700;
-            background: var(--section-bg);
-            padding: 10px;
-            border-right: 4px solid var(--gold-matte);
+        
+        .form-container h2 { 
+            text-align: center; 
+            color: var(--gold-matte); 
+            margin-bottom: 30px; 
+            border-bottom: 2px solid var(--border-color); 
+            padding-bottom: 10px; 
+            font-size: 1.6rem; 
+        }
+        
+        .form-section-title { 
+            font-size: 1.2rem; 
+            color: var(--text-dark); 
+            margin: 25px 0 15px; 
+            font-weight: 700; 
+            background: var(--section-bg); 
+            padding: 10px; 
+            border-right: 4px solid var(--gold-matte); 
             border-radius: 4px;
         }
-        .row { display: flex; flex-wrap: wrap; gap: 15px; margin-bottom: 15px; }
-        .col { flex: 1; min-width: 200px; }
-        .col label { display: block; margin-bottom: 5px; font-weight: 600; font-size: 0.9rem; color: var(--text-dark); }
-        .col input, .col select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid var(--input-border);
-            border-radius: 6px;
-            font-family: 'Cairo', sans-serif;
+        
+        .row { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 15px; 
+            margin-bottom: 15px; 
+        }
+        
+        .col { 
+            flex: 1; 
+            min-width: 200px; 
+        }
+        
+        .col label { 
+            display: block; 
+            margin-bottom: 5px; 
+            font-weight: 600; 
+            font-size: 0.9rem; 
+            color: var(--text-dark); 
+        }
+        
+        .col input, .col select { 
+            width: 100%; 
+            padding: 10px; 
+            border: 1px solid var(--input-border); 
+            border-radius: 6px; 
+            font-family: 'Cairo', sans-serif; 
             box-sizing: border-box;
             background: var(--input-bg);
             color: var(--text-dark);
             transition: 0.3s;
         }
-        .col input:focus, .col select:focus { border-color: var(--gold-matte); outline: none; box-shadow: 0 0 5px rgba(212, 168, 67, 0.5); }
-
+        
+        .col input:focus, .col select:focus { 
+            border-color: var(--gold-matte); 
+            outline: none; 
+            box-shadow: 0 0 5px rgba(212, 168, 67, 0.5); 
+        }
+        
         .submit-btn {
             width: 100%;
             padding: 15px;
-            background: var(--gold-matte);
+            background: #059669;
             color: #fff;
             border: none;
             border-radius: 8px;
@@ -158,115 +259,166 @@
             margin-top: 20px;
             transition: background 0.3s;
         }
-        .submit-btn:hover { background: #B8912F; }
+        
+        .submit-btn:hover { 
+            background: #047857; 
+        }
 
-        .section-title { text-align: center; margin: 50px 0 20px; }
-        .section-title h3 { font-size: 1.8rem; color: var(--gold-matte); position: relative; display: inline-block; margin-bottom: 10px; }
-        .horizontal-scroll { display: flex; overflow-x: auto; gap: 20px; padding: 20px; scroll-snap-type: x mandatory; scrollbar-width: none; }
-        .horizontal-scroll::-webkit-scrollbar { display: none; }
+        /* تصميم صفحة نوع الرحلة */
+        .trip-type-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
 
-        .card {
-            min-width: 300px;
-            max-width: 300px;
+        .trip-card {
             background: var(--white);
-            border-radius: 15px;
-            border: 1px solid var(--border-color);
-            scroll-snap-align: start;
-            flex-shrink: 0;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            box-shadow: 0 4px 15px var(--shadow-color);
-            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s, background 0.3s;
-        }
-        .card:hover {
-            transform: translateY(-5px);
-            border-color: var(--gold-matte);
-            box-shadow: 0 10px 25px rgba(212, 168, 67, 0.25);
-        }
-        .card-img { height: 180px; background-size: cover; background-position: center; position: relative; background-color: #eee; }
-        .card-badge {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: var(--gold-matte);
-            color: #fff;
-            padding: 4px 12px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: bold;
-        }
-        .card-content { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
-        .card-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 5px; color: var(--text-dark); }
-        .card-desc { font-size: 0.9rem; color: var(--text-medium); margin-bottom: 10px; line-height: 1.5; }
-        .card-price { font-size: 1.4rem; font-weight: 800; color: var(--gold-matte); margin: 10px 0 15px; }
-        .btn-book {
-            text-align: center;
-            padding: 10px;
-            background: var(--gold-matte);
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: bold;
-            transition: background 0.3s;
-            margin-top: auto;
-            border: none;
-            cursor: pointer;
-        }
-        .btn-book:hover { background: #B8912F; }
-
-        .visa-card {
-            background: var(--white);
-            border-radius: 15px;
-            border: 1px solid var(--border-color);
-            padding: 25px;
-            margin-bottom: 20px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            align-items: center;
-            transition: background 0.3s, border-color 0.3s;
-        }
-        .visa-img { width: 120px; height: 80px; object-fit: cover; border-radius: 8px; background: #eee; }
-        .visa-info { flex: 1; min-width: 200px; }
-        .visa-info h4 { font-size: 1.2rem; color: var(--text-dark); margin-bottom: 5px; }
-        .visa-info p { color: var(--text-medium); font-size: 0.95rem; }
-        .visa-price { font-size: 1.3rem; font-weight: 800; color: var(--gold-matte); }
-
-        .trip-type-card {
-            background: var(--white);
-            border-radius: 15px;
             border: 2px solid var(--border-color);
+            border-radius: 12px;
             padding: 30px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.3s;
-            flex: 1;
-            min-width: 200px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px var(--shadow-color);
         }
-        .trip-type-card:hover {
+
+        .trip-card:hover, .trip-card.selected {
             border-color: var(--gold-matte);
             transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(212, 168, 67, 0.25);
+            box-shadow: 0 10px 20px rgba(212, 168, 67, 0.15);
         }
-        .trip-type-card h4 { font-size: 1.3rem; color: var(--text-dark); margin-bottom: 10px; }
-        .trip-type-card p { color: var(--text-medium); }
-        .trip-type-icon { font-size: 3rem; margin-bottom: 15px; }
 
-        footer {
-            text-align: center;
-            padding: 30px;
-            background: var(--white);
-            border-top: 3px solid var(--gold-matte);
-            margin-top: 50px;
+        .trip-card .icon {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+        }
+
+        .trip-card h4 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+
+        .trip-card p {
+            font-size: 0.95rem;
             color: var(--text-medium);
-            transition: background 0.3s;
         }
 
-        @media (max-width: 768px) {
-            .hero h2 { font-size: 1.6rem; }
-            .card { min-width: 260px; max-width: 260px; }
-            .visa-card { flex-direction: column; text-align: center; }
+        /* التمرير الأفقي للبطاقات (الباقات والفيز) */
+        .section-title { 
+            text-align: center; 
+            margin: 40px 0 20px; 
+        }
+        
+        .section-title h3 { 
+            font-size: 1.8rem; 
+            color: var(--gold-matte); 
+            position: relative; 
+            display: inline-block; 
+            margin-bottom: 10px; 
+        }
+        
+        .horizontal-scroll { 
+            display: flex; 
+            overflow-x: auto; 
+            gap: 20px; 
+            padding: 20px; 
+            scroll-snap-type: x mandatory; 
+            scrollbar-width: none; 
+        }
+        
+        .horizontal-scroll::-webkit-scrollbar { 
+            display: none; 
+        }
+
+        .card { 
+            min-width: 320px; 
+            max-width: 320px; 
+            background: var(--white); 
+            border-radius: 15px; 
+            border: 1px solid var(--border-color); 
+            scroll-snap-align: start; 
+            flex-shrink: 0; 
+            display: flex; 
+            flex-direction: column; 
+            overflow: hidden; 
+            box-shadow: 0 4px 15px var(--shadow-color); 
+            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s, background 0.3s; 
+        }
+        
+        .card:hover { 
+            transform: translateY(-5px); 
+            border-color: var(--gold-matte); 
+            box-shadow: 0 10px 25px rgba(212, 168, 67, 0.25); 
+        }
+        
+        .card-img { 
+            height: 200px; 
+            background-size: cover; 
+            background-position: center; 
+            position: relative; 
+            background-color: #eee; 
+        }
+        
+        .card-badge { 
+            position: absolute; 
+            top: 10px; 
+            right: 10px; 
+            background: var(--gold-matte); 
+            color: #fff; 
+            padding: 4px 12px; 
+            border-radius: 15px; 
+            font-size: 0.8rem; 
+            font-weight: bold; 
+        }
+        
+        .card-content { 
+            padding: 20px; 
+            flex-grow: 1; 
+            display: flex; 
+            flex-direction: column; 
+        }
+        
+        .card-title { 
+            font-size: 1.2rem; 
+            font-weight: 700; 
+            margin-bottom: 5px; 
+            color: var(--text-dark); 
+        }
+        
+        .card-desc { 
+            font-size: 0.9rem; 
+            color: var(--text-medium); 
+            margin-bottom: 10px; 
+            line-height: 1.5; 
+            height: 72px;
+            overflow: hidden;
+        }
+        
+        .card-price { 
+            font-size: 1.3rem; 
+            font-weight: 800; 
+            color: var(--gold-matte); 
+            margin: 10px 0 15px; 
+        }
+        
+        .btn-book { 
+            text-align: center; 
+            padding: 10px; 
+            background: var(--gold-matte); 
+            color: white; 
+            text-decoration: none; 
+            border-radius: 8px; 
+            font-weight: bold; 
+            transition: background 0.3s; 
+            margin-top: auto; 
+            border: none; 
+            cursor: pointer; 
+        }
+        
+        .btn-book:hover { 
+            background: #B8912F; 
         }
     </style>
 </head>
@@ -275,312 +427,435 @@
     <header>
         <div class="header-inner">
             <div class="logo-area">
-                <img src="florin-logo.png" alt="فلورين لخدمات السفر والسياحة" style="width: 90px; height: auto; object-fit: contain; cursor: pointer;">
+                <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=100&q=80" alt="شعار فلورين" class="logo-img">
+                <div class="logo-text">
+                    <h1>فلورين للسفر والسياحة</h1>
+                </div>
             </div>
+            
             <div class="controls">
-                <select>
-                    <option>الدولار ($)</option>
-                    <option>الريال السعودي (SAR)</option>
-                    <option>الجنيه المصري (EGP)</option>
-                    <option>الجنيه السوداني (SDG)</option>
-                </select>
-                <button class="lang-btn">AR</button>
-                <button id="theme-toggle" class="theme-btn">🌙</button>
+                <button class="theme-btn" onclick="toggleDarkMode()">🌙 الوضع الداكن</button>
             </div>
         </div>
-        <nav class="nav-tabs">
-            <button class="nav-tab active" onclick="showPage('page-home')">الرئيسية</button>
-            <button class="nav-tab" onclick="showPage('page-booking')">نموذج الحجز</button>
-            <button class="nav-tab" onclick="showPage('page-trips')">أنواع الرحلات</button>
-            <button class="nav-tab" onclick="showPage('page-packages')">الباقات السياحية</button>
-            <button class="nav-tab" onclick="showPage('page-visas')">التأشيرات</button>
-        </nav>
     </header>
 
-    <main>
-        <!-- الصفحة الرئيسية -->
-        <div id="page-home" class="page active">
-            <section class="hero">
-                <h2>اكتشف العالم مع فلورين</h2>
-                <p>أفضل العروض السياحية وتسهيلات التأشيرات لرحلة لا تُنسى.</p>
-            </section>
-            <div style="text-align: center; padding: 30px;">
-                <img src="travel-banner.jpg" alt="فلورين للسفر والسياحة" style="max-width: 100%; border-radius: 15px; box-shadow: 0 4px 20px var(--shadow-color);">
+    <nav>
+        <button id="btn-customer" class="active" onclick="showPage('customer-page')">بيانات العميل</button>
+        <button id="btn-trip" onclick="showPage('trip-page')">نوع الرحلة</button>
+        <button id="btn-packages" onclick="showPage('packages-page')">البكجات السياحية</button>
+        <button id="btn-visas" onclick="showPage('visas-page')">التأشيرات والفيز</button>
+    </nav>
+
+    <div class="hero">
+        <h2>مرحباً بكم في فلورين للسياحة</h2>
+        <p>نعمل على تلبية طلباتكم وتسهيل إجراءات سفركم حول العالم بأفضل الأسعار</p>
+    </div>
+
+    <div class="page-container">
+        
+        <!-- صفحة بيانات العميل -->
+        <div id="customer-page" class="page active">
+            <div class="form-container">
+                <h2>نموذج بيانات العميل الشاملة</h2>
+                <form id="bookingForm">
+                    <div class="form-section-title">البيانات الشخصية وبيانات السفر</div>
+                    
+                    <div class="row">
+                        <div class="col">
+                            <label for="firstName">الاسم الأول *</label>
+                            <input type="text" id="firstName" required placeholder="أدخل الاسم الأول كما في جواز السفر">
+                        </div>
+                        <div class="col">
+                            <label for="lastName">الاسم الأخير *</label>
+                            <input type="text" id="lastName" required placeholder="أدخل الاسم الأخير (العائلة)">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <label for="dob">تاريخ الميلاد *</label>
+                            <input type="date" id="dob" required>
+                        </div>
+                        <div class="col">
+                            <label for="passportExpiry">تاريخ انتهاء صلاحية الجواز *</label>
+                            <input type="date" id="passportExpiry" required>
+                        </div>
+                    </div>
+
+                    <div class="form-section-title">تفاصيل الدفع والخدمة المطلوبة</div>
+
+                    <div class="row">
+                        <div class="col">
+                            <label for="paymentMethod">تحديد وسيلة الدفع *</label>
+                            <select id="paymentMethod" required>
+                                <option value="" disabled selected>--- اختر وسيلة الدفع المناسبة ---</option>
+                                <option value="فيزا">فيزا (Visa)</option>
+                                <option value="ماستر كارد">ماستر كارد (MasterCard)</option>
+                                <option value="بنكك من بنك الخرطوم">بنكك (بنك الخرطوم)</option>
+                                <option value="أوكاش من بنك أمدرمان الوطني">أوكاش (بنك أمدرمان الوطني)</option>
+                                <option value="محفظة ماي كاشي">محفظة ماي كاشي</option>
+                                <option value="فودافون كاش">فودافون كاش</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <label for="selectedService">الخدمة المحددة حالياً</label>
+                            <input type="text" id="selectedService" readonly placeholder="يرجى اختيار نوع رحلة، باقة، أو تأشيرة من الصفحات الأخرى" style="background-color: var(--section-bg); font-weight: bold; color: var(--gold-matte);">
+                        </div>
+                    </div>
+
+                    <button type="button" class="submit-btn" onclick="sendOrder()">إرسال الطلب وحجز الآن</button>
+                </form>
             </div>
         </div>
 
-        <!-- صفحة نموذج الحجز الشامل -->
-        <div id="page-booking" class="page">
-            <section class="form-container">
-                <h2>نموذج الحجز الشامل</h2>
-                <form id="bookingForm" action="#" method="POST">
-                    <!-- بيانات العميل وجواز السفر -->
-                    <div class="form-section-title">بيانات العميل وجواز السفر</div>
-                    <div class="row">
-                        <div class="col">
-                            <label>الاسم الأول</label>
-                            <input type="text" id="firstName" placeholder="الاسم الأول" required>
-                        </div>
-                        <div class="col">
-                            <label>الاسم الأخير</label>
-                            <input type="text" id="lastName" placeholder="الاسم الأخير" required>
-                        </div>
+        <!-- صفحة تحديد نوع الرحلة -->
+        <div id="trip-page" class="page">
+            <div class="section-title">
+                <h3>تحديد نوع الرحلة</h3>
+                <p style="color: var(--text-medium);">يرجى تحديد نوع الحجز المفضل لديك لتضمينه في طلب الحجز</p>
+            </div>
+            
+            <div class="trip-type-container">
+                <div class="trip-card" id="trip-flight" onclick="selectTripType('حجز الطيران')">
+                    <div class="icon">✈️</div>
+                    <h4>حجز الطيران</h4>
+                    <p>حجز تذاكر طيران دولية وداخلية بأفضل الأسعار والمسارات المباشرة.</p>
+                </div>
+                
+                <div class="trip-card" id="trip-hotel" onclick="selectTripType('حجوزات الفنادق')">
+                    <div class="icon">🏨</div>
+                    <h4>حجوزات الفنادق</h4>
+                    <p>إقامة فاخرة ومريحة في أفضل الفنادق العالمية المعتمدة وبأسعار تنافسية.</p>
+                </div>
+                
+                <div class="trip-card" id="trip-resort" onclick="selectTripType('حجوزات الرحلات السياحية والمنتجعات')">
+                    <div class="icon">🏖️</div>
+                    <h4>الرحلات السياحية والمنتجعات</h4>
+                    <p>برامج ترفيهية متكاملة وإقامة مميزة في أرقى المنتجعات السياحية العالمية.</p>
+                </div>
+            </div>
+        </div>
+                <!-- صفحة البكجات السياحية -->
+        <div id="packages-page" class="page">
+            <div class="section-title">
+                <h3>أقوى 10 بكجات سياحية عالمية</h3>
+                <p style="color: var(--text-medium);">استكشف أفضل الوجهات السياحية مع عروضنا المتكاملة شاملة الإقامة والجولات</p>
+            </div>
+            
+            <div class="horizontal-scroll">
+                <!-- 1. المالديف -->
+                <div class="card">
+                    <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=400&q=80');">
+                        <span class="card-badge">الأكثر طلباً</span>
                     </div>
-                    <div class="row">
-                        <div class="col">
-                            <label>تاريخ الميلاد</label>
-                            <input type="date" id="birthDate" required>
-                        </div>
-                        <div class="col">
-                            <label>رقم جواز السفر</label>
-                            <input type="text" id="passportNumber" placeholder="رقم جواز السفر" required>
-                        </div>
+                    <div class="card-content">
+                        <div class="card-title">باقة المالديف الاستوائية</div>
+                        <div class="card-desc">استمتع بسحر شاطئ نالادهو، منتجع شي فال، وبانانا ريف. إقامة فاخرة فوق الماء شاملة الوجبات والأنشطة البحرية.</div>
+                        <div class="card-price">ابتداءً من $1200</div>
+                        <button class="btn-book" onclick="selectItem('بكج جزر المالديف الاستوائية')">احجز البكج الآن</button>
                     </div>
-                    <div class="row">
-                        <div class="col">
-                            <label>تاريخ انتهاء صلاحية جواز السفر</label>
-                            <input type="date" id="passportExpiry" required>
-                        </div>
-                        <div class="col">
-                            <label>رقم الهاتف</label>
-                            <input type="tel" id="phoneNumber" placeholder="رقم الهاتف للتواصل" required>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <label>البريد الإلكتروني</label>
-                            <input type="email" id="email" placeholder="البريد الإلكتروني" required>
-                        </div>
-                        <div class="col">
-                            <label>الجنسية</label>
-                            <input type="text" id="nationality" placeholder="الجنسية" required>
-                        </div>
-                    </div>
+                </div>
 
-                    <!-- تحديد نوع الرحلة -->
-                    <div class="form-section-title">تحديد نوع الرحلة</div>
-                    <div class="row">
-                        <div class="col">
-                            <label>نوع الخدمة المطلوبة</label>
-                            <select id="tripType" required>
-                                <option value="">-- اختر نوع الخدمة --</option>
-                                <option value="flight">حجز الطيران</option>
-                                <option value="hotel">حجوزات الفنادق</option>
-                                <option value="tour">حجوزات الرحلات السياحية والمنتجعات</option>
-                            </select>
-                        </div>
-                        <div class="col">
-                            <label>الوجهة المطلوبة</label>
-                            <select id="destination" required>
-                                <option value="">-- اختر الوجهة --</option>
-                                <option value="maldives">المالديف</option>
-                                <option value="zanzibar">زنزبار</option>
-                                <option value="kuala-lumpur">كوالالمبور</option>
-                                <option value="sharm-el-sheikh">شرم الشيخ</option>
-                                <option value="dahab">دهب</option>
-                                <option value="north-coast">الساحل الشمالي</option>
-                                <option value="dubai">دبي</option>
-                                <option value="comoros">جزر القمر</option>
-                                <option value="alexandria">الإسكندرية</option>
-                                <option value="turkey">تركيا</option>
-                            </select>
-                        </div>
+                <!-- 2. زنزبار -->
+                <div class="card">
+                    <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1583212292454-1fe6229603b7?auto=format&fit=crop&w=400&q=80');">
+                        <span class="card-badge">طبيعة بكر</span>
                     </div>
-                    <div class="row">
-                        <div class="col">
-                            <label>تاريخ السفر المتوقع</label>
-                            <input type="date" id="travelDate">
-                        </div>
-                        <div class="col">
-                            <label>عدد المسافرين</label>
-                            <input type="number" id="travelersCount" min="1" placeholder="عدد المسافرين">
-                        </div>
+                    <div class="card-content">
+                        <div class="card-title">باقة زنزبار الساحرة</div>
+                        <div class="card-desc">استكشف غابة جوزاني، شاطئ نونغوي، وفندق بارازا الفاخر. رحلة استوائية تجمع بين الاستجمام والمغامرة الأفريقية.</div>
+                        <div class="card-price">ابتداءً من $850</div>
+                        <button class="btn-book" onclick="selectItem('بكج زنزبار الأفريقية')">احجز البكج الآن</button>
                     </div>
+                </div>
 
-                    <!-- تحديد وسيلة الدفع -->
-                    <div class="form-section-title">تحديد وسيلة الدفع</div>
-                    <div class="row">
-                        <div class="col">
-                            <label>وسيلة الدفع المفضلة</label>
-                            <select id="paymentMethod" required>
-                                <option value="">-- اختر وسيلة الدفع --</option>
-                                <option value="visa">فيزا</option>
-                                <option value="mastercard">ماستر كارد</option>
-                                <option value="bankak">بنكك - بنك الخرطوم</option>
-                                <option value="okash">أوكاش - بنك أمدرمان الوطني</option>
-                                <option value="mycashy">محفظة ماي كاشي</option>
-                                <option value="vodafone-cash">فودافون كاش</option>
-                            </select>
-                        </div>
-                        <div class="col">
-                            <label>رقم الحساب / المحفظة</label>
-                            <input type="text" id="paymentAccount" placeholder="أدخل رقم الحساب أو المحفظة">
-                        </div>
+                <!-- 3. كوالالمبور -->
+                <div class="card">
+                    <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1596422846543-75c6fc18a523?auto=format&fit=crop&w=400&q=80');">
+                        <span class="card-badge">حداثة وتسوق</span>
                     </div>
-
-                    <!-- ملاحظات إضافية -->
-                    <div class="form-section-title">ملاحظات إضافية</div>
-                    <div class="row">
-                        <div class="col" style="flex: 1 1 100%;">
-                            <label>ملاحظات أو طلبات خاصة</label>
-                            <textarea id="notes" rows="4" style="width: 100%; padding: 10px; border: 1px solid var(--input-border); border-radius: 6px; font-family: 'Cairo', sans-serif; background: var(--input-bg); color: var(--text-dark);" placeholder="اكتب أي ملاحظات أو طلبات خاصة هنا..."></textarea>
-                        </div>
+                    <div class="card-content">
+                        <div class="card-title">باقة كوالالمبور المتكاملة</div>
+                        <div class="card-desc">أروع الجولات لبرجي بتروناس، كهوف باتو، والإقامة في فندق جراند حياة كوالالمبور الفاخر.</div>
+                        <div class="card-price">ابتداءً من $650</div>
+                        <button class="btn-book" onclick="selectItem('بكج كوالالمبور الساحر')">احجز البكج الآن</button>
                     </div>
+                </div>
 
-                    <button type="submit" class="submit-btn">إرسال الطلب</button>
-                </form>
-            </section>
+                <!-- 4. شرم الشيخ -->
+                <div class="card">
+                    <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1539635278303-d4002c07eae3?auto=format&fit=crop&w=400&q=80');">
+                        <span class="card-badge">عائلي ممتع</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-title">باقة شرم الشيخ الترفيهية</div>
+                        <div class="card-desc">شاملة زيارة محمية رأس محمد، خليج نعمة، مع إقامة مميزة في منتجع ريكسوس شرم الشيخ الفاخر.</div>
+                        <div class="card-price">ابتداءً من $400</div>
+                        <button class="btn-book" onclick="selectItem('بكج شرم الشيخ الترفيهي')">احجز البكج الآن</button>
+                    </div>
+                </div>
+
+                <!-- 5. دهب -->
+                <div class="card">
+                    <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=400&q=80');">
+                        <span class="card-badge">عشاق المغامرة</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-title">باقة دهب والاسترخاء</div>
+                        <div class="card-desc">اكتشف البلو هول الشهير، محمية أبو جالوم، وممشى دهب السياحي الساحر مع إقامة في فندق لوميريديان دهب.</div>
+                        <div class="card-price">ابتداءً من $350</div>
+                        <button class="btn-book" onclick="selectItem('بكج دهب والاسترخاء')">احجز البكج الآن</button>
+                    </div>
+                </div>
+
+                <!-- 6. الساحل الشمالي -->
+                <div class="card">
+                    <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=400&q=80');">
+                        <span class="card-badge">رفاهية الصيف</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-title">باقة الساحل الشمالي الفاخرة</div>
+                        <div class="card-desc">استمتع بشواطئ مراسي، هاكيندا باي، والإقامة الفاخرة في فندق ريكسوس العلمين الجديد. عطلة صيفية ملكية.</div>
+                        <div class="card-price">ابتداءً من $900</div>
+                        <button class="btn-book" onclick="selectItem('بكج الساحل الشمالي الفاخر')">احجز البكج الآن</button>
+                    </div>
+                </div>
+
+                <!-- 7. دبي -->
+                <div class="card">
+                    <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=400&q=80');">
+                        <span class="card-badge">تسوق وفخامة</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-title">باقة دبي الساحرة</div>
+                        <div class="card-desc">تتضمن صعود برج خليفة، زيارة دبي مول، والإقامة الفاخرة في فندق أتلانتس النخلة الشهير.</div>
+                        <div class="card-price">ابتداءً من $950</div>
+                        <button class="btn-book" onclick="selectItem('بكج دبي الفاخر')">احجز البكج الآن</button>
+                    </div>
+                </div>
+
+                <!-- 8. جزر القمر -->
+                <div class="card">
+                    <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1559136555-9303baea8ebd?auto=format&fit=crop&w=400&q=80');">
+                        <span class="card-badge">وجهة نادرة</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-title">باقة جزر القمر الطبيعية</div>
+                        <div class="card-desc">استكشف جبل كارتالا، شواطئ موهيلي العذراء، مع إقامة في منتجع رويال كومور المتميز وسط الطبيعة الخلابة.</div>
+                        <div class="card-price">ابتداءً من $780</div>
+                        <button class="btn-book" onclick="selectItem('بكج جزر القمر الطبيعية')">احجز البكج الآن</button>
+                    </div>
+                </div>
+
+                <!-- 9. الإسكندرية -->
+                <div class="card">
+                    <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1568322422390-0ec4fc9cfa5b?auto=format&fit=crop&w=400&q=80');">
+                        <span class="card-badge">تاريخ وثقافة</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-title">باقة الإسكندرية الكلاسيكية</div>
+                        <div class="card-desc">استمتع بزيارة قلعة قايتباي، مكتبة الإسكندرية، مع إقامة راقية مطلة على البحر في فندق فورسيزونز سان ستيفانو.</div>
+                        <div class="card-price">ابتداءً من $300</div>
+                        <button class="btn-book" onclick="selectItem('بكج الإسكندرية الكلاسيكي')">احجز البكج الآن</button>
+                    </div>
+                </div>
+
+                <!-- 10. تركيا -->
+                <div class="card">
+                    <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=400&q=80');">
+                        <span class="card-badge">تاريخ وطبيعة</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-title">باقة تركيا الساحرة</div>
+                        <div class="card-desc">جولات في جامع آيا صوفيا، مضيق البوسفور، والإقامة المتميزة في فندق هيلتون إسطنبول بومونتي الفاخر.</div>
+                        <div class="card-price">ابتداءً من $700</div>
+                        <button class="btn-book" onclick="selectItem('بكج تركيا الساحر')">احجز البكج الآن</button>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <!-- صفحة أنواع الرحلات -->
-        <div id="page-trips" class="page">
-            <section class="hero">
-                <h2>أنواع الرحلات</h2>
-                <p>اختر نوع الخدمة التي تناسب احتياجات سفرك</p>
-            </section>
-            <div style="max-width: 1000px; margin: 30px auto; padding: 20px; display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
-                <div class="trip-type-card">
-                    <div class="trip-type-icon">✈️</div>
-                    <h4>حجز الطيران</h4>
-                    <p>احجز تذاكر الطيران إلى وجهتك المفضلة بأفضل الأسعار مع أشهر شركات الطيران العالمية.</p>
+        <!-- صفحة التأشيرات والفيز -->
+        <div id="visas-page" class="page">
+            <div class="section-title">
+                <h3>خدمات التأشيرات والفيز المعتمدة</h3>
+                <p style="color: var(--text-medium);">نوفر لكم خدمات استخراج التأشيرات والموافقات الأمنية بأسرع وقت وبإجراءات ميسرة</p>
+            </div>
+            
+            <div class="horizontal-scroll">
+                <!-- 1. مصر -->
+                <div class="card">
+                    <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1539650116574-8efeb43e2750?auto=format&fit=crop&w=400&q=80');">
+                        <span class="card-badge" style="background-color: #e11d48;">عرض خاص</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-title">موافقة أمنية لجمهورية مصر</div>
+                        <div class="card-desc">استخراج الموافقة الأمنية لدخول جمهورية مصر العربية لجميع الجنسيات المؤهلة بسرعة وموثوقية تامة.</div>
+                        <div class="card-price">
+                            $290 <span class="old-price">$310</span>
+                        </div>
+                        <button class="btn-book" onclick="selectItem('موافقة أمنية لجمهورية مصر - 290$')">طلب الموافقة الآن</button>
+                    </div>
                 </div>
-                <div class="trip-type-card">
-                    <div class="trip-type-icon">🏨</div>
-                    <h4>حجوزات الفنادق</h4>
-                    <p>استمتع بالإقامة في أفخم الفنادق والمنتجعات حول العالم مع 
-                                    const lastName = document.getElementById('lastName').value;
-            const birthDate = document.getElementById('birthDate').value;
-            const passportNumber = document.getElementById('passportNumber').value;
-            const passportExpiry = document.getElementById('passportExpiry').value;
-            const phoneNumber = document.getElementById('phoneNumber').value;
-            const email = document.getElementById('email').value;
-            const nationality = document.getElementById('nationality').value;
-            const tripType = document.getElementById('tripType').value;
-            const destination = document.getElementById('destination').value;
-            const travelDate = document.getElementById('travelDate').value;
-            const travelersCount = document.getElementById('travelersCount').value;
-            const paymentMethod = document.getElementById('paymentMethod').value;
-            const paymentAccount = document.getElementById('paymentAccount').value;
-            const notes = document.getElementById('notes').value;
 
-            const tripTypeText = document.getElementById('tripType').options[document.getElementById('tripType').selectedIndex].text;
-            const destinationText = document.getElementById('destination').options[document.getElementById('destination').selectedIndex].text;
-            const paymentMethodText = document.getElementById('paymentMethod').options[document.getElementById('paymentMethod').selectedIndex].text;
+                <!-- 2. الإمارات شهر -->
+                <div class="card">
+                    <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=400&q=80');">
+                        <span class="card-badge">سياحة قصيرة</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-title">تأشيرة الإمارات (شهر واحد)</div>
+                        <div class="card-desc">تأشيرة دخول سياحية لدولة الإمارات العربية المتحدة صالحة لمدة 30 يوماً من تاريخ الدخول. إجراءات سريعة.</div>
+                        <div class="card-price">850 درهم إماراتي</div>
+                        <button class="btn-book" onclick="selectItem('تأشيرة الإمارات شهر واحد - 850 درهم')">طلب التأشيرة الآن</button>
+                    </div>
+                </div>
 
-            const message = `طلب حجز جديد من فلورين للسياحة:%0A%0A` +
-                `👤 بيانات العميل:%0A` +
-                `الاسم: ${firstName} ${lastName}%0A` +
-                `تاريخ الميلاد: ${birthDate}%0A` +
-                `رقم الجواز: ${passportNumber}%0A` +
-                `تاريخ انتهاء الجواز: ${passportExpiry}%0A` +
-                `رقم الهاتف: ${phoneNumber}%0A` +
-                `البريد الإلكتروني: ${email}%0A` +
-                `الجنسية: ${nationality}%0A%0A` +
-                `✈️ تفاصيل الرحلة:%0A` +
-                `نوع الخدمة: ${tripTypeText}%0A` +
-                `الوجهة: ${destinationText}%0A` +
-                `تاريخ السفر: ${travelDate}%0A` +
-                `عدد المسافرين: ${travelersCount}%0A%0A` +
-                `💳 وسيلة الدفع:%0A` +
-                `طريقة الدفع: ${paymentMethodText}%0A` +
-                `رقم الحساب: ${paymentAccount}%0A%0A` +
-                `📝 ملاحظات:%0A` +
-                `${notes || 'لا يوجد'}`;
+                <!-- 3. الإمارات شهرين -->
+                <div class="card">
+                    <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1526478806334-5fa488a38682?auto=format&fit=crop&w=400&q=80');">
+                        <span class="card-badge">سياحة طويلة</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-title">تأشيرة الإمارات (شهرين)</div>
+                        <div class="card-desc">تأشيرة دخول سياحية لدولة الإمارات العربية المتحدة صالحة لمدة 60 يوماً متواصلة من تاريخ الدخول.</div>
+                        <div class="card-price">1200 درهم إماراتي</div>
+                        <button class="btn-book" onclick="selectItem('تأشيرة الإمارات شهرين - 1200 درهم')">طلب التأشيرة الآن</button>
+                    </div>
+                </div>
 
-            const emailLink = `mailto:flournitourism2026@gmail.com?subject=طلب حجز جديد من ${firstName} ${lastName}&body=${message}`;
-            
-            const whatsappNumber = '249969862218';
-            const whatsappLink = `https://wa.me/${whatsappNumber}?text=${message}`;
+                <!-- 4. السعودية عمرة -->
+                <div class="card">
+                    <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=400&q=80');">
+                        <span class="card-badge" style="background-color: #059669;">تأشيرة دينية</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-title">تأشيرة عمرة للمملكة العربية السعودية</div>
+                        <div class="card-desc">تأشيرة عمرة شاملة التنسيق والتأمين الطبي المعتمد لدخول المملكة العربية السعودية لأداء المناسك.</div>
+                        <div class="card-price">2100 ريال سعودي</div>
+                        <button class="btn-book" onclick="selectItem('تأشيرة عمرة للمملكة العربية السعودية - 2100 ريال')">طلب التأشيرة الآن</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-            window.open(emailLink, '_blank');
-            
-            setTimeout(() => {
-                window.open(whatsappLink, '_blank');
-            }, 500);
+    </div>
 
-            alert('تم إرسال طلبك بنجاح! سيتم التواصل معك قريباً عبر البريد الإلكتروني والواتساب.');
-            
-            this.reset();
-        });
+    <footer>
+        <p>© 2026 فلورين للسفر والسياحة. جميع الحقوق محفوظة.</p>
+        <p style="font-size: 0.85rem; margin-top: 10px; color: var(--gold-light);">بريد إلكتروني: flournitourism2026@gmail.com | واتساب: 249969862218+</p>
+    </footer>
 
-        // تبديل الوضع الداكن
-        const themeToggle = document.getElementById('theme-toggle');
-        themeToggle.addEventListener('click', function() {
-            document.body.classList.toggle('dark-mode');
-            if (document.body.classList.contains('dark-mode')) {
-                themeToggle.textContent = '☀️';
-                localStorage.setItem('theme', 'dark');
-            } else {
-                themeToggle.textContent = '🌙';
-                localStorage.setItem('theme', 'light');
+    <script>
+        // التبديل بين الصفحات بشكل سلس
+        function showPage(pageId) {
+            // إخفاء جميع الصفحات
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+
+            // إزالة الحالة النشطة من أزرار القائمة
+            const navButtons = document.querySelectorAll('nav button');
+            navButtons.forEach(btn => btn.classList.remove('active'));
+
+            // إظهار الصفحة المحددة
+            const activePage = document.getElementById(pageId);
+            if (activePage) {
+                activePage.classList.add('active');
             }
-        });
 
-        // تحميل الوضع المحفوظ
-        if (localStorage.getItem('theme') === 'dark') {
-            document.body.classList.add('dark-mode');
-            themeToggle.textContent = '☀️';
+            // تفعيل الزر المقابل
+            if (pageId === 'customer-page') document.getElementById('btn-customer').classList.add('active');
+            if (pageId === 'trip-page') document.getElementById('btn-trip').classList.add('active');
+            if (pageId === 'packages-page') document.getElementById('btn-packages').classList.add('active');
+            if (pageId === 'visas-page') document.getElementById('btn-visas').classList.add('active');
+
+            // التمرير إلى أعلى الصفحة بسلاسة
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // تغيير العملة
-        const currencySelect = document.querySelector('.controls select');
-        currencySelect.addEventListener('change', function() {
-            const selectedCurrency = this.value;
-            alert(`تم تغيير العملة إلى: ${selectedCurrency}`);
-        });
-
-        // زر اللغة
-        const langBtn = document.querySelector('.lang-btn');
-        langBtn.addEventListener('click', function() {
-            if (this.textContent === 'AR') {
-                this.textContent = 'EN';
-                document.documentElement.lang = 'en';
-                document.documentElement.dir = 'ltr';
-                alert('Language changed to English');
+        // تفعيل الوضع الداكن والفاتح
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const themeBtn = document.querySelector('.theme-btn');
+            if (document.body.classList.contains('dark-mode')) {
+                themeBtn.innerHTML = '☀️ الوضع الفاتح';
             } else {
-                this.textContent = 'AR';
-                document.documentElement.lang = 'ar';
-                document.documentElement.dir = 'rtl';
-                alert('تم تغيير اللغة إلى العربية');
+                themeBtn.innerHTML = '🌙 الوضع الداكن';
             }
-        });
+        }
 
-        // تمرير سلس للبطاقات
-        const scrollContainers = document.querySelectorAll('.horizontal-scroll');
-        scrollContainers.forEach(container => {
-            let isDown = false;
-            let startX;
-            let scrollLeft;
+        // اختيار نوع الرحلة من الصفحة المنفصلة
+        function selectTripType(tripType) {
+            // إزالة الاختيار السابق
+            document.querySelectorAll('.trip-card').forEach(card => card.classList.remove('selected'));
+            
+            // تمييز الكرت المختار
+            if (tripType === 'حجز الطيران') document.getElementById('trip-flight').classList.add('selected');
+            if (tripType === 'حجوزات الفنادق') document.getElementById('trip-hotel').classList.add('selected');
+            if (tripType === 'حجوزات الرحلات السياحية والمنتجعات') document.getElementById('trip-resort').classList.add('selected');
 
-            container.addEventListener('mousedown', (e) => {
-                isDown = true;
-                container.style.cursor = 'grabbing';
-                startX = e.pageX - container.offsetLeft;
-                scrollLeft = container.scrollLeft;
-            });
+            // تعبئة حقل الخدمة في الصفحة الأولى
+            document.getElementById('selectedService').value = tripType;
 
-            container.addEventListener('mouseleave', () => {
-                isDown = false;
-                container.style.cursor = 'grab';
-            });
+            // توجيه العميل لصفحة البيانات لتأكيد الحجز
+            alert('تم اختيار: ' + tripType + '. يرجى الآن إكمال بياناتك الشخصية لتأكيد الطلب.');
+            showPage('customer-page');
+        }
 
-            container.addEventListener('mouseup', () => {
-                isDown = false;
-                container.style.cursor = 'grab';
-            });
+        // اختيار البكج أو الفيزا وتعبئة الحقل وتوجيه العميل
+        function selectItem(itemName) {
+            document.getElementById('selectedService').value = itemName;
+            alert('تم اختيار: ' + itemName + '. تم نقل الخدمة لنموذج البيانات، يرجى إكمال الحقول لإرسال الطلب.');
+            showPage('customer-page');
+        }
 
-            container.addEventListener('mousemove', (e) => {
-                if (!isDown) return;
-                e.preventDefault();
-                const x = e.pageX - container.offsetLeft;
-                const walk = (x - startX) * 2;
-                container.scrollLeft = scrollLeft - walk;
-            });
+        // دالة إرسال وتحويل البيانات للواتساب والإيميل
+        function sendOrder() {
+            const firstName = document.getElementById('firstName').value.trim();
+            const lastName = document.getElementById('lastName').value.trim();
+            const dob = document.getElementById('dob').value;
+            const passportExpiry = document.getElementById('passportExpiry').value;
+            const paymentMethod = document.getElementById('paymentMethod').value;
+            const selectedService = document.getElementById('selectedService').value.trim();
 
-            container.style.cursor = 'grab';
-        });
+            // التحقق من الحقول الإجبارية
+            if (!firstName || !lastName || !dob || !passportExpiry || !paymentMethod) {
+                alert('يرجى ملء كافة الحقول الإلزامية المميزة بعلامة (*) قبل إرسال الطلب.');
+                return;
+            }
+
+            const serviceText = selectedService ? selectedService : 'لم يتم تحديد خدمة معينة بعد';
+
+            // صياغة نص الرسالة الاحترافي
+            const message = `*طلب حجز جديد من فلورين للسياحة*\n\n` +
+                            `👤 *اسم العميل:* ${firstName} ${lastName}\n` +
+                            `📅 *تاريخ الميلاد:* ${dob}\n` +
+                            `🛂 *انتهاء صلاحية الجواز:* ${passportExpiry}\n` +
+                            `💳 *وسيلة الدفع:* ${paymentMethod}\n` +
+                            `✈️ *الخدمة المطلوبة:* ${serviceText}\n\n` +
+                            `تم إرسال هذا الطلب تلقائياً عبر النظام المعتمد لشركة فلورين.`;
+
+            // 1. الإرسال عبر الواتساب المباشر
+            const whatsappNumber = '249969862218';
+            const whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(message)}`;
+            
+            // 2. الإرسال عبر البريد الإلكتروني المباشر
+            const emailRecipient = 'flournitourism2026@gmail.com';
+            const emailSubject = encodeURIComponent(`طلب حجز جديد باسم: ${firstName} ${lastName}`);
+            const emailBody = encodeURIComponent(message.replace(/\*/g, '')); // إزالة النجمات التنسيقية للبريد الإلكتروني
+            const mailtoUrl = `mailto:${emailRecipient}?subject=${emailSubject}&body=${emailBody}`;
+
+            // فتح الواتساب أولاً في نافذة جديدة
+            window.open(whatsappUrl, '_blank');
+
+            // فتح البريد الإلكتروني بعد فترة وجيزة للعميل
+            setTimeout(() => {
+                window.location.href = mailtoUrl;
+            }, 1000);
+        }
     </script>
-
 </body>
-                </html>
-                    
+</html>
