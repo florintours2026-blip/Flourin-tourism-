@@ -7,7 +7,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* ألوان الوضع الفاتح (الافتراضي) */
             --gold-matte: #D4A843;
             --gold-light: #E8C876;
             --white: #FFFFFF;
@@ -23,7 +22,6 @@
             --section-bg: #f8f9fa;
         }
 
-        /* ألوان الوضع الداكن */
         body.dark-mode {
             --white: #1E1E1E;
             --bg-gradient-1: #121212;
@@ -39,88 +37,114 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; }
-        
-        body { 
-            background: linear-gradient(180deg, var(--bg-gradient-1) 0%, var(--bg-gradient-2) 30%, var(--bg-gradient-3) 100%); 
-            color: var(--text-dark); 
-            overflow-x: hidden; 
+
+        body {
+            background: linear-gradient(180deg, var(--bg-gradient-1) 0%, var(--bg-gradient-2) 30%, var(--bg-gradient-3) 100%);
+            color: var(--text-dark);
+            overflow-x: hidden;
             transition: background 0.3s, color 0.3s;
         }
 
-        /* الهيدر وأدوات التحكم */
-        header { 
-            background: var(--white); 
-            border-bottom: 3px solid var(--gold-matte); 
-            position: sticky; 
-            top: 0; 
-            z-index: 100; 
-            box-shadow: 0 2px 20px var(--shadow-color); 
+        header {
+            background: var(--white);
+            border-bottom: 3px solid var(--gold-matte);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 20px var(--shadow-color);
             transition: background 0.3s;
         }
         .header-inner { max-width: 1200px; margin: 0 auto; padding: 10px 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 15px; }
-        
-        /* قسم الشعار */
+
         .logo-area { display: flex; align-items: center; gap: 12px; }
         .logo-img { width: 50px; height: 50px; object-fit: contain; border-radius: 8px; }
         .logo-text h1 { font-size: 1.3rem; font-weight: 800; color: var(--text-dark); line-height: 1.1; }
-        
+
         .controls { display: flex; gap: 10px; align-items: center; }
-        select, .lang-btn, .theme-btn { 
-            padding: 8px 12px; 
-            border: 1px solid var(--gold-light); 
-            border-radius: 6px; 
-            background: var(--input-bg); 
+        select, .lang-btn, .theme-btn {
+            padding: 8px 12px;
+            border: 1px solid var(--gold-light);
+            border-radius: 6px;
+            background: var(--input-bg);
             color: var(--text-dark);
-            cursor: pointer; 
-            font-weight: 600; 
-            outline: none; 
+            cursor: pointer;
+            font-weight: 600;
+            outline: none;
             transition: 0.3s;
         }
         .lang-btn:hover, select:hover, .theme-btn:hover { background: var(--gold-light); color: #fff; }
 
-        /* القسم الترحيبي */
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            padding: 15px 20px;
+            background: var(--white);
+            border-bottom: 1px solid var(--border-color);
+            transition: background 0.3s;
+        }
+        .nav-tab {
+            padding: 10px 20px;
+            border: 2px solid var(--gold-matte);
+            border-radius: 25px;
+            background: transparent;
+            color: var(--gold-matte);
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s;
+            font-family: 'Cairo', sans-serif;
+        }
+        .nav-tab:hover, .nav-tab.active {
+            background: var(--gold-matte);
+            color: #fff;
+        }
+
         .hero { text-align: center; padding: 50px 20px; }
         .hero h2 { font-size: 2.2rem; margin-bottom: 15px; color: var(--text-dark); }
         .hero p { color: var(--text-medium); font-size: 1.1rem; }
 
-        /* نموذج الحجز الشامل */
-        .form-container { 
-            max-width: 900px; 
-            margin: 40px auto; 
-            background: var(--white); 
-            padding: 30px; 
-            border-radius: 15px; 
-            border: 1px solid var(--border-color); 
+        .page { display: none; }
+        .page.active { display: block; }
+
+        .form-container {
+            max-width: 900px;
+            margin: 40px auto;
+            background: var(--white);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
             box-shadow: 0 4px 15px var(--shadow-color);
             transition: background 0.3s, border-color 0.3s;
         }
         .form-container h2 { text-align: center; color: var(--gold-matte); margin-bottom: 30px; border-bottom: 2px solid var(--border-color); padding-bottom: 10px; font-size: 1.6rem; }
-        .form-section-title { 
-            font-size: 1.2rem; 
-            color: var(--text-dark); 
-            margin: 25px 0 15px; 
-            font-weight: 700; 
-            background: var(--section-bg); 
-            padding: 10px; 
-            border-right: 4px solid var(--gold-matte); 
+        .form-section-title {
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            margin: 25px 0 15px;
+            font-weight: 700;
+            background: var(--section-bg);
+            padding: 10px;
+            border-right: 4px solid var(--gold-matte);
             border-radius: 4px;
         }
         .row { display: flex; flex-wrap: wrap; gap: 15px; margin-bottom: 15px; }
         .col { flex: 1; min-width: 200px; }
         .col label { display: block; margin-bottom: 5px; font-weight: 600; font-size: 0.9rem; color: var(--text-dark); }
-        .col input, .col select { 
-            width: 100%; 
-            padding: 10px; 
-            border: 1px solid var(--input-border); 
-            border-radius: 6px; 
-            font-family: 'Cairo', sans-serif; 
+        .col input, .col select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--input-border);
+            border-radius: 6px;
+            font-family: 'Cairo', sans-serif;
             box-sizing: border-box;
             background: var(--input-bg);
             color: var(--text-dark);
             transition: 0.3s;
         }
         .col input:focus, .col select:focus { border-color: var(--gold-matte); outline: none; box-shadow: 0 0 5px rgba(212, 168, 67, 0.5); }
-        
+
         .submit-btn {
             width: 100%;
             padding: 15px;
@@ -134,62 +158,116 @@
             margin-top: 20px;
             transition: background 0.3s;
         }
-        .submit-btn:hover { background: #B8912F; }        /* التمرير الأفقي للبطاقات (الباقات والفيز) */
+        .submit-btn:hover { background: #B8912F; }
+
         .section-title { text-align: center; margin: 50px 0 20px; }
         .section-title h3 { font-size: 1.8rem; color: var(--gold-matte); position: relative; display: inline-block; margin-bottom: 10px; }
         .horizontal-scroll { display: flex; overflow-x: auto; gap: 20px; padding: 20px; scroll-snap-type: x mandatory; scrollbar-width: none; }
         .horizontal-scroll::-webkit-scrollbar { display: none; }
 
-        .card { 
-            min-width: 300px; 
-            max-width: 300px; 
-            background: var(--white); 
-            border-radius: 15px; 
-            border: 1px solid var(--border-color); 
-            scroll-snap-align: start; 
-            flex-shrink: 0; 
-            display: flex; 
-            flex-direction: column; 
-            overflow: hidden; 
-            box-shadow: 0 4px 15px var(--shadow-color); 
-            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s, background 0.3s; 
+        .card {
+            min-width: 300px;
+            max-width: 300px;
+            background: var(--white);
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+            scroll-snap-align: start;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 4px 15px var(--shadow-color);
+            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s, background 0.3s;
         }
-        .card:hover { 
-            transform: translateY(-5px); 
-            border-color: var(--gold-matte); 
-            box-shadow: 0 10px 25px rgba(212, 168, 67, 0.25); 
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold-matte);
+            box-shadow: 0 10px 25px rgba(212, 168, 67, 0.25);
         }
         .card-img { height: 180px; background-size: cover; background-position: center; position: relative; background-color: #eee; }
-        .card-badge { 
-            position: absolute; 
-            top: 10px; 
-            right: 10px; 
-            background: var(--gold-matte); 
-            color: #fff; 
-            padding: 4px 12px; 
-            border-radius: 15px; 
-            font-size: 0.8rem; 
-            font-weight: bold; 
+        .card-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--gold-matte);
+            color: #fff;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
         }
         .card-content { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
         .card-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 5px; color: var(--text-dark); }
         .card-desc { font-size: 0.9rem; color: var(--text-medium); margin-bottom: 10px; line-height: 1.5; }
         .card-price { font-size: 1.4rem; font-weight: 800; color: var(--gold-matte); margin: 10px 0 15px; }
-        .btn-book { 
-            text-align: center; 
-            padding: 10px; 
-            background: var(--gold-matte); 
-            color: white; 
-            text-decoration: none; 
-            border-radius: 8px; 
-            font-weight: bold; 
-            transition: background 0.3s; 
-            margin-top: auto; 
-            border: none; 
-            cursor: pointer; 
+        .btn-book {
+            text-align: center;
+            padding: 10px;
+            background: var(--gold-matte);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: background 0.3s;
+            margin-top: auto;
+            border: none;
+            cursor: pointer;
         }
         .btn-book:hover { background: #B8912F; }
-        
+
+        .visa-card {
+            background: var(--white);
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+            padding: 25px;
+            margin-bottom: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            align-items: center;
+            transition: background 0.3s, border-color 0.3s;
+        }
+        .visa-img { width: 120px; height: 80px; object-fit: cover; border-radius: 8px; background: #eee; }
+        .visa-info { flex: 1; min-width: 200px; }
+        .visa-info h4 { font-size: 1.2rem; color: var(--text-dark); margin-bottom: 5px; }
+        .visa-info p { color: var(--text-medium); font-size: 0.95rem; }
+        .visa-price { font-size: 1.3rem; font-weight: 800; color: var(--gold-matte); }
+
+        .trip-type-card {
+            background: var(--white);
+            border-radius: 15px;
+            border: 2px solid var(--border-color);
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            flex: 1;
+            min-width: 200px;
+        }
+        .trip-type-card:hover {
+            border-color: var(--gold-matte);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(212, 168, 67, 0.25);
+        }
+        .trip-type-card h4 { font-size: 1.3rem; color: var(--text-dark); margin-bottom: 10px; }
+        .trip-type-card p { color: var(--text-medium); }
+        .trip-type-icon { font-size: 3rem; margin-bottom: 15px; }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: var(--white);
+            border-top: 3px solid var(--gold-matte);
+            margin-top: 50px;
+            color: var(--text-medium);
+            transition: background 0.3s;
+        }
+
+        @media (max-width: 768px) {
+            .hero h2 { font-size: 1.6rem; }
+            .card { min-width: 260px; max-width: 260px; }
+            .visa-card { flex-direction: column; text-align: center; }
+        }
     </style>
 </head>
 <body>
@@ -197,10 +275,8 @@
     <header>
         <div class="header-inner">
             <div class="logo-area">
-                <!-- تم تعديل الأبعاد برمجياً لتتناسب مع تفاصيل الشعار الجديد وإلغاء النص المكرر -->
                 <img src="florin-logo.png" alt="فلورين لخدمات السفر والسياحة" style="width: 90px; height: auto; object-fit: contain; cursor: pointer;">
             </div>
-            
             <div class="controls">
                 <select>
                     <option>الدولار ($)</option>
@@ -209,49 +285,302 @@
                     <option>الجنيه السوداني (SDG)</option>
                 </select>
                 <button class="lang-btn">AR</button>
-                <!-- زر التبديل بين الوضع الداكن والفاتح -->
                 <button id="theme-toggle" class="theme-btn">🌙</button>
             </div>
         </div>
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showPage('page-home')">الرئيسية</button>
+            <button class="nav-tab" onclick="showPage('page-booking')">نموذج الحجز</button>
+            <button class="nav-tab" onclick="showPage('page-trips')">أنواع الرحلات</button>
+            <button class="nav-tab" onclick="showPage('page-packages')">الباقات السياحية</button>
+            <button class="nav-tab" onclick="showPage('page-visas')">التأشيرات</button>
+        </nav>
     </header>
 
     <main>
-        <section class="hero">
-            <h2>اكتشف العالم مع فلورين</h2>
-            <p>أفضل العروض السياحية وتسهيلات التأشيرات لرحلة لا تُنسى.</p>
-        </section>
+        <!-- الصفحة الرئيسية -->
+        <div id="page-home" class="page active">
+            <section class="hero">
+                <h2>اكتشف العالم مع فلورين</h2>
+                <p>أفضل العروض السياحية وتسهيلات التأشيرات لرحلة لا تُنسى.</p>
+            </section>
+            <div style="text-align: center; padding: 30px;">
+                <img src="travel-banner.jpg" alt="فلورين للسفر والسياحة" style="max-width: 100%; border-radius: 15px; box-shadow: 0 4px 20px var(--shadow-color);">
+            </div>
+        </div>
 
-        <section class="form-container">
-            <h2>نموذج الحجز الشامل</h2>
+        <!-- صفحة نموذج الحجز الشامل -->
+        <div id="page-booking" class="page">
+            <section class="form-container">
+                <h2>نموذج الحجز الشامل</h2>
+                <form id="bookingForm" action="#" method="POST">
+                    <!-- بيانات العميل وجواز السفر -->
+                    <div class="form-section-title">بيانات العميل وجواز السفر</div>
+                    <div class="row">
+                        <div class="col">
+                            <label>الاسم الأول</label>
+                            <input type="text" id="firstName" placeholder="الاسم الأول" required>
+                        </div>
+                        <div class="col">
+                            <label>الاسم الأخير</label>
+                            <input type="text" id="lastName" placeholder="الاسم الأخير" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label>تاريخ الميلاد</label>
+                            <input type="date" id="birthDate" required>
+                        </div>
+                        <div class="col">
+                            <label>رقم جواز السفر</label>
+                            <input type="text" id="passportNumber" placeholder="رقم جواز السفر" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label>تاريخ انتهاء صلاحية جواز السفر</label>
+                            <input type="date" id="passportExpiry" required>
+                        </div>
+                        <div class="col">
+                            <label>رقم الهاتف</label>
+                            <input type="tel" id="phoneNumber" placeholder="رقم الهاتف للتواصل" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label>البريد الإلكتروني</label>
+                            <input type="email" id="email" placeholder="البريد الإلكتروني" required>
+                        </div>
+                        <div class="col">
+                            <label>الجنسية</label>
+                            <input type="text" id="nationality" placeholder="الجنسية" required>
+                        </div>
+                    </div>
+
+                    <!-- تحديد نوع الرحلة -->
+                    <div class="form-section-title">تحديد نوع الرحلة</div>
+                    <div class="row">
+                        <div class="col">
+                            <label>نوع الخدمة المطلوبة</label>
+                            <select id="tripType" required>
+                                <option value="">-- اختر نوع الخدمة --</option>
+                                <option value="flight">حجز الطيران</option>
+                                <option value="hotel">حجوزات الفنادق</option>
+                                <option value="tour">حجوزات الرحلات السياحية والمنتجعات</option>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <label>الوجهة المطلوبة</label>
+                            <select id="destination" required>
+                                <option value="">-- اختر الوجهة --</option>
+                                <option value="maldives">المالديف</option>
+                                <option value="zanzibar">زنزبار</option>
+                                <option value="kuala-lumpur">كوالالمبور</option>
+                                <option value="sharm-el-sheikh">شرم الشيخ</option>
+                                <option value="dahab">دهب</option>
+                                <option value="north-coast">الساحل الشمالي</option>
+                                <option value="dubai">دبي</option>
+                                <option value="comoros">جزر القمر</option>
+                                <option value="alexandria">الإسكندرية</option>
+                                <option value="turkey">تركيا</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label>تاريخ السفر المتوقع</label>
+                            <input type="date" id="travelDate">
+                        </div>
+                        <div class="col">
+                            <label>عدد المسافرين</label>
+                            <input type="number" id="travelersCount" min="1" placeholder="عدد المسافرين">
+                        </div>
+                    </div>
+
+                    <!-- تحديد وسيلة الدفع -->
+                    <div class="form-section-title">تحديد وسيلة الدفع</div>
+                    <div class="row">
+                        <div class="col">
+                            <label>وسيلة الدفع المفضلة</label>
+                            <select id="paymentMethod" required>
+                                <option value="">-- اختر وسيلة الدفع --</option>
+                                <option value="visa">فيزا</option>
+                                <option value="mastercard">ماستر كارد</option>
+                                <option value="bankak">بنكك - بنك الخرطوم</option>
+                                <option value="okash">أوكاش - بنك أمدرمان الوطني</option>
+                                <option value="mycashy">محفظة ماي كاشي</option>
+                                <option value="vodafone-cash">فودافون كاش</option>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <label>رقم الحساب / المحفظة</label>
+                            <input type="text" id="paymentAccount" placeholder="أدخل رقم الحساب أو المحفظة">
+                        </div>
+                    </div>
+
+                    <!-- ملاحظات إضافية -->
+                    <div class="form-section-title">ملاحظات إضافية</div>
+                    <div class="row">
+                        <div class="col" style="flex: 1 1 100%;">
+                            <label>ملاحظات أو طلبات خاصة</label>
+                            <textarea id="notes" rows="4" style="width: 100%; padding: 10px; border: 1px solid var(--input-border); border-radius: 6px; font-family: 'Cairo', sans-serif; background: var(--input-bg); color: var(--text-dark);" placeholder="اكتب أي ملاحظات أو طلبات خاصة هنا..."></textarea>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-btn">إرسال الطلب</button>
+                </form>
+            </section>
+        </div>
+
+        <!-- صفحة أنواع الرحلات -->
+        <div id="page-trips" class="page">
+            <section class="hero">
+                <h2>أنواع الرحلات</h2>
+                <p>اختر نوع الخدمة التي تناسب احتياجات سفرك</p>
+            </section>
+            <div style="max-width: 1000px; margin: 30px auto; padding: 20px; display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+                <div class="trip-type-card">
+                    <div class="trip-type-icon">✈️</div>
+                    <h4>حجز الطيران</h4>
+                    <p>احجز تذاكر الطيران إلى وجهتك المفضلة بأفضل الأسعار مع أشهر شركات الطيران العالمية.</p>
+                </div>
+                <div class="trip-type-card">
+                    <div class="trip-type-icon">🏨</div>
+                    <h4>حجوزات الفنادق</h4>
+                    <p>استمتع بالإقامة في أفخم الفنادق والمنتجعات حول العالم مع 
+                                    const lastName = document.getElementById('lastName').value;
+            const birthDate = document.getElementById('birthDate').value;
+            const passportNumber = document.getElementById('passportNumber').value;
+            const passportExpiry = document.getElementById('passportExpiry').value;
+            const phoneNumber = document.getElementById('phoneNumber').value;
+            const email = document.getElementById('email').value;
+            const nationality = document.getElementById('nationality').value;
+            const tripType = document.getElementById('tripType').value;
+            const destination = document.getElementById('destination').value;
+            const travelDate = document.getElementById('travelDate').value;
+            const travelersCount = document.getElementById('travelersCount').value;
+            const paymentMethod = document.getElementById('paymentMethod').value;
+            const paymentAccount = document.getElementById('paymentAccount').value;
+            const notes = document.getElementById('notes').value;
+
+            const tripTypeText = document.getElementById('tripType').options[document.getElementById('tripType').selectedIndex].text;
+            const destinationText = document.getElementById('destination').options[document.getElementById('destination').selectedIndex].text;
+            const paymentMethodText = document.getElementById('paymentMethod').options[document.getElementById('paymentMethod').selectedIndex].text;
+
+            const message = `طلب حجز جديد من فلورين للسياحة:%0A%0A` +
+                `👤 بيانات العميل:%0A` +
+                `الاسم: ${firstName} ${lastName}%0A` +
+                `تاريخ الميلاد: ${birthDate}%0A` +
+                `رقم الجواز: ${passportNumber}%0A` +
+                `تاريخ انتهاء الجواز: ${passportExpiry}%0A` +
+                `رقم الهاتف: ${phoneNumber}%0A` +
+                `البريد الإلكتروني: ${email}%0A` +
+                `الجنسية: ${nationality}%0A%0A` +
+                `✈️ تفاصيل الرحلة:%0A` +
+                `نوع الخدمة: ${tripTypeText}%0A` +
+                `الوجهة: ${destinationText}%0A` +
+                `تاريخ السفر: ${travelDate}%0A` +
+                `عدد المسافرين: ${travelersCount}%0A%0A` +
+                `💳 وسيلة الدفع:%0A` +
+                `طريقة الدفع: ${paymentMethodText}%0A` +
+                `رقم الحساب: ${paymentAccount}%0A%0A` +
+                `📝 ملاحظات:%0A` +
+                `${notes || 'لا يوجد'}`;
+
+            const emailLink = `mailto:flournitourism2026@gmail.com?subject=طلب حجز جديد من ${firstName} ${lastName}&body=${message}`;
             
-            <form action="#" method="POST">
-                <!-- بيانات العميل وجواز السفر -->
-                <div class="form-section-title">بيانات العميل وجواز السفر</div>
-                <div class="row">
-                    <div class="col">
-                        <label>الاسم الأول</label>
-                        <input type="text" placeholder="الاسم الأول" required>
-                    </div>
-                    <div class="col">
-                        <label>الاسم الأخير</label>
-                        <input type="text" placeholder="الاسم الأخير" required>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <label>تاريخ الميلاد</label>
-                        <input type="date" required>
-                    </div>
-                    <div class="col">
-                        <label>رقم جواز السفر</label>
-                        <input type="text" placeholder="رقم الجواز" required>
-                    </div>
-                </div>
-                <!-- يمكن إضافة المزيد من الحقول هنا -->
-                <button type="submit" class="submit-btn">إرسال الطلب</button>
-            </form>
-        </section>
-    </main>
+            const whatsappNumber = '249969862218';
+            const whatsappLink = `https://wa.me/${whatsappNumber}?text=${message}`;
+
+            window.open(emailLink, '_blank');
+            
+            setTimeout(() => {
+                window.open(whatsappLink, '_blank');
+            }, 500);
+
+            alert('تم إرسال طلبك بنجاح! سيتم التواصل معك قريباً عبر البريد الإلكتروني والواتساب.');
+            
+            this.reset();
+        });
+
+        // تبديل الوضع الداكن
+        const themeToggle = document.getElementById('theme-toggle');
+        themeToggle.addEventListener('click', function() {
+            document.body.classList.toggle('dark-mode');
+            if (document.body.classList.contains('dark-mode')) {
+                themeToggle.textContent = '☀️';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                themeToggle.textContent = '🌙';
+                localStorage.setItem('theme', 'light');
+            }
+        });
+
+        // تحميل الوضع المحفوظ
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+            themeToggle.textContent = '☀️';
+        }
+
+        // تغيير العملة
+        const currencySelect = document.querySelector('.controls select');
+        currencySelect.addEventListener('change', function() {
+            const selectedCurrency = this.value;
+            alert(`تم تغيير العملة إلى: ${selectedCurrency}`);
+        });
+
+        // زر اللغة
+        const langBtn = document.querySelector('.lang-btn');
+        langBtn.addEventListener('click', function() {
+            if (this.textContent === 'AR') {
+                this.textContent = 'EN';
+                document.documentElement.lang = 'en';
+                document.documentElement.dir = 'ltr';
+                alert('Language changed to English');
+            } else {
+                this.textContent = 'AR';
+                document.documentElement.lang = 'ar';
+                document.documentElement.dir = 'rtl';
+                alert('تم تغيير اللغة إلى العربية');
+            }
+        });
+
+        // تمرير سلس للبطاقات
+        const scrollContainers = document.querySelectorAll('.horizontal-scroll');
+        scrollContainers.forEach(container => {
+            let isDown = false;
+            let startX;
+            let scrollLeft;
+
+            container.addEventListener('mousedown', (e) => {
+                isDown = true;
+                container.style.cursor = 'grabbing';
+                startX = e.pageX - container.offsetLeft;
+                scrollLeft = container.scrollLeft;
+            });
+
+            container.addEventListener('mouseleave', () => {
+                isDown = false;
+                container.style.cursor = 'grab';
+            });
+
+            container.addEventListener('mouseup', () => {
+                isDown = false;
+                container.style.cursor = 'grab';
+            });
+
+            container.addEventListener('mousemove', (e) => {
+                if (!isDown) return;
+                e.preventDefault();
+                const x = e.pageX - container.offsetLeft;
+                const walk = (x - startX) * 2;
+                container.scrollLeft = scrollLeft - walk;
+            });
+
+            container.style.cursor = 'grab';
+        });
+    </script>
 
 </body>
-</html>
+                </html>
+                    
