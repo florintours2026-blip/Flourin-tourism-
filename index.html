@@ -134,7 +134,62 @@
             margin-top: 20px;
             transition: background 0.3s;
         }
-        .submit-btn:hover { background: #B8912F; }
+        .submit-btn:hover { background: #B8912F; }        /* التمرير الأفقي للبطاقات (الباقات والفيز) */
+        .section-title { text-align: center; margin: 50px 0 20px; }
+        .section-title h3 { font-size: 1.8rem; color: var(--gold-matte); position: relative; display: inline-block; margin-bottom: 10px; }
+        .horizontal-scroll { display: flex; overflow-x: auto; gap: 20px; padding: 20px; scroll-snap-type: x mandatory; scrollbar-width: none; }
+        .horizontal-scroll::-webkit-scrollbar { display: none; }
+
+        .card { 
+            min-width: 300px; 
+            max-width: 300px; 
+            background: var(--white); 
+            border-radius: 15px; 
+            border: 1px solid var(--border-color); 
+            scroll-snap-align: start; 
+            flex-shrink: 0; 
+            display: flex; 
+            flex-direction: column; 
+            overflow: hidden; 
+            box-shadow: 0 4px 15px var(--shadow-color); 
+            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s, background 0.3s; 
+        }
+        .card:hover { 
+            transform: translateY(-5px); 
+            border-color: var(--gold-matte); 
+            box-shadow: 0 10px 25px rgba(212, 168, 67, 0.25); 
+        }
+        .card-img { height: 180px; background-size: cover; background-position: center; position: relative; background-color: #eee; }
+        .card-badge { 
+            position: absolute; 
+            top: 10px; 
+            right: 10px; 
+            background: var(--gold-matte); 
+            color: #fff; 
+            padding: 4px 12px; 
+            border-radius: 15px; 
+            font-size: 0.8rem; 
+            font-weight: bold; 
+        }
+        .card-content { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
+        .card-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 5px; color: var(--text-dark); }
+        .card-desc { font-size: 0.9rem; color: var(--text-medium); margin-bottom: 10px; line-height: 1.5; }
+        .card-price { font-size: 1.4rem; font-weight: 800; color: var(--gold-matte); margin: 10px 0 15px; }
+        .btn-book { 
+            text-align: center; 
+            padding: 10px; 
+            background: var(--gold-matte); 
+            color: white; 
+            text-decoration: none; 
+            border-radius: 8px; 
+            font-weight: bold; 
+            transition: background 0.3s; 
+            margin-top: auto; 
+            border: none; 
+            cursor: pointer; 
+        }
+        .btn-book:hover { background: #B8912F; }
+        
     </style>
 </head>
 <body>
@@ -288,6 +343,88 @@
                 <button type="submit" class="submit-btn">تأكيد الحجز</button>
             </form>
         </section>
+                <!-- بداية قسم الباقات السياحية (السطر 311) -->
+        <section class="packages-section">
+            <div class="section-title">
+                <h3>الباقات السياحية المميزة</h3>
+            </div>
+            <div class="horizontal-scroll">
+                <!-- بطاقة باقة 1 -->
+                <div class="card">
+                    <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=400&q=80');">
+                        <span class="card-badge">عرض حصري</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-title">رحلة إلى دبي</div>
+                        <div class="card-desc">إقامة 5 أيام في فندق 5 نجوم مع جولات سياحية متكاملة.</div>
+                        <div class="card-price">2,500 SAR</div>
+                        <button class="btn-book">تفاصيل الباقة</button>
+                    </div>
+                </div>
+                
+                <!-- بطاقة باقة 2 -->
+                <div class="card">
+                    <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1549877452-9c387954fbc2?auto=format&fit=crop&w=400&q=80');">
+                        <span class="card-badge">الأكثر طلباً</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-title">استكشاف تركيا</div>
+                        <div class="card-desc">برنامج سياحي 7 أيام يشمل إسطنبول وطرابزون.</div>
+                        <div class="card-price">3,200 SAR</div>
+                        <button class="btn-book">تفاصيل الباقة</button>
+                    </div>
+                </div>
+
+                <!-- بطاقة باقة 3 -->
+                <div class="card">
+                    <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?auto=format&fit=crop&w=400&q=80');">
+                        <span class="card-badge">جديد</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-title">سحر المالديف</div>
+                        <div class="card-desc">استجمام لمدة 4 أيام في منتجع مائي شامل الإفطار.</div>
+                        <div class="card-price">6,100 SAR</div>
+                        <button class="btn-book">تفاصيل الباقة</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- بداية قسم تأشيرات السفر (الفيز) -->
+        <section class="visas-section">
+            <div class="section-title">
+                <h3>تأشيرات السفر (الفيز)</h3>
+            </div>
+            <div class="horizontal-scroll">
+                <!-- بطاقة فيزا 1 -->
+                <div class="card">
+                    <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=400&q=80');">
+                        <span class="card-badge">سريعة</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-title">فيزا الشنغن</div>
+                        <div class="card-desc">تسهيل إجراءات استخراج تأشيرة الشنغن لدول أوروبا.</div>
+                        <div class="card-price">500 SAR</div>
+                        <button class="btn-book">اطلب التأشيرة</button>
+                    </div>
+                </div>
+                
+                <!-- بطاقة فيزا 2 -->
+                <div class="card">
+                    <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=400&q=80');">
+                        <span class="card-badge">مضمونة</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-title">فيزا بريطانيا</div>
+                        <div class="card-desc">تجهيز ملف التأشيرة السياحية للمملكة المتحدة بالكامل.</div>
+                        <div class="card-price">650 SAR</div>
+                        <button class="btn-book">اطلب التأشيرة</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- نهاية الأقسام المضافة -->
+        
     </main>
 
     <!-- سكريبت تفعيل الوضع الداكن والفاتح -->
