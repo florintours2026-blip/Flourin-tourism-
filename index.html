@@ -3,347 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>فلورين للسفر والسياحة - عروض سياحية وتأشيرات</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <title>فلورين للسفر والسياحة</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --gold-matte: #D4A843;
             --gold-light: #E8C876;
-            --gold-pale: #FDF6E8;
             --white: #FFFFFF;
             --off-white: #FFFAF0;
             --text-dark: #2D2D2D;
             --text-medium: #555555;
-            --text-light: #777777;
-            --border-gold: #E0C878;
             --shadow-gold: rgba(212, 168, 67, 0.25);
-            --card-bg: #FFFFFF;
-            --hover-gold: #C49635;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; }
+        body { background: linear-gradient(180deg, #FFFDF7 0%, #FFFAF0 30%, #FFF8E7 100%); color: var(--text-dark); overflow-x: hidden; }
 
-        body {
-            font-family: 'Cairo', sans-serif;
-            background: linear-gradient(180deg, #FFFDF7 0%, #FFFAF0 30%, #FFF8E7 100%);
-            color: var(--text-dark);
-            line-height: 1.7;
-            min-height: 100vh;
-        }
+        /* الهيدر وأدوات التحكم */
+        header { background: var(--white); border-bottom: 3px solid var(--gold-matte); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 20px rgba(0,0,0,0.06); }
+        .header-inner { max-width: 1200px; margin: 0 auto; padding: 10px 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 15px; }
+        .logo-area { display: flex; align-items: center; gap: 12px; }
+        .logo-icon { width: 50px; height: 50px; background: linear-gradient(135deg, #D4A843, #B8912F); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; color: white; }
+        .logo-text h1 { font-size: 1.3rem; font-weight: 800; color: #3D2E0A; line-height: 1.1; }
+        .controls { display: flex; gap: 10px; align-items: center; }
+        select, .lang-btn { padding: 8px 12px; border: 1px solid var(--gold-light); border-radius: 6px; background: var(--white); cursor: pointer; font-weight: 600; outline: none; }
+        .lang-btn:hover, select:hover { background: var(--off-white); }
 
-        /* ============ الهيدر ============ */
-        header {
-            background: var(--white);
-            border-bottom: 3px solid var(--gold-matte);
-            padding: 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.06);
-        }
+        /* القسم الترحيبي */
+        .hero { text-align: center; padding: 50px 20px; }
+        .hero h2 { font-size: 2.2rem; margin-bottom: 15px; color: #3D2E0A; }
+        .hero p { color: var(--text-medium); font-size: 1.1rem; }
 
-        .header-inner {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 12px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
+        /* التمرير الأفقي للبطاقات */
+        .section-title { text-align: center; margin: 40px 0 20px; }
+        .section-title h3 { font-size: 1.6rem; color: #3D2E0A; position: relative; display: inline-block; margin-bottom: 10px; }
+        .horizontal-scroll { display: flex; overflow-x: auto; gap: 20px; padding: 20px; scroll-snap-type: x mandatory; scrollbar-width: none; }
+        .horizontal-scroll::-webkit-scrollbar { display: none; }
+        
+        .card { min-width: 300px; max-width: 300px; background: var(--white); border-radius: 15px; border: 1px solid #F0E4CC; scroll-snap-align: start; flex-shrink: 0; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: 0.3s; }
+        .card:hover { transform: translateY(-5px); border-color: var(--gold-matte); box-shadow: 0 10px 25px var(--shadow-gold); }
+        .card-img { height: 180px; background-size: cover; background-position: center; position: relative; }
+        .card-badge { position: absolute; top: 10px; right: 10px; background: var(--gold-matte); color: white; padding: 4px 12px; border-radius: 15px; font-size: 0.8rem; font-weight: bold; }
+        .card-content { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
+        .card-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 5px; }
+        .card-price { font-size: 1.4rem; font-weight: 800; color: var(--gold-matte); margin: 15px 0; }
+        .btn-book { text-align: center; padding: 10px; background: var(--gold-matte); color: white; text-decoration: none; border-radius: 8px; font-weight: bold; transition: 0.3s; margin-top: auto; }
+        .btn-book:hover { background: #C49635; }
 
-        .logo-area {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .logo-icon {
-            width: 55px;
-            height: 55px;
-            background: linear-gradient(135deg, #D4A843, #B8912F);
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            color: white;
-            box-shadow: 0 4px 15px var(--shadow-gold);
-        }
-
-        .logo-text h1 {
-            font-size: 1.4rem;
-            font-weight: 800;
-            color: #3D2E0A;
-            line-height: 1.2;
-        }
-
-        .logo-text span {
-            font-size: 0.75rem;
-            color: var(--gold-matte);
-            font-weight: 600;
-            letter-spacing: 1px;
-        }
-
-        nav {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
-        nav a {
-            color: var(--text-medium);
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 600;
-            padding: 10px 18px;
-            border-radius: 25px;
-            transition: all 0.3s ease;
-            background: transparent;
-            white-space: nowrap;
-        }
-
-        nav a:hover, nav a.active {
-            background: var(--gold-matte);
-            color: white;
-            box-shadow: 0 4px 12px var(--shadow-gold);
-        }
-
-        /* ============ القسم الترحيبي ============ */
-        .hero {
-            background: linear-gradient(135deg, #FFFDF7 0%, #FDF6E8 50%, #FFF8E1 100%);
-            padding: 60px 20px;
-            text-align: center;
-            border-bottom: 1px solid var(--border-gold);
-        }
-
-        .hero h2 {
-            font-size: 2.2rem;
-            font-weight: 800;
-            color: #3D2E0A;
-            margin-bottom: 12px;
-        }
-
-        .hero .highlight {
-            color: var(--gold-matte);
-        }
-
-        .hero p {
-            font-size: 1.1rem;
-            color: var(--text-medium);
-            max-width: 600px;
-            margin: 0 auto 25px;
-        }
-
-        /* ============ الحاوية الرئيسية ============ */
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 30px 20px;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 35px;
-            margin-top: 20px;
-        }
-
-        .section-title h3 {
-            font-size: 1.6rem;
-            font-weight: 800;
-            color: #3D2E0A;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title h3::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 3px;
-            background: var(--gold-matte);
-            border-radius: 2px;
-        }
-
-        /* ============ بطاقات العروض والفيز ============ */
-        .packages-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 25px;
-        }
-
-        .package-card {
-            background: var(--card-bg);
-            border: 1px solid #F0E4CC;
-            border-radius: 20px;
-            overflow: hidden;
-            transition: all 0.35s ease;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .package-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 15px 40px var(--shadow-gold);
-            border-color: var(--gold-matte);
-        }
-
-        .package-image {
-            height: 200px;
-            background-color: #FDF6E8;
-            background-size: cover;
-            background-position: center;
-            position: relative;
-        }
-
-        .package-badge {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: var(--gold-matte);
-            color: white;
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 700;
-        }
-
-        .package-info {
-            padding: 22px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .package-info h4 {
-            font-size: 1.15rem;
-            font-weight: 700;
-            color: #3D2E0A;
-            margin-bottom: 8px;
-        }
-
-        .package-info .duration {
-            color: var(--text-light);
-            font-size: 0.85rem;
-            margin-bottom: 10px;
-        }
-
-        .package-info .features {
-            list-style: none;
-            margin-bottom: 15px;
-            flex-grow: 1;
-        }
-
-        .package-info .features li {
-            font-size: 0.85rem;
-            color: var(--text-medium);
-            padding: 4px 0;
-            padding-right: 20px;
-            position: relative;
-        }
-
-        .package-info .features li::before {
-            content: '✓';
-            position: absolute;
-            right: 0;
-            color: var(--gold-matte);
-            font-weight: 700;
-        }
-
-        .package-price {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--gold-matte);
-            margin: 10px 0;
-        }
-
-        .btn-book {
-            display: block;
-            width: 100%;
-            padding: 13px;
-            background: var(--gold-matte);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-family: 'Cairo', sans-serif;
-            font-size: 1rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: center;
-            text-decoration: none;
-        }
-
-        .btn-book:hover {
-            background: var(--hover-gold);
-            box-shadow: 0 6px 20px var(--shadow-gold);
-        }
-
-        /* ============ نموذج الطلب ============ */
-        .order-section {
-            background: var(--white);
-            border: 1px solid #F0E4CC;
-            border-radius: 20px;
-            padding: 35px;
-            margin-top: 40px;
-            box-shadow: 0 4px 25px rgba(0,0,0,0.03);
-        }
-
-        .form-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 18px;
-        }
-
-        @media (max-width: 600px) {
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .form-group.full {
-            grid-column: 1 / -1;
-        }
-
-        label {
-            font-size: 0.9rem;
-            font-weight: 700;
-            color: #3D2E0A;
-            margin-bottom: 6px;
-        }
-
-        input, select, textarea {
-            padding: 13px 16px;
-            border: 2px solid #EDE4D0;
-            border-radius: 12px;
-            font-family: 'Cairo', sans-serif;
-            font-size: 0.95rem;
-            background: #FFFDF9;
-            color: var(--text-dark);
-            transition: all 0.3s ease;
-        }
-
-        input:focus, select:focus, textarea:focus {
-            outline: none;
-            border-color: var(--gold-matte);
-            box-shadow: 0 0 0 3px var(--shadow-gold);
-        }
+        /* نموذج الحجز */
+        .booking-form { max-width: 800px; margin: 40px auto; background: var(--white); padding: 30px; border-radius: 15px; border: 1px solid #F0E4CC; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: bold; }
+        .form-group input, .form-group select { width: 100%; padding: 12px; border: 1px solid #E0C878; border-radius: 8px; outline: none; }
     </style>
 </head>
 <body>
@@ -353,171 +64,203 @@
             <div class="logo-area">
                 <div class="logo-icon">✈</div>
                 <div class="logo-text">
-                    <h1>فلورين</h1>
-                    <span>للسفر والسياحة</span>
+                    <h1 data-i18n="logoTitle">فلورين</h1>
+                    <span data-i18n="logoSub">للسفر والسياحة</span>
                 </div>
             </div>
-            <nav>
-                <a href="#offers" class="active">العروض السياحية</a>
-                <a href="#visas">تأشيرات السفر (فيز)</a>
-                <a href="#booking">احجز الآن</a>
-            </nav>
+            <div class="controls">
+                <select id="currencySelector" onchange="updatePrices()">
+                    <option value="USD">الدولار ($)</option>
+                    <option value="SAR">الريال السعودي (SAR)</option>
+                    <option value="EGP">الجنيه المصري (EGP)</option>
+                    <option value="SDG">الجنيه السوداني (SDG)</option>
+                </select>
+                <button class="lang-btn" onclick="changeLang('ar')">AR</button>
+                <button class="lang-btn" onclick="changeLang('en')">EN</button>
+                <button class="lang-btn" onclick="changeLang('ja')">JA</button>
+            </div>
         </div>
     </header>
 
     <div class="hero">
-        <h2>اكتشف العالم مع <span class="highlight">فلورين</span></h2>
-        <p>نقدم لك أفضل العروض السياحية وتسهيلات استخراج التأشيرات لضمان رحلة لا تُنسى.</p>
+        <h2 data-i18n="heroTitle">اكتشف العالم مع فلورين</h2>
+        <p data-i18n="heroDesc">أفضل العروض السياحية وتسهيلات التأشيرات لرحلة لا تُنسى.</p>
     </div>
 
-    <div class="container">
-        
-        <!-- قسم العروض السياحية -->
-        <div class="section-title" id="offers">
-            <h3>أحدث العروض السياحية</h3>
-            <p>اختر وجهتك المفضلة واستمتع بأسعار تنافسية</p>
-        </div>
-        <div class="packages-grid" id="offers-container">
-            <!-- سيتم حقن العروض هنا بواسطة جافاسكريبت -->
-        </div>
+    <!-- قسم العروض السياحية (تمرير أفقي) -->
+    <div class="section-title">
+        <h3 data-i18n="offersTitle">أحدث العروض السياحية</h3>
+    </div>
+    <div class="horizontal-scroll" id="offersContainer"></div>
 
-        <!-- قسم التأشيرات (الفيز) -->
-        <div class="section-title" id="visas">
-            <h3>تأشيرات السفر (الفيز)</h3>
-            <p>استخراج تأشيرات سياحية ودراسية بأسرع وقت</p>
-        </div>
-        <div class="packages-grid" id="visas-container">
-            <!-- سيتم حقن التأشيرات هنا بواسطة جافاسكريبت -->
-        </div>
+    <!-- قسم التأشيرات (تمرير أفقي) -->
+    <div class="section-title">
+        <h3 data-i18n="visasTitle">تأشيرات السفر (الفيز)</h3>
+    </div>
+    <div class="horizontal-scroll" id="visasContainer"></div>
 
-        <!-- قسم الحجز -->
-        <div class="order-section" id="booking">
-            <div class="section-title">
-                <h3>نموذج طلب حجز / استفسار</h3>
-            </div>
-            <form>
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label>الاسم الكامل</label>
-                        <input type="text" placeholder="أدخل اسمك الكريم" required>
-                    </div>
-                    <div class="form-group">
-                        <label>رقم الهاتف</label>
-                        <input type="tel" placeholder="05xxxxxxxx" required>
-                    </div>
-                    <div class="form-group">
-                        <label>نوع الخدمة</label>
-                        <select required>
-                            <option value="">اختر الخدمة...</option>
-                            <option value="offer">حجز عرض سياحي</option>
-                            <option value="visa">استخراج تأشيرة (فيزا)</option>
-                            <option value="other">استفسار عام</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>الوجهة المطلوبة</label>
-                        <input type="text" placeholder="مثال: جورجيا، تأشيرة بريطانيا...">
-                    </div>
-                    <div class="form-group full">
-                        <label>ملاحظات إضافية</label>
-                        <textarea rows="4" placeholder="اكتب تفاصيل طلبك هنا..."></textarea>
-                    </div>
-                    <div class="form-group full">
-                        <button type="submit" class="btn-book">إرسال الطلب</button>
-                    </div>
-                </div>
-            </form>
+    <!-- نموذج الحجز -->
+    <div class="booking-form">
+        <div class="section-title">
+            <h3 data-i18n="formTitle">نموذج طلب حجز</h3>
         </div>
-
+        <div class="form-group">
+            <label data-i18n="formName">الاسم الكامل</label>
+            <input type="text">
+        </div>
+        <div class="form-group">
+            <label data-i18n="formPhone">رقم الهاتف</label>
+            <input type="tel">
+        </div>
+        <button class="btn-book" style="width:100%; border:none; cursor:pointer; font-size:1.1rem;" data-i18n="formSubmit">إرسال الطلب</button>
     </div>
 
-    <!-- لوحة التحكم المصغرة (بيانات الموقع) -->
     <script>
-        // 1. بيانات العروض السياحية (يمكنك تعديلها، إضافة عروض جديدة، أو تغيير الصور والأسعار من هنا)
-        const travelOffers = [
-            {
-                title: "عطلة في جورجيا",
-                duration: "7 أيام / 6 ليالي",
-                badge: "الأكثر مبيعاً",
-                image: "https://images.unsplash.com/photo-1541358101376-79f9024041d8?auto=format&fit=crop&w=600&q=80",
-                features: ["تذاكر الطيران ذهاب وعودة", "إقامة في فنادق 4 نجوم", "وجبة الإفطار يومياً", "جولات سياحية مع مرشد"],
-                price: "2,499 ريال"
-            },
-            {
-                title: "سحر المالديف",
-                duration: "5 أيام / 4 ليالي",
-                badge: "عرض خاص",
-                image: "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=600&q=80",
-                features: ["إقامة في فيلا فوق الماء", "استقبال وتوديع بالمطار", "جميع الوجبات (شامل)", "أنشطة بحرية مجانية"],
-                price: "5,800 ريال"
-            },
-            {
-                title: "استكشاف تركيا",
-                duration: "10 أيام / 9 ليالي",
-                badge: "جديد",
-                image: "https://images.unsplash.com/photo-1522083111822-42f275685d56?auto=format&fit=crop&w=600&q=80",
-                features: ["زيارة إسطنبول وطرابزون", "طيران داخلي", "فنادق ممتازة", "رحلة بحرية في البوسفور"],
-                price: "3,200 ريال"
-            }
+        // --- 1. إعدادات العملات والأسعار الأساسية (بالدولار لتسهيل التحويل) ---
+        // ملاحظة: أسعار الصرف تقريبية ويمكنك تعديلها
+        const exchangeRates = {
+            USD: 1,
+            SAR: 3.75,
+            EGP: 48.0,
+            SDG: 600.0 // سعر تقريبي للجنيه السوداني
+        };
+
+        let currentCurrency = 'USD';
+        let currentLang = 'ar';
+
+        // --- 2. بيانات العروض والفيز ---
+        const offersData = [
+            { id: 'off1', priceUSD: 666, img: 'https://images.unsplash.com/photo-1541358101376-79f9024041d8?w=500' }, // ~2500 SAR
+            { id: 'off2', priceUSD: 1546, img: 'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=500' }, // ~5800 SAR
+            { id: 'off3', priceUSD: 853, img: 'https://images.unsplash.com/photo-1522083111822-42f275685d56?w=500' }  // ~3200 SAR
         ];
 
-        // 2. بيانات التأشيرات (يمكنك إضافة دول جديدة أو تعديل المتطلبات والأسعار)
-        const visaOffers = [
-            {
-                title: "تأشيرة الشنغن (أوروبا)",
-                duration: "مدة الاستخراج: 14-21 يوم عمل",
-                badge: "مطلوبة بكثرة",
-                image: "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=600&q=80",
-                features: ["تعبئة النماذج وتجهيز الملف", "حجز موعد البصمة", "حجوزات مبدئية (طيران وفندق)", "استشارات مجانية للمقابلة"],
-                price: "450 ريال"
-            },
-            {
-                title: "تأشيرة بريطانيا (UK)",
-                duration: "مدة الاستخراج: 15-30 يوم عمل",
-                badge: "سياحية",
-                image: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=600&q=80",
-                features: ["ترجمة المستندات المطلوبة", "تعبئة طلب التأشيرة بدقة", "رفع الأوراق على الموقع الرسمي", "متابعة حالة الطلب"],
-                price: "600 ريال"
-            },
-            {
-                title: "تأشيرة دبي (الإمارات)",
-                duration: "مدة الاستخراج: 2-4 أيام عمل",
-                badge: "سريعة",
-                image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=600&q=80",
-                features: ["تأشيرة إلكترونية بالكامل", "صلاحية دخول لمدة 30 يوم", "لا تتطلب حضور شخصي", "تأمين صحي مشمول"],
-                price: "350 ريال"
-            }
+        const visasData = [
+            { id: 'visa1', priceUSD: 204, img: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=500' }, // 750 AED ~= 204 USD
+            { id: 'visa2', priceUSD: 354, img: 'https://images.unsplash.com/photo-1582672060624-cb814c817531?w=500' }, // 1300 AED ~= 354 USD
+            { id: 'visa3', priceUSD: 290, img: 'https://images.unsplash.com/photo-1539650116574-8efeb43e2750?w=500' }, // 290 USD لمصر
+            { id: 'visa4', priceUSD: 300, img: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=500' }  // 300 USD لإندونيسيا
         ];
 
-        // دالة مساعدة لإنشاء البطاقات ديناميكياً
-        function renderCards(dataArray, containerId) {
-            const container = document.getElementById(containerId);
-            dataArray.forEach(item => {
-                const featuresList = item.features.map(f => `<li>${f}</li>`).join('');
-                const cardHTML = `
-                    <div class="package-card">
-                        <div class="package-image" style="background-image: url('${item.image}')">
-                            ${item.badge ? `<span class="package-badge">${item.badge}</span>` : ''}
-                        </div>
-                        <div class="package-info">
-                            <h4>${item.title}</h4>
-                            <div class="duration">${item.duration}</div>
-                            <ul class="features">
-                                ${featuresList}
-                            </ul>
-                            <div class="package-price">${item.price}</div>
-                            <a href="#booking" class="btn-book">طلب الخدمة</a>
-                        </div>
-                    </div>
-                `;
-                container.innerHTML += cardHTML;
-            });
+        // --- 3. قاموس الترجمة (اللغات) ---
+        const translations = {
+            ar: {
+                logoTitle: "فلورين", logoSub: "للسفر والسياحة",
+                heroTitle: "اكتشف العالم مع فلورين", heroDesc: "أفضل العروض السياحية وتسهيلات التأشيرات لرحلة لا تُنسى.",
+                offersTitle: "أحدث العروض السياحية", visasTitle: "تأشيرات السفر (الفيز)",
+                formTitle: "نموذج طلب حجز", formName: "الاسم الكامل", formPhone: "رقم الهاتف", formSubmit: "إرسال الطلب",
+                bookBtn: "طلب الخدمة",
+                items: {
+                    off1: { title: "عطلة في جورجيا", badge: "الأكثر مبيعاً" },
+                    off2: { title: "سحر المالديف", badge: "عرض خاص" },
+                    off3: { title: "استكشاف تركيا", badge: "جديد" },
+                    visa1: { title: "تأشيرة الإمارات (شهر)", badge: "سريعة" },
+                    visa2: { title: "تأشيرة الإمارات (شهرين)", badge: "مطلوبة" },
+                    visa3: { title: "موافقة أمنية - مصر", badge: "مضمونة" },
+                    visa4: { title: "تأشيرة إندونيسيا", badge: "سياحية" }
+                }
+            },
+            en: {
+                logoTitle: "Floren", logoSub: "Travel & Tourism",
+                heroTitle: "Discover the World with Floren", heroDesc: "The best travel packages and visa facilities for an unforgettable journey.",
+                offersTitle: "Latest Travel Packages", visasTitle: "Travel Visas",
+                formTitle: "Booking Form", formName: "Full Name", formPhone: "Phone Number", formSubmit: "Submit Request",
+                bookBtn: "Book Now",
+                items: {
+                    off1: { title: "Georgia Holiday", badge: "Best Seller" },
+                    off2: { title: "Maldives Magic", badge: "Special" },
+                    off3: { title: "Explore Turkey", badge: "New" },
+                    visa1: { title: "UAE Visa (1 Month)", badge: "Fast" },
+                    visa2: { title: "UAE Visa (2 Months)", badge: "Popular" },
+                    visa3: { title: "Egypt Security Approval", badge: "Guaranteed" },
+                    visa4: { title: "Indonesia Visa", badge: "Tourist" }
+                }
+            },
+            ja: {
+                logoTitle: "フローレン", logoSub: "旅行と観光",
+                heroTitle: "フローレンで世界を発見", heroDesc: "忘れられない旅のための最高の旅行パッケージとビザ施設。",
+                offersTitle: "最新の旅行パッケージ", visasTitle: "旅行ビザ",
+                formTitle: "予約フォーム", formName: "氏名", formPhone: "電話番号", formSubmit: "リクエストを送信",
+                bookBtn: "今すぐ予約",
+                items: {
+                    off1: { title: "ジョージアの休日", badge: "ベストセラー" },
+                    off2: { title: "モルディブの魔法", badge: "特別" },
+                    off3: { title: "トルコを探索", badge: "新着" },
+                    visa1: { title: "UAEビザ（1ヶ月）", badge: "速い" },
+                    visa2: { title: "UAEビザ（2ヶ月）", badge: "人気" },
+                    visa3: { title: "エジプト治安承認", badge: "保証付き" },
+                    visa4: { title: "インドネシアビザ", badge: "観光" }
+                }
+            }
+        };
+
+        // --- 4. دوال التحديث والعرض ---
+        function formatPrice(priceUSD) {
+            const converted = (priceUSD * exchangeRates[currentCurrency]).toFixed(0);
+            const symbols = { USD: '$', SAR: ' SAR', EGP: ' EGP', SDG: ' SDG' };
+            return converted + symbols[currentCurrency];
         }
 
-        // تشغيل دوال العرض عند تحميل الصفحة
+        function renderCards() {
+            const t = translations[currentLang];
+            
+            // رسم العروض
+            const offersHtml = offersData.map(item => `
+                <div class="card">
+                    <div class="card-img" style="background-image: url('${item.img}')">
+                        <span class="card-badge">${t.items[item.id].badge}</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-title">${t.items[item.id].title}</div>
+                        <div class="card-price">${formatPrice(item.priceUSD)}</div>
+                        <a href="#" class="btn-book">${t.bookBtn}</a>
+                    </div>
+                </div>
+            `).join('');
+            document.getElementById('offersContainer').innerHTML = offersHtml;
+
+            // رسم الفيز
+            const visasHtml = visasData.map(item => `
+                <div class="card">
+                    <div class="card-img" style="background-image: url('${item.img}')">
+                        <span class="card-badge">${t.items[item.id].badge}</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-title">${t.items[item.id].title}</div>
+                        <div class="card-price">${formatPrice(item.priceUSD)}</div>
+                        <a href="#" class="btn-book">${t.bookBtn}</a>
+                    </div>
+                </div>
+            `).join('');
+            document.getElementById('visasContainer').innerHTML = visasHtml;
+        }
+
+        function updatePrices() {
+            currentCurrency = document.getElementById('currencySelector').value;
+            renderCards();
+        }
+
+        function changeLang(lang) {
+            currentLang = lang;
+            const t = translations[lang];
+            
+            // تغيير اتجاه الصفحة
+            document.documentElement.lang = lang;
+            document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+
+            // تحديث النصوص الثابتة
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (t[key]) el.innerText = t[key];
+            });
+
+            // إعادة رسم البطاقات لتحديث نصوصها
+            renderCards();
+        }
+
+        // التهيئة الأولية
         window.onload = () => {
-            renderCards(travelOffers, 'offers-container');
-            renderCards(visaOffers, 'visas-container');
+            renderCards();
         };
     </script>
 </body>
