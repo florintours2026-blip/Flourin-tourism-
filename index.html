@@ -305,126 +305,128 @@
             color: var(--text-medium);
         }
 
-        /* التمرير الأفقي للبطاقات (الباقات والفيز) */
-        .section-title { 
-            text-align: center; 
-            margin: 40px 0 20px; 
-        }
-        
-        .section-title h3 { 
-            font-size: 1.8rem; 
-            color: var(--gold-matte); 
-            position: relative; 
-            display: inline-block; 
-            margin-bottom: 10px; 
-        }
-        
-        .horizontal-scroll { 
-            display: flex; 
-            overflow-x: auto; 
-            gap: 20px; 
-            padding: 20px; 
-            scroll-snap-type: x mandatory; 
-            scrollbar-width: none; 
-        }
-        
-        .horizontal-scroll::-webkit-scrollbar { 
-            display: none; 
-        }
+/* التمرير الأفقي للبطاقات (الباقات والفيز) */
+.section-title { 
+    text-align: center; 
+    margin: 40px 0 20px; 
+}
 
-        .card { 
-            min-width: 320px; 
-            max-width: 320px; 
-            background: var(--white); 
-            border-radius: 15px; 
-            border: 1px solid var(--border-color); 
-            scroll-snap-align: start; 
-            flex-shrink: 0; 
-            display: flex; 
-            flex-direction: column; 
-            overflow: hidden; 
-            box-shadow: 0 4px 15px var(--shadow-color); 
-            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s, background 0.3s; 
-        }
-        
-        .card:hover { 
-            transform: translateY(-5px); 
-            border-color: var(--gold-matte); 
-            box-shadow: 0 10px 25px rgba(212, 168, 67, 0.25); 
-        }
-        
-        .card-img { 
-            height: 200px; 
-            background-size: cover; 
-            background-position: center; 
-            position: relative; 
-            background-color: #eee; 
-        }
-        
-        .card-badge { 
-            position: absolute; 
-            top: 10px; 
-            right: 10px; 
-            background: var(--gold-matte); 
-            color: #fff; 
-            padding: 4px 12px; 
-            border-radius: 15px; 
-            font-size: 0.8rem; 
-            font-weight: bold; 
-        }
-        
-        .card-content { 
-            padding: 20px; 
-            flex-grow: 1; 
-            display: flex; 
-            flex-direction: column; 
-        }
-        
-        .card-title { 
-            font-size: 1.2rem; 
-            font-weight: 700; 
-            margin-bottom: 5px; 
-            color: var(--text-dark); 
-        }
-        
-        .card-desc { 
-            font-size: 0.9rem; 
-            color: var(--text-medium); 
-            margin-bottom: 10px; 
-            line-height: 1.5; 
-            height: 72px;
-            overflow: hidden;
-        }
-        
-        .card-price { 
-            font-size: 1.3rem; 
-            font-weight: 800; 
-            color: var(--gold-matte); 
-            margin: 10px 0 15px; 
-        }
-        
-        .btn-book { 
-            text-align: center; 
-            padding: 10px; 
-            background: var(--gold-matte); 
-            color: white; 
-            text-decoration: none; 
-            border-radius: 8px; 
-            font-weight: bold; 
-            transition: background 0.3s; 
-            margin-top: auto; 
-            border: none; 
-            cursor: pointer; 
-        }
-        
-        .btn-book:hover { 
-            background: #B8912F; 
-        }
-    </style>
-</head>
-<body>
+.section-title h3 { 
+    font-size: 1.8rem; 
+    color: var(--gold-matte); 
+    position: relative; 
+    display: inline-block; 
+    margin-bottom: 10px; 
+}
 
-    <header>
+.horizontal-scroll { 
+    display: flex; 
+    overflow-x: auto; 
+    gap: 25px; /* زيادة المسافة بين البطاقات لراحة العين */
+    padding: 30px 5vw; /* هوامش جانبية مرنة لترك مساحة قبل أول بطاقة وبعد آخر بطاقة */
+    scroll-snap-type: x mandatory; 
+    scroll-padding-left: 5vw; /* لضبط نقطة وقوف البطاقة بدقة */
+    scrollbar-width: none; 
+}
+
+.horizontal-scroll::-webkit-scrollbar { 
+    display: none; 
+}
+
+.card { 
+    width: 85vw; /* تأخذ 85% من عرض الشاشة في الجوال لتظهر جزءاً من البطاقة التالية */
+    max-width: 380px; /* أقصى عرض للبطاقة في الشاشات الكبيرة لتظل مريحة للعين */
+    background: var(--white); 
+    border-radius: 15px; 
+    border: 1px solid var(--border-color); 
+    scroll-snap-align: center; /* تمركز البطاقة في المنتصف عند التمرير بدلاً من البداية */
+    flex-shrink: 0; 
+    display: flex; 
+    flex-direction: column; 
+    overflow: hidden; 
+    box-shadow: 0 4px 15px var(--shadow-color); 
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; 
+}
+
+.card:hover { 
+    transform: translateY(-8px); /* حركة صعود أوضح وأكثر نعومة عند التمرير بالماوس */
+    border-color: var(--gold-matte); 
+    box-shadow: 0 12px 30px rgba(212, 168, 67, 0.25); 
+}
+
+.card-img { 
+    height: 230px; /* زيادة ارتفاع الصورة لتكون بارزة ومالئة للعين */
+    background-size: cover; 
+    background-position: center; 
+    position: relative; 
+    background-color: #eee; 
+}
+
+.card-badge { 
+    position: absolute; 
+    top: 15px; 
+    right: 15px; 
+    background: var(--gold-matte); 
+    color: #fff; 
+    padding: 6px 14px; 
+    border-radius: 20px; 
+    font-size: 0.85rem; 
+    font-weight: bold; 
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2); /* إضافة ظل خفيف للشارة لتبرز عن الصورة */
+}
+
+.card-content { 
+    padding: 25px; /* مساحة داخلية أوسع لراحة النص */
+    flex-grow: 1; 
+    display: flex; 
+    flex-direction: column; 
+}
+
+.card-title { 
+    font-size: 1.3rem; 
+    font-weight: 700; 
+    margin-bottom: 8px; 
+    color: var(--text-dark); 
+}
+
+.card-desc { 
+    font-size: 0.95rem; 
+    color: var(--text-medium); 
+    margin-bottom: 15px; 
+    line-height: 1.6; 
+    /* طريقة عصرية لقص النص الزائد بدلاً من الارتفاع الثابت المقطوع */
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* تحديد عدد الأسطر بـ 3 فقط */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.card-price { 
+    font-size: 1.4rem; 
+    font-weight: 800; 
+    color: var(--gold-matte); 
+    margin: auto 0 20px; /* دفع السعر والزر للأسفل تلقائياً */
+}
+
+.btn-book { 
+    text-align: center; 
+    padding: 12px; 
+    background: var(--gold-matte); 
+    color: white; 
+    text-decoration: none; 
+    border-radius: 10px; 
+    font-weight: bold; 
+    font-size: 1.05rem; /* تكبير خط الزر قليلاً */
+    transition: all 0.3s ease; 
+    border: none; 
+    cursor: pointer; 
+}
+
+.btn-book:hover { 
+    background: #B8912F; 
+    transform: scale(1.02); /* تكبير الزر قليلاً عند التمرير عليه */
+}
+
                     <div class="controls">
                 <!-- قائمة العملات المتعددة -->
                 <select id="currency-select" onchange="updateCurrency()">
