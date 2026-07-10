@@ -58,9 +58,9 @@
     <div class="sidebar">
         <h2>إدارة فلورين</h2>
         <ul>
-            <li class="active" onclick="switchTab('logo-section')">إعدادات الشعار (اللوقو)</li>
-            <li onclick="switchTab('offers-section')">إدارة العروض السياحية</li>
-            <li onclick="switchTab('visas-section')">إدارة التأشيرات (الفيز)</li>
+            <li id="tab-logo-section" class="active" onclick="switchTab('logo-section', this)">إعدادات الشعار (اللوقو)</li>
+            <li id="tab-offers-section" onclick="switchTab('offers-section', this)">إدارة العروض السياحية</li>
+            <li id="tab-visas-section" onclick="switchTab('visas-section', this)">إدارة التأشيرات (الفيز)</li>
         </ul>
     </div>
 
@@ -70,7 +70,6 @@
             <button onclick="clearData()" style="background-color: var(--danger);">مسح كافة البيانات واستعادة الافتراضي</button>
         </div>
 
-        <!-- قسم اللوقو -->
         <div id="logo-section" class="section active">
             <h3>تغيير شعار الموقع</h3>
             <div class="form-group">
@@ -81,7 +80,6 @@
             <img id="currentLogoPreview" class="logo-preview" alt="معاينة الشعار الحالي">
         </div>
 
-        <!-- قسم العروض -->
         <div id="offers-section" class="section">
             <h3>إضافة عرض سياحي جديد</h3>
             <div class="form-group"><label>عنوان العرض</label><input type="text" id="offerTitle"></div>
@@ -99,7 +97,6 @@
             </table>
         </div>
 
-        <!-- قسم الفيز -->
         <div id="visas-section" class="section">
             <h3>إضافة تأشيرة جديدة</h3>
             <div class="form-group"><label>اسم التأشيرة</label><input type="text" id="visaTitle"></div>
@@ -124,55 +121,100 @@
         let visas = JSON.parse(localStorage.getItem('savedVisas')) || [];
         let savedLogo = localStorage.getItem('savedLogo') || '';
 
-        // التنقل بين الأقسام
-        function switchTab(tabId) {
+        // التنقل بين الأقسام (تم إصلاح تمرير العنصر المضغوط)
+        function switchTab(tabId, element) {
+            // إخفاء كافة الأقسام وإزالة الخلفية النشطة من القائمة
             document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
             document.querySelectorAll('.sidebar li').forEach(li => li.classList.remove('active'));
+            
+            // تفعيل القسم المختار والعنصر المختار في القائمة الجانبية
             document.getElementById(tabId).classList.add('active');
-            event.target.classList.add('active');
+            element.classList.add('active');
         }
 
         // إعدادات الشعار
-        if(savedLogo) document.getElementById('currentLogoPreview').src = savedLogo;
+        if(savedLogo) {
+            document.getElementById('currentLogoPreview').src = savedLogo;
+            document.getElementById('logoUrl').value = savedLogo;
+        }
+        
         function saveLogo() {
-            const url = document.getElementById('logoUrl').value;
+            const url = document.getElementById('logoUrl').value.trim();
             if(url) {
                 localStorage.setItem('savedLogo', url);
                 document.getElementById('currentLogoPreview').src = url;
                 alert('تم حفظ الشعار بنجاح! قم بتحديث الصفحة الرئيسية لرؤية التغيير.');
+            } else {
+                alert('الرجاء إدخال رابط الصورة أولاً.');
             }
         }
 
         // إضافة وعرض العروض
         function addOffer() {
+            const title = document.getElementById('offerTitle').value.trim();
+            const price = document.getElementById('offerPrice').value.trim();
+            
+            if(!title || !price) {
+                alert('يرجى ملء الحقول الأساسية (العنوان والسعر)');
+                return;
+            }
+
             const offer = {
-                title: document.getElementById('offerTitle').value,
-                duration: document.getElementById('offerDuration').value,
-                badge: document.getElementById('offerBadge').value,
-                image: document.getElementById('offerImage').value,
-                features: document.getElementById('offerFeatures').value.split('،').map(item => item.trim()),
-                price: document.getElementById('offerPrice').value
+                title: title,
+                duration: document.getElementById('offerDuration').value.trim(),
+                badge: document.getElementById('offerBadge').value.trim(),
+                image: document.getElementById('offerImage').value.trim(),
+                features: document.getElementById('offerFeatures').value.split('،').map(item => item.trim()).filter(i => i),
+                price: price
             };
+            
             offers.push(offer);
             localStorage.setItem('savedOffers', JSON.stringify(offers));
             renderTable('offersTableBody', offers, 'offers');
-            alert('تمت إضافة العرض!');
+            
+            // تفريغ الحقول بعد الإضافة نجاح
+            document.getElementById('offerTitle').value = '';
+            document.getElementById('offerDuration').value = '';
+            document.getElementById('offerBadge').value = '';
+            document.getElementById('offerImage').value = '';
+            document.getElementById('offerFeatures').value = '';
+            document.getElementById('offerPrice').value = '';
+            
+            alert('تمت إضافة العرض بنجاح!');
         }
 
         // إضافة وعرض التأشيرات
         function addVisa() {
+            const title = document.getElementById('visaTitle').value.trim();
+            const price = document.getElementById('visaPrice').value.trim();
+
+            if(!title || !price) {
+                alert('يرجى ملء الحقول الأساسية (اسم التأشيرة والسعر)');
+                return;
+            }
+
             const visa = {
-                title: document.getElementById('visaTitle').value,
-                duration: document.getElementById('visaDuration').value,
-                badge: document.getElementById('visaBadge').value,
-                image: document.getElementById('visaImage').value,
-                features: document.getElementById('visaFeatures').value.split('،').map(item => item.trim()),
-                price: document.getElementById('visaPrice').value
+                title: title,
+                duration: document.getElementById('visaDuration').value.trim(),
+                badge: document.getElementById('visaBadge').value.trim(),
+                image: document.getElementById('visaImage').value.trim(),
+                features: document.getElementById('visaFeatures').value.split('،').map(item => item.trim()).filter(i => i),
+                price: price
             };
+            
             visas.push(visa);
             localStorage.setItem('savedVisas', JSON.stringify(visas));
             renderTable('visasTableBody', visas, 'visas');
-            alert('تمت إضافة التأشيرة!');
+            
+            // تفريغ الحقول بعد الإضافة بنجاح
+            document.getElementById('visaTitle').value = '';
+            document.getElementById('visaDuration').value = '';
+            document.getElementById('visaBadge').value = '';
+            document.getElementById('visaImage').value = '';
+            document.getElementById('visaFeatures').value = '';
+            document.getElementById('visaPrice').value = '';
+
+            alert('تمت إضافة التأشيرة بنجاح!');
         }
 
         // رسم الجداول
@@ -184,7 +226,7 @@
                     <tr>
                         <td>${item.title}</td>
                         <td>${item.price}</td>
-                        <td>${item.duration}</td>
+                        <td>${item.duration || '-'}</td>
                         <td><button class="delete-btn" onclick="deleteItem(${index}, '${type}')">حذف</button></td>
                     </tr>
                 `;
@@ -193,14 +235,16 @@
 
         // حذف عنصر
         function deleteItem(index, type) {
-            if(type === 'offers') {
-                offers.splice(index, 1);
-                localStorage.setItem('savedOffers', JSON.stringify(offers));
-                renderTable('offersTableBody', offers, 'offers');
-            } else {
-                visas.splice(index, 1);
-                localStorage.setItem('savedVisas', JSON.stringify(visas));
-                renderTable('visasTableBody', visas, 'visas');
+            if(confirm('هل أنت متأكد من رغبتك في حذف هذا العنصر؟')) {
+                if(type === 'offers') {
+                    offers.splice(index, 1);
+                    localStorage.setItem('savedOffers', JSON.stringify(offers));
+                    renderTable('offersTableBody', offers, 'offers');
+                } else {
+                    visas.splice(index, 1);
+                    localStorage.setItem('savedVisas', JSON.stringify(visas));
+                    renderTable('visasTableBody', visas, 'visas');
+                }
             }
         }
 
@@ -212,7 +256,7 @@
             }
         }
 
-        // التحميل الأولي للجداول
+        // التحميل الأولي للجداول عند فتح الصفحة
         renderTable('offersTableBody', offers, 'offers');
         renderTable('visasTableBody', visas, 'visas');
     </script>
