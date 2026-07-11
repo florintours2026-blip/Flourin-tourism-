@@ -3,39 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>شعار فلورين للسفر والسياحة</title>
+    <title>شعار فلورين لخدمات السفر والسياحة</title>
     <style>
-        /* تنسيقات حاوية الشعار */
-        .logo-container {
+        /* إعدادات عامة للصفحة لتوسيط الشعار */
+        body {
+            background-color: #fbfbfb; /* لون خلفية مقارب للون خلفية الشعار */
             display: flex;
             justify-content: center;
             align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* حاوية الشعار */
+        .logo-wrapper {
+            max-width: 450px; /* يمكنك تعديل هذا الرقم لتغيير حجم الشعار */
+            width: 90%;
             padding: 20px;
-            background-color: transparent; 
+            text-align: center;
         }
 
-        /* تنسيقات الصورة نفسها */
-        .florin-logo {
-            max-width: 100%;
+        /* إعدادات الصورة نفسها */
+        .logo-wrapper img {
+            width: 100%;
             height: auto;
-            width: 250px; /* يمكنك زيادة أو تقليل هذا الرقم للتحكم بحجم الشعار */
-            object-fit: contain;
-            transition: transform 0.3s ease;
+            display: block;
+            margin: 0 auto;
+            transition: transform 0.4s ease, filter 0.4s ease;
+            filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.1)); /* ظل خفيف لإبراز الشعار */
         }
 
-        /* تأثير حركي بسيط عند تمرير الماوس */
-        .florin-logo:hover {
-            transform: scale(1.05);
+        /* تأثير عند تمرير الماوس */
+        .logo-wrapper img:hover {
+            transform: scale(1.05); /* تكبير الشعار بنسبة 5% عند تمرير الماوس */
+            filter: drop-shadow(0px 8px 15px rgba(212, 175, 55, 0.3)); /* زيادة الظل وإعطائه لمسة ذهبية */
         }
     </style>
 </head>
 <body>
 
-    <!-- حاوية الشعار -->
-    <div class="logo-container">
-        <!-- يرجى استبدال 'logo.jpg' بمسار أو اسم الصورة الفعلي لدياك -->
-        <img src="logo.jpg" alt="شعار فلورين لخدمات السفر والسياحة" class="florin-logo">
+    <!-- بداية قسم الشعار -->
+    <div class="logo-wrapper">
+        <a href="index.html" title="العودة إلى الصفحة الرئيسية">
+            <!-- تأكد من وضع مسار الصورة الصحيح هنا بدلاً من logo.png -->
+            <img src="logo.png" alt="شعار فلورين لخدمات السفر والسياحة - Florin Tours Agency">
+        </a>
     </div>
+    <!-- نهاية قسم الشعار -->
 
 </body>
 </html>
