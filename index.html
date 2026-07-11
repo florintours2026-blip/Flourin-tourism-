@@ -1008,15 +1008,6 @@ select, .lang-btn, .theme-btn {
             // 1. الإرسال عبر الواتساب المباشر
             const whatsappNumber = '249969862218';
             const whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(message)}`;
-            // 2. الإرسال عبر البريد الإلكتروني المباشر
-const emailRecipient = 'flournitourism2026@gmail.com';
-const emailSubject = encodeURIComponent(`طلب حجز جديد باسم: ${firstName} ${lastName}`);
-const emailBody = encodeURIComponent(message.replace(/\*/g, '')); // إزالة النجمات التنسيقية للبريد الإلكتروني
-const mailtoUrl = `mailto:${emailRecipient}?subject=${emailSubject}&body=${emailBody}`;
-
-// السطر الجديد الذي يقوم بتوجيه المتصفح لفتح تطبيق البريد الإلكتروني
-window.location.href = mailtoUrl;
-
 
             // فتح الواتساب أولاً في نافذة جديدة
             window.open(whatsappUrl, '_blank');
