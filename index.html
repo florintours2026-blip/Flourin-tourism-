@@ -1242,7 +1242,8 @@ function showPage(pageId) {
     document.querySelectorAll('nav button').forEach(btn => btn.classList.remove('active'));
     
     document.getElementById(pageId).classList.add('active');
-    
+}
+            
     // تفعيل الزر المناسب في شريط التنقل
     if(pageId === 'customer-page') document.getElementById('btn-customer').classList.add('active');
     else if(pageId === 'trip-page') document.getElementById('btn-trip').classList.add('active');
