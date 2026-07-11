@@ -73,51 +73,51 @@
             flex-wrap: wrap; 
             gap: 15px; 
         }
-        
-        .logo-area { 
+        /* قسم الشعار */
+.logo-area { 
     display: flex; 
     align-items: center; 
     gap: 12px; 
-    margin-top: -15px; /* يمكنك زيادة أو تقليل الرقم حسب الحاجة */
+    margin-top: -15px; /* التعديل هنا: هذه القيمة سترفع الشعار والنص للأعلى، يمكنك تغيير الرقم (-10 أو -20) حسب الحاجة */
 }
 
-        
-        .logo-img { 
-            width: 70px; 
-            height: auto; 
-            object-fit: contain; 
-            border-radius: 8px; 
-        }
-        
-        .logo-text h1 { 
-            font-size: 1.3rem; 
-            font-weight: 800; 
-            color: var(--text-dark); 
-            line-height: 1.1; 
-        }
-        
-        .controls { 
-            display: flex; 
-            gap: 10px; 
-            align-items: center; 
-        }
-        
-        select, .lang-btn, .theme-btn { 
-            padding: 8px 12px; 
-            border: 1px solid var(--gold-light); 
-            border-radius: 6px; 
-            background: var(--input-bg); 
-            color: var(--text-dark);
-            cursor: pointer; 
-            font-weight: 600; 
-            outline: none; 
-            transition: 0.3s;
-        }
-        
-        .lang-btn:hover, select:hover, .theme-btn:hover { 
-            background: var(--gold-light); 
-            color: #fff; 
-        }
+.logo-img { 
+    /* تم تعديل العرض إلى 120 بكسل بدلاً من 70 بكسل لتكون تفاصيل شعار فلورين واضحة ومقروءة */
+    width: 120px; 
+    height: auto; 
+    object-fit: contain; 
+    border-radius: 8px; /* ملاحظة: إذا قمت بتفريغ خلفية الشعار (PNG شفاف)، فمن الأفضل حذف هذا السطر */
+}
+
+.logo-text h1 { 
+    font-size: 1.3rem; 
+    font-weight: 800; 
+    color: var(--text-dark); 
+    line-height: 1.1; 
+}
+
+.controls { 
+    display: flex; 
+    gap: 10px; 
+    align-items: center; 
+}
+
+select, .lang-btn, .theme-btn { 
+    padding: 8px 12px; 
+    border: 1px solid var(--gold-light); 
+    border-radius: 6px; 
+    background: var(--input-bg); 
+    color: var(--text-dark);
+    cursor: pointer; 
+    font-weight: 600; 
+    outline: none; 
+    transition: 0.3s;
+}
+
+.lang-btn:hover, select:hover, .theme-btn:hover { 
+    background: var(--gold-light); 
+    color: #fff; 
+}
 
         /* شريط التنقل الرئيسي */
         nav {
