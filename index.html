@@ -1235,7 +1235,47 @@ function submitBooking(event) {
             alert('تم تأكيد وحفظ تفاصيل الطيران بنجاح ونقلها لنموذج الحجز.');
             showPage('customer-page');
         }
+// المتغيرات الأساسية المفقودة
+const currencyRates = { USD: 1, SAR: 3.75, AED: 3.67, EGP: 48, SDG: 6000 };
+const currencySymbols = { USD: '$', SAR: 'SAR', AED: 'AED', EGP: 'EGP', SDG: 'SDG' };
+const translations = { ar: {}, en: {} }; // يمكنك إضافة نصوص الترجمة لاحقاً
 
+// دالة التنقل بين الصفحات
+function showPage(pageId) {
+    document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+    document.querySelectorAll('nav button').forEach(btn => btn.classList.remove('active'));
+    
+    document.getElementById(pageId).classList.add('active');
+    
+    // تفعيل الزر المناسب في شريط التنقل
+    if(pageId === 'customer-page') document.getElementById('btn-customer').classList.add('active');
+    else if(pageId === 'trip-page') document.getElementById('btn-trip').classList.add('active');
+    else if(pageId === 'packages-page') document.getElementById('btn-packages').classList.add('active');
+    else if(pageId === 'visas-page') document.getElementById('btn-visas').classList.add('active');
+}
+
+// دالة اختيار الباقات والخدمات
+function selectItem(itemName) {
+    document.getElementById('selectedService').value = itemName;
+    showPage('customer-page');
+}
+
+// دالة إرسال الطلب
+function sendOrder() {
+    alert('تم استلام طلبك بنجاح! سيتم تحويلك قريباً.');
+}
+
+// دالة إظهار حقل الطيران المخصص
+function toggleAirlineInput() {
+    const opt = document.getElementById('airlineOption').value;
+    const customCol = document.getElementById('custom-airline-col');
+    if(opt === 'طيران مخصص') {
+        customCol.style.display = 'block';
+    } else {
+        customCol.style.display = 'none';
+    }
+        }
+    
         // حفظ وتأكيد تفاصيل الفندق لنموذج العميل
         function saveHotelDetails() {
             const country = document.getElementById('hotelCountry').value.trim();
