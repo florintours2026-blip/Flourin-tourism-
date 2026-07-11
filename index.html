@@ -465,6 +465,15 @@ select, .lang-btn, .theme-btn {
 
 
                     <div class="controls">
+    
+    <!-- أضف هذا السطر الجديد الخاص بزر تسجيل الدخول هنا -->
+    <a href="login.html" class="theme-btn" style="text-decoration: none;">دخول</a>
+
+    <!-- هذه الأزرار ستكون موجودة لديك مسبقاً (لا تقم بحذفها) -->
+    <select id="lang-select">...</select>
+    <button class="theme-btn">🌙</button>
+                    </div>
+    
                 <!-- قائمة العملات المتعددة -->
                 <select id="currency-select" onchange="updateCurrency()">
                     <option value="USD">الدولار 1($)</option>
@@ -1013,18 +1022,48 @@ window.location.href = mailtoUrl;
             window.open(whatsappUrl, '_blank');
 
       // 2. الإرسال عبر البريد الإلكتروني المباشر
-const emailRecipient = 'flournitourism2026@gmail.com';
-const emailSubject = encodeURIComponent(`طلب حجز جديد باسم: ${firstName} ${lastName}`);
-const emailBody = encodeURIComponent(message.replace(/\*/g, '')); 
-const mailtoUrl = `mailto:${emailRecipient}?subject=${emailSubject}&body=${emailBody}`;
+function submitBooking(event) {
+    // احتواء الكود داخل try...catch لمنع أي خطأ من تعطيل باقي أزرار الموقع
+    try {
+        // التأكد من وجود الحدث قبل منعه لتجنب الأخطاء
+        if (event) {
+            event.preventDefault();
+        }
 
-// إظهار رسالة تنبيه للعميل ليعلم بما سيحدث (خطوة اختيارية ومفيدة)
-alert("جاري تحويلك إلى تطبيق البريد الإلكتروني لإتمام طلب الحجز...");
+        // 1. جلب العناصر بأمان دون قراءة قيمتها فوراً
+        const firstNameEl = document.getElementById('first-name');
+        const lastNameEl = document.getElementById('last-name');
+        const phoneEl = document.getElementById('phone');
 
-// 3. فتح البريد الإلكتروني بعد فترة وجيزة للعميل
-setTimeout(() => {
-    window.location.href = mailtoUrl;
-}, 1000); // 1000 تعني تأخير لمدة ثانية واحدة
+        // 2. التحقق من وجود العناصر، وفي حال غيابها يتم وضع قيمة افتراضية لمنع توقف الكود
+        const firstName = firstNameEl ? firstNameEl.value : 'غير محدد';
+        const lastName = lastNameEl ? lastNameEl.value : 'غير محدد';
+        const phoneNumber = phoneEl ? phoneEl.value : 'غير محدد';
+        
+        // تكوين نص الرسالة
+        const message = `
+            مرحباً، يوجد طلب حجز جديد:
+            - الاسم الكامل: ${firstName} ${lastName}
+            - رقم التواصل: ${phoneNumber}
+        `;
+
+        // 3. تجهيز روابط البريد الإلكتروني
+        const emailRecipient = 'flournitourism2026@gmail.com';
+        const emailSubject = encodeURIComponent(`طلب حجز جديد باسم: ${firstName} ${lastName}`);
+        const emailBody = encodeURIComponent(message.replace(/\*/g, '')); 
+        const mailtoUrl = `mailto:${emailRecipient}?subject=${emailSubject}&body=${emailBody}`;
+
+        // 4. تنفيذ التأخير الزمني وفتح البريد
+        setTimeout(() => {
+            window.location.href = mailtoUrl;
+        }, 500); // تقليل المدة قليلاً لضمان استجابة المتصفح
+
+    } catch (error) {
+        // طباعة الخطأ في لوحة التحكم دون التأثير على عمل الموقع
+        console.error("تم اكتشاف خطأ في دالة الحجز، ولكن الموقع مستمر في العمل:", error);
+    }
+}
+
 
                 // أسعار تحويل العملات الافتراضية مقابل الدولار الأمريكي كأساس
         const currencyRates = {
