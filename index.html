@@ -999,28 +999,40 @@ select, .lang-btn, .theme-btn {
             // 1. الإرسال عبر الواتساب المباشر
             const whatsappNumber = '249969862218';
             const whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(message)}`;
-            
             // 2. الإرسال عبر البريد الإلكتروني المباشر
-            const emailRecipient = 'flournitourism2026@gmail.com';
-            const emailSubject = encodeURIComponent(`طلب حجز جديد باسم: ${firstName} ${lastName}`);
-            const emailBody = encodeURIComponent(message.replace(/\*/g, '')); // إزالة النجمات التنسيقية للبريد الإلكتروني
-            const mailtoUrl = `mailto:${emailRecipient}?subject=${emailSubject}&body=${emailBody}`;
+const emailRecipient = 'flournitourism2026@gmail.com';
+const emailSubject = encodeURIComponent(`طلب حجز جديد باسم: ${firstName} ${lastName}`);
+const emailBody = encodeURIComponent(message.replace(/\*/g, '')); // إزالة النجمات التنسيقية للبريد الإلكتروني
+const mailtoUrl = `mailto:${emailRecipient}?subject=${emailSubject}&body=${emailBody}`;
+
+// السطر الجديد الذي يقوم بتوجيه المتصفح لفتح تطبيق البريد الإلكتروني
+window.location.href = mailtoUrl;
+
 
             // فتح الواتساب أولاً في نافذة جديدة
             window.open(whatsappUrl, '_blank');
 
-            // فتح البريد الإلكتروني بعد فترة وجيزة للعميل
-            setTimeout(() => {
-                window.location.href = mailtoUrl;
-            }, 1000);
-        }
+      // 2. الإرسال عبر البريد الإلكتروني المباشر
+const emailRecipient = 'flournitourism2026@gmail.com';
+const emailSubject = encodeURIComponent(`طلب حجز جديد باسم: ${firstName} ${lastName}`);
+const emailBody = encodeURIComponent(message.replace(/\*/g, '')); 
+const mailtoUrl = `mailto:${emailRecipient}?subject=${emailSubject}&body=${emailBody}`;
+
+// إظهار رسالة تنبيه للعميل ليعلم بما سيحدث (خطوة اختيارية ومفيدة)
+alert("جاري تحويلك إلى تطبيق البريد الإلكتروني لإتمام طلب الحجز...");
+
+// 3. فتح البريد الإلكتروني بعد فترة وجيزة للعميل
+setTimeout(() => {
+    window.location.href = mailtoUrl;
+}, 1000); // 1000 تعني تأخير لمدة ثانية واحدة
+
                 // أسعار تحويل العملات الافتراضية مقابل الدولار الأمريكي كأساس
         const currencyRates = {
             USD: 1,
             SAR: 3.75,
             AED: 3.67,
             EGP: 48.50,
-            SDG: 600.00
+            SDG: 6000.00
         };
 
         const currencySymbols = {
@@ -1231,28 +1243,43 @@ select, .lang-btn, .theme-btn {
 
         // تحديث اللغات بالصفحة ديناميكياً
         function updateLanguage() {
-            const lang = document.getElementById('lang-select').value;
-            const trans = translations[lang];
+    const langSelect = document.getElementById('lang-select');
+    if (!langSelect) return; // التأكد من وجود قائمة اللغات لتجنب الأخطاء
 
-            if (trans) {
-                document.getElementById('txt-trip-title').innerText = trans.tripTitle;
-                document.getElementById('txt-trip-subtitle').innerText = trans.tripSubtitle;
-                document.getElementById('txt-flight-tab').innerText = trans.flightTab;
-                document.getElementById('txt-hotel-tab').innerText = trans.hotelTab;
-                document.getElementById('txt-flight-head').innerText = trans.flightHead;
-                document.getElementById('txt-hotel-head').innerText = trans.hotelHead;
-                document.getElementById('lbl-flight-type').innerText = trans.flightType;
-                document.getElementById('lbl-dep-country').innerText = trans.depCountry;
-                document.getElementById('lbl-arr-country').innerText = trans.arrCountry;
-                document.getElementById('lbl-airline-opt').innerText = trans.airlineOpt;
-                document.getElementById('lbl-custom-airline').innerText = trans.customAirline;
-                document.getElementById('lbl-adults').innerText = trans.adults;
-                document.getElementById('lbl-children').innerText = trans.children;
-                document.getElementById('lbl-infants').innerText = trans.infants;
-                document.getElementById('btn-save-flight').innerText = trans.saveFlight;
-                document.getElementById('btn-save-hotel').innerText = trans.saveHotel;
+    const lang = langSelect.value;
+    const trans = translations[lang];
+
+    if (trans) {
+        // تجميع المعرفات ومفاتيح الترجمة لسهولة إدارتها
+        const elementsToUpdate = {
+            'txt-trip-title': trans.tripTitle,
+            'txt-trip-subtitle': trans.tripSubtitle,
+            'txt-flight-tab': trans.flightTab,
+            'txt-hotel-tab': trans.hotelTab,
+            'txt-flight-head': trans.flightHead,
+            'txt-hotel-head': trans.hotelHead,
+            'lbl-flight-type': trans.flightType,
+            'lbl-dep-country': trans.depCountry,
+            'lbl-arr-country': trans.arrCountry,
+            'lbl-airline-opt': trans.airlineOpt,
+            'lbl-custom-airline': trans.customAirline,
+            'lbl-adults': trans.adults,
+            'lbl-children': trans.children,
+            'lbl-infants': trans.infants,
+            'btn-save-flight': trans.saveFlight,
+            'btn-save-hotel': trans.saveHotel
+        };
+
+        // المرور على العناصر وتحديثها بأمان فقط إذا كانت موجودة
+        for (const [id, text] of Object.entries(elementsToUpdate)) {
+            const element = document.getElementById(id);
+            if (element && text !== undefined) {
+                element.innerText = text;
             }
-                }
+        }
+    }
+}
+
                 
     </script>
 </body>
