@@ -170,7 +170,7 @@
 
     </div>
 
-    <script>
+        <script>
         // إعدادات الإدارة
         const ADMIN_EMAIL = 'firassaeed44@gmail.com';
         const ADMIN_PASSWORD = 'Flourin@33';
@@ -199,10 +199,13 @@
                 const customerData = { email: email, phone: phone };
                 localStorage.setItem('florinCurrentCustomer', JSON.stringify(customerData));
                 
-                alert('تم تسجيل الدخول بنجاح كعميل! سيتم توجيهك لصفحة العروض قريباً.');
-                // مستقبلاً سنضيف: window.location.href = 'customer-portal.html';
+                alert('تم تسجيل الدخول بنجاح كعميل! سيتم توجيهك لصفحة العروض الآن.');
+                
+                // التوجيه الفعلي لصفحة العملاء
+                window.location.href = 'customer-portal.html';
             }
         });
     </script>
+
 </body>
 </html>
