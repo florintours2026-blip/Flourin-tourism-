@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>بوابة الإدارة - فلورين للسياحة</title>
+    <title>تسجيل الدخول - فلورين للسياحة</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
@@ -11,7 +11,7 @@
             --dark-gold: #bfa030;
             --bg-color: #f0f2f5;
             --text-dark: #2c3e50;
-            --error-red: #e74c3c;
+            --white: #ffffff;
         }
 
         body {
@@ -25,43 +25,51 @@
             min-height: 100vh;
         }
 
-        .login-wrapper {
-            background-color: #ffffff;
-            padding: 40px 50px;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        .split-container {
+            display: flex;
             width: 100%;
-            max-width: 420px;
-            box-sizing: border-box;
-            transition: transform 0.3s ease;
+            max-width: 900px;
+            background: var(--white);
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin: 20px;
         }
 
-        .brand-header {
+        .form-section {
+            flex: 1;
+            padding: 40px;
+            box-sizing: border-box;
+        }
+
+        .admin-section {
+            background-color: #f8fafc;
+            border-left: 2px solid #eee;
+        }
+
+        .customer-section {
+            background-color: var(--white);
+        }
+
+        .section-header {
             text-align: center;
             margin-bottom: 30px;
         }
 
-        .brand-header img {
-            width: 120px;
-            margin-bottom: 15px;
+        .section-header i {
+            font-size: 40px;
+            color: var(--primary-gold);
+            margin-bottom: 10px;
         }
 
-        .brand-header h2 {
+        .section-header h2 {
             margin: 0;
             color: var(--text-dark);
-            font-size: 26px;
-            letter-spacing: 0.5px;
-        }
-
-        .brand-header p {
-            color: #7f8c8d;
-            font-size: 14px;
-            margin-top: 5px;
+            font-size: 22px;
         }
 
         .input-group {
-            margin-bottom: 22px;
-            position: relative;
+            margin-bottom: 20px;
         }
 
         .input-group label {
@@ -72,54 +80,19 @@
             font-size: 14px;
         }
 
-        .input-wrapper {
-            position: relative;
-            display: flex;
-            align-items: center;
-        }
-
-        .input-wrapper i.icon-main {
-            position: absolute;
-            right: 15px;
-            color: #95a5a6;
-        }
-
-        .input-wrapper input {
+        .input-group input {
             width: 100%;
-            padding: 14px 40px 14px 15px;
+            padding: 12px 15px;
             border: 1.5px solid #e0e6ed;
             border-radius: 8px;
             font-size: 15px;
-            transition: all 0.3s;
             box-sizing: border-box;
-            background-color: #f8fafc;
+            transition: border-color 0.3s;
         }
 
-        .input-wrapper input:focus {
+        .input-group input:focus {
             border-color: var(--primary-gold);
-            background-color: #ffffff;
             outline: none;
-            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
-        }
-
-        .toggle-password {
-            position: absolute;
-            left: 15px;
-            cursor: pointer;
-            color: #95a5a6;
-            transition: color 0.3s;
-        }
-
-        .toggle-password:hover {
-            color: var(--primary-gold);
-        }
-
-        .error-message {
-            color: var(--error-red);
-            font-size: 13px;
-            margin-top: 5px;
-            display: none;
-            font-weight: 500;
         }
 
         .login-btn {
@@ -132,148 +105,104 @@
             font-size: 16px;
             font-weight: bold;
             cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
+            transition: background-color 0.3s;
         }
 
         .login-btn:hover {
             background-color: var(--dark-gold);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
         }
 
-        .login-btn:disabled {
-            background-color: #bdc3c7;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-
-        .spinner {
-            display: none;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255,255,255,0.3);
-            border-radius: 50%;
-            border-top-color: #fff;
-            animation: spin 1s ease-in-out infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+        /* استجابة الشاشات الصغيرة */
+        @media (max-width: 768px) {
+            .split-container {
+                flex-direction: column;
+            }
+            .admin-section {
+                border-left: none;
+                border-top: 2px solid #eee;
+            }
         }
     </style>
 </head>
 <body>
 
-    <div class="login-wrapper">
-        <div class="brand-header">
-            <img src="logo.png" alt="شعار فلورين للسياحة">
-            <h2>بوابة الإدارة</h2>
-            <p>الرجاء إدخال بيانات الاعتماد للوصول للوحة التحكم</p>
-        </div>
+    <div class="split-container">
         
-        <form id="adminLoginForm">
-            <div class="input-group">
-                <label for="adminEmail">البريد الإلكتروني الإداري</label>
-                <div class="input-wrapper">
-                    <i class="fas fa-envelope icon-main"></i>
-                    <input type="email" id="adminEmail" placeholder="admin@florin-tourism.com" required autocomplete="email">
-                </div>
-                <div id="emailError" class="error-message">صيغة البريد الإلكتروني غير صحيحة.</div>
+        <!-- قسم دخول العملاء -->
+        <div class="form-section customer-section">
+            <div class="section-header">
+                <i class="fas fa-user"></i>
+                <h2>دخول العملاء</h2>
+                <p style="color: #7f8c8d; font-size: 13px;">استكشف أفضل العروض السياحية</p>
             </div>
-            
-            <div class="input-group">
-                <label for="adminPassword">كلمة المرور</label>
-                <div class="input-wrapper">
-                    <i class="fas fa-lock icon-main"></i>
-                    <input type="password" id="adminPassword" placeholder="أدخل كلمة المرور" required autocomplete="current-password">
-                    <i class="fas fa-eye toggle-password" id="togglePassword" title="عرض/إخفاء كلمة المرور"></i>
+            <form id="customerForm">
+                <div class="input-group">
+                    <label>البريد الإلكتروني</label>
+                    <input type="email" id="customerEmail" required placeholder="أدخل بريدك الإلكتروني">
                 </div>
-                <div id="loginError" class="error-message">بيانات الدخول غير صحيحة. يرجى المحاولة مجدداً.</div>
+                <div class="input-group">
+                    <label>رقم الهاتف</label>
+                    <input type="tel" id="customerPhone" required placeholder="أدخل رقم هاتفك">
+                </div>
+                <button type="submit" class="login-btn">دخول للموقع</button>
+            </form>
+        </div>
+
+        <!-- قسم دخول الإدارة -->
+        <div class="form-section admin-section">
+            <div class="section-header">
+                <i class="fas fa-user-shield"></i>
+                <h2>بوابة الإدارة</h2>
+                <p style="color: #7f8c8d; font-size: 13px;">لوحة تحكم فلورين للسياحة</p>
             </div>
-            
-            <button type="submit" class="login-btn" id="submitBtn">
-                <span id="btnText">تسجيل الدخول</span>
-                <div class="spinner" id="loadingSpinner"></div>
-            </button>
-        </form>
+            <form id="adminForm">
+                <div class="input-group">
+                    <label>البريد الإلكتروني للإدارة</label>
+                    <input type="email" id="adminEmail" required placeholder="admin@florin.com">
+                </div>
+                <div class="input-group">
+                    <label>كلمة المرور</label>
+                    <input type="password" id="adminPassword" required placeholder="أدخل كلمة المرور">
+                </div>
+                <button type="submit" class="login-btn">تسجيل الدخول</button>
+            </form>
+        </div>
+
     </div>
 
     <script>
-        // إعدادات الدخول التجريبية (للاختبار المحلي فقط)
+        // إعدادات الإدارة
         const ADMIN_EMAIL = 'firassaeed44@gmail.com';
         const ADMIN_PASSWORD = 'Flourin@33';
-        const DASHBOARD_URL = 'dashboard.html'; // مسار صفحة لوحة التحكم
 
-        // عناصر واجهة المستخدم
-        const loginForm = document.getElementById('adminLoginForm');
-        const emailInput = document.getElementById('adminEmail');
-        const passwordInput = document.getElementById('adminPassword');
-        const submitBtn = document.getElementById('submitBtn');
-        const btnText = document.getElementById('btnText');
-        const loadingSpinner = document.getElementById('loadingSpinner');
-        const emailError = document.getElementById('emailError');
-        const loginError = document.getElementById('loginError');
-        const togglePassword = document.getElementById('togglePassword');
+        // معالجة دخول الإدارة
+        document.getElementById('adminForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('adminEmail').value.trim();
+            const password = document.getElementById('adminPassword').value;
 
-        // ميزة إظهار وإخفاء كلمة المرور
-        togglePassword.addEventListener('click', function() {
-            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-            passwordInput.setAttribute('type', type);
-            this.classList.toggle('fa-eye');
-            this.classList.toggle('fa-eye-slash');
+            if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
+                window.location.href = 'dashboard.html';
+            } else {
+                alert('بيانات الإدارة غير صحيحة.');
+            }
         });
 
-        // إخفاء رسائل الخطأ عند بدء الكتابة
-        emailInput.addEventListener('input', () => emailError.style.display = 'none');
-        passwordInput.addEventListener('input', () => loginError.style.display = 'none');
+        // معالجة دخول العملاء
+        document.getElementById('customerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('customerEmail').value.trim();
+            const phone = document.getElementById('customerPhone').value.trim();
 
-        // التحقق من صحة البريد الإلكتروني
-        function isValidEmail(email) {
-            const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return regex.test(email);
-        }
-
-        // معالجة إرسال النموذج
-        loginForm.addEventListener('submit', function(event) {
-            event.preventDefault();
-            
-            const email = emailInput.value.trim();
-            const password = passwordInput.value;
-
-            // تحقق مبدئي من صيغة البريد
-            if (!isValidEmail(email)) {
-                emailError.style.display = 'block';
-                return;
+            if (email && phone) {
+                // حفظ بيانات العميل محلياً لاستخدامها لاحقاً في عمليات الحجز
+                const customerData = { email: email, phone: phone };
+                localStorage.setItem('florinCurrentCustomer', JSON.stringify(customerData));
+                
+                alert('تم تسجيل الدخول بنجاح كعميل! سيتم توجيهك لصفحة العروض قريباً.');
+                // مستقبلاً سنضيف: window.location.href = 'offers.html';
             }
-
-            // تفعيل حالة التحميل
-            submitBtn.disabled = true;
-            btnText.textContent = 'جاري التحقق...';
-            loadingSpinner.style.display = 'block';
-            loginError.style.display = 'none';
-
-            // محاكاة تأخير الاتصال بالخادم (1.5 ثانية) لإظهار تأثير التحميل بوضوح
-            setTimeout(() => {
-                if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
-                    // تسجيل الدخول ناجح: توجيه المستخدم للوحة التحكم
-                    window.location.href = DASHBOARD_URL;
-                } else {
-                    // تسجيل الدخول فاشل: إظهار رسالة الخطأ وإعادة الزر لحالته الطبيعية
-                    loginError.textContent = 'بيانات الدخول غير صحيحة. يرجى التأكد من البريد وكلمة المرور.';
-                    loginError.style.display = 'block';
-                    
-                    submitBtn.disabled = false;
-                    btnText.textContent = 'تسجيل الدخول';
-                    loadingSpinner.style.display = 'none';
-                }
-            }, 1500);
         });
     </script>
 </body>
 </html>
-
