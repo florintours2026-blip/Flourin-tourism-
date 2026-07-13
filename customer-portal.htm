@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بوابة العملاء - فلورين للسياحة</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gold: #d4af37;
+            --dark-gold: #bfa030;
+            --bg-color: #f8fafc;
+            --text-dark: #2c3e50;
+            --white: #ffffff;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+        }
+
+        /* الشريط العلوي */
+        .navbar {
+            background-color: var(--white);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 22px;
+            font-weight: bold;
+            color: var(--primary-gold);
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 14px;
+        }
+
+        .logout-btn {
+            background: none;
+            border: 1px solid #e74c3c;
+            color: #e74c3c;
+            padding: 6px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: #e74c3c;
+            color: var(--white);
+        }
+
+        /* حاوية المحتوى */
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            margin-bottom: 30px;
+            font-size: 24px;
+            border-right: 4px solid var(--primary-gold);
+            padding-right: 15px;
+        }
+
+        /* شبكة العروض */
+        .offers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .offer-card {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .offer-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .offer-image {
+            height: 200px;
+            background-color: #e0e6ed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #95a5a6;
+            font-size: 40px;
+            position: relative;
+        }
+
+        .offer-price {
+            position: absolute;
+            bottom: 15px;
+            left: 15px;
+            background: var(--primary-gold);
+            color: var(--white);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .offer-details {
+            padding: 20px;
+        }
+
+        .offer-details h3 {
+            margin: 0 0 10px 0;
+            font-size: 18px;
+        }
+
+        .offer-details p {
+            color: #7f8c8d;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .book-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--text-dark);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .book-btn:hover {
+            background-color: var(--primary-gold);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- الشريط العلوي -->
+    <nav class="navbar">
+        <div class="brand-logo">
+            <i class="fas fa-globe-americas"></i>
+            فلورين للسياحة
+        </div>
+        <div class="user-profile">
+            <span id="displayUserEmail">جاري التحميل...</span>
+            <button class="logout-btn" onclick="customerLogout()">تسجيل الخروج</button>
+        </div>
+    </nav>
+
+    <div class="container">
+        
+        <!-- قسم الباقات السياحية -->
+        <h2 class="section-title">أبرز الباقات السياحية</h2>
+        <div class="offers-grid">
+            <div class="offer-card">
+                <div class="offer-image">
+                    <i class="fas fa-umbrella-beach"></i>
+                    <div class="offer-price">1,200$</div>
+                </div>
+                <div class="offer-details">
+                    <h3>رحلة المالديف الساحرة</h3>
+                    <p>إقامة لمدة 5 ليالي في منتجع 5 نجوم مع وجبات الإفطار وتذاكر الطيران ذهاب وعودة.</p>
+                    <button class="book-btn" onclick="bookOffer('رحلة المالديف (باقة سياحية)')">احجز الآن</button>
+                </div>
+            </div>
+
+            <div class="offer-card">
+                <div class="offer-image">
+                    <i class="fas fa-city"></i>
+                    <div class="offer-price">850$</div>
+                </div>
+                <div class="offer-details">
+                    <h3>جولة دبي الفاخرة</h3>
+                    <p>استكشف معالم دبي السياحية، شاملة الإقامة والتنقلات وتذكرة دخول برج خليفة.</p>
+                    <button class="book-btn" onclick="bookOffer('جولة دبي (باقة سياحية)')">احجز الآن</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- قسم تأشيرات السفر -->
+        <h2 class="section-title">تأشيرات السفر (الفيزا)</h2>
+        <div class="offers-grid">
+            <div class="offer-card">
+                <div class="offer-image">
+                    <i class="fas fa-passport"></i>
+                    <div class="offer-price">150$</div>
+                </div>
+                <div class="offer-details">
+                    <h3>تأشيرة الشنغن (أوروبا)</h3>
+                    <p>تجهيز ملف متكامل، حجز مواعيد السفارة، ومتابعة الطلب حتى استلام الجواز.</p>
+                    <button class="book-btn" onclick="bookOffer('فيزا الشنغن')">قدم طلب الآن</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // التحقق من بيانات العميل عند فتح الصفحة
+        let currentCustomer = null;
+
+        function checkCustomerSession() {
+            const customerData = localStorage.getItem('florinCurrentCustomer');
+            if (customerData) {
+                currentCustomer = JSON.parse(customerData);
+                document.getElementById('displayUserEmail').textContent = currentCustomer.email;
+            } else {
+                // توجيه المستخدم غير المسجل لصفحة الدخول
+                alert('يرجى تسجيل الدخول أولاً للوصول للعروض.');
+                window.location.href = 'login.html';
+            }
+        }
+
+        // دالة حجز العرض وإرساله للوحة الإدارة
+        function bookOffer(offerName) {
+            if (!currentCustomer) return;
+
+            // استدعاء الحجوزات السابقة من التخزين المحلي
+            let bookings = [];
+            const savedBookings = localStorage.getItem('florinBookings');
+            if (savedBookings) {
+                bookings = JSON.parse(savedBookings);
+            }
+
+            // تجهيز تاريخ اليوم
+            const today = new Date().toISOString().split('T')[0];
+
+            // دمج بيانات العميل مع العرض المطلوب
+            const newBooking = {
+                name: currentCustomer.phone, // استخدام رقم الهاتف كمعرف للعميل في الإدارة
+                destination: offerName,
+                date: today,
+                status: 'pending' // الطلب يبدأ كـ "قيد الانتظار"
+            };
+
+            // حفظ الحجز الجديد
+            bookings.push(newBooking);
+            localStorage.setItem('florinBookings', JSON.stringify(bookings));
+
+            alert(`تم استلام طلبك لـ [${offerName}] بنجاح! فريقنا سيتواصل معك قريباً لتأكيد الحجز.`);
+        }
+
+        // دالة تسجيل خروج العميل
+        function customerLogout() {
+            localStorage.removeItem('florinCurrentCustomer');
+            window.location.href = 'login.html';
+        }
+
+        // تشغيل التحقق عند تحميل الصفحة
+        checkCustomerSession();
+    </script>
+</body>
+</html>
+
