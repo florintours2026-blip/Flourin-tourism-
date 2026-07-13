@@ -1266,29 +1266,33 @@ function sendOrder() {
 function toggleAirlineInput() {
     const opt = document.getElementById('airlineOption').value;
     const customCol = document.getElementById('custom-airline-col');
-    if(opt === 'طيران مخصص') {
+    
+    if (opt === 'طيران مخصص') {
         customCol.style.display = 'block';
     } else {
         customCol.style.display = 'none';
     }
-        }
+}
     
-        // حفظ وتأكيد تفاصيل الفندق لنموذج العميل
-        function saveHotelDetails() {
-            const country = document.getElementById('hotelCountry').value.trim();
-            const checkIn = document.getElementById('hotelCheckIn').value;
-            const checkOut = document.getElementById('hotelCheckOut').value;
+// حفظ وتأكيد تفاصيل الفندق لنموذج العميل
+function saveHotelDetails() {
+    const country = document.getElementById('hotelCountry').value.trim();
+    const checkIn = document.getElementById('hotelCheckIn').value;
+    const checkOut = document.getElementById('hotelCheckOut').value;
 
-            if (!country || !checkIn || !checkOut) {
-                alert('يرجى تعبئة كافة حقول حجز الفندق المطلوبة.');
-                return;
-            }
+    if (!country || !checkIn || !checkOut) {
+        alert('يرجى تعبئة كافة حقول حجز الفندق المطلوبة.');
+        return;
+    }
 
-            let summary = `حجز فندق في [${country}] | دخول: ${checkIn} | خروج: ${checkOut}`;
-            document.getElementById('selectedService').value = summary;
-            alert('تم تأكيد وحفظ تفاصيل الفندق بنجاح ونقلها لنموذج الحجز.');
-            showPage('customer-page');
-        }
+    let summary = `حجز فندق في [${country}] | دخول: ${checkIn} | خروج: ${checkOut}`;
+    document.getElementById('selectedService').value = summary;
+    alert('تم تأكيد وحفظ تفاصيل الفندق بنجاح ونقلها لنموذج الحجز.');
+    
+    // يُفترض أن هذه الدالة معرّفة مسبقاً في مكان آخر ضمن مشروعك
+    showPage('customer-page');
+}
+
 
         // تحديث العملات بالصفحة ديناميكياً
         function updateCurrency() {
