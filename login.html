@@ -171,7 +171,6 @@
 
     <div class="login-wrapper">
         <div class="brand-header">
-            <!-- استبدل الرابط أدناه بمسار شعار الشركة الفعلي -->
             <img src="logo.png" alt="شعار فلورين للسياحة">
             <h2>بوابة الإدارة</h2>
             <p>الرجاء إدخال بيانات الاعتماد للوصول للوحة التحكم</p>
@@ -205,10 +204,10 @@
     </div>
 
     <script>
-        // إعدادات واجهة برمجة التطبيقات (API)
-        // يجب استبدال هذا الرابط بالرابط الفعلي للخادم الخاص بك
-        const API_LOGIN_ENDPOINT = 'https://api.florin-tourism.com/v1/admin/login';
-        const DASHBOARD_URL = '/admin/dashboard.html';
+        // إعدادات الدخول التجريبية (للاختبار المحلي فقط)
+        const ADMIN_EMAIL = 'firassaeed44@gmail.com';
+        const ADMIN_PASSWORD = 'Flourin@33';
+        const DASHBOARD_URL = 'dashboard.html'; // مسار صفحة لوحة التحكم
 
         // عناصر واجهة المستخدم
         const loginForm = document.getElementById('adminLoginForm');
@@ -240,7 +239,7 @@
         }
 
         // معالجة إرسال النموذج
-        loginForm.addEventListener('submit', async function(event) {
+        loginForm.addEventListener('submit', function(event) {
             event.preventDefault();
             
             const email = emailInput.value.trim();
@@ -258,41 +257,23 @@
             loadingSpinner.style.display = 'block';
             loginError.style.display = 'none';
 
-            try {
-                // إرسال الطلب الفعلي للخادم
-                const response = await fetch(API_LOGIN_ENDPOINT, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    },
-                    body: JSON.stringify({ email, password })
-                });
-
-                const data = await response.json();
-
-                if (response.ok && data.success) {
-                    // حفظ رمز التوثيق (Token) في المتصفح
-                    localStorage.setItem('adminToken', data.token);
-                    
-                    // توجيه المسؤول إلى لوحة التحكم
+            // محاكاة تأخير الاتصال بالخادم (1.5 ثانية) لإظهار تأثير التحميل بوضوح
+            setTimeout(() => {
+                if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
+                    // تسجيل الدخول ناجح: توجيه المستخدم للوحة التحكم
                     window.location.href = DASHBOARD_URL;
                 } else {
-                    // عرض رسالة خطأ في حال رفض الخادم للبيانات
-                    loginError.textContent = data.message || 'بيانات الدخول غير صحيحة. يرجى المحاولة مجدداً.';
+                    // تسجيل الدخول فاشل: إظهار رسالة الخطأ وإعادة الزر لحالته الطبيعية
+                    loginError.textContent = 'بيانات الدخول غير صحيحة. يرجى التأكد من البريد وكلمة المرور.';
                     loginError.style.display = 'block';
+                    
+                    submitBtn.disabled = false;
+                    btnText.textContent = 'تسجيل الدخول';
+                    loadingSpinner.style.display = 'none';
                 }
-            } catch (error) {
-                // التعامل مع أخطاء الاتصال بالشبكة
-                loginError.textContent = 'حدث خطأ في الاتصال بالخادم. يرجى التحقق من اتصالك بالإنترنت.';
-                loginError.style.display = 'block';
-            } finally {
-                // إيقاف حالة التحميل
-                submitBtn.disabled = false;
-                btnText.textContent = 'تسجيل الدخول';
-                loadingSpinner.style.display = 'none';
-            }
+            }, 1500);
         });
     </script>
 </body>
 </html>
+
