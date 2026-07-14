@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إدارة العروض - فلورين للسياحة</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gold: #d4af37;
+            --dark-gold: #bfa030;
+            --sidebar-bg: #2c3e50;
+            --bg-color: #f4f6f9;
+            --text-dark: #333;
+            --text-light: #ecf0f1;
+            --white: #ffffff;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* القائمة الجانبية */
+        .sidebar {
+            width: 250px;
+            background-color: var(--sidebar-bg);
+            color: var(--text-light);
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .sidebar-header h2 {
+            margin: 0;
+            color: var(--primary-gold);
+            font-size: 22px;
+        }
+
+        .nav-links {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+            flex-grow: 1;
+        }
+
+        .nav-links li { padding: 10px 20px; }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px 15px;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            background-color: var(--primary-gold);
+            color: var(--white);
+        }
+
+        /* مساحة العمل الرئيسية */
+        .main-content {
+            margin-right: 250px;
+            padding: 30px;
+            flex-grow: 1;
+            width: calc(100% - 250px);
+            box-sizing: border-box;
+        }
+
+        .page-title {
+            margin-top: 0;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        @media (min-width: 992px) {
+            .content-grid {
+                grid-template-columns: 1fr 2fr;
+            }
+        }
+
+        .panel {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        /* نموذج الإدخال */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: var(--text-dark);
+            font-size: 14px;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-family: inherit;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--primary-gold);
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn-submit:hover { background-color: var(--dark-gold); }
+
+        /* جدول العروض */
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 600px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: right;
+            border-bottom: 1px solid #eee;
+        }
+
+        th { background-color: #f8fafc; color: #555; }
+
+        .btn-delete {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .btn-delete:hover { background-color: #c0392b; }
+
+        .offer-type {
+            padding: 4px 8px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: bold;
+            background-color: #e1f5fe;
+            color: #0277bd;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- القائمة الجانبية -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <h2>فلورين للسياحة</h2>
+        </div>
+        <ul class="nav-links">
+            <li><a href="dashboard.html"><i class="fas fa-home"></i> الرئيسية</a></li>
+            <li><a href="bookings.html"><i class="fas fa-plane-departure"></i> الحجوزات</a></li>
+            <li><a href="manage-offers.html" class="active"><i class="fas fa-tags"></i> إدارة العروض</a></li>
+            <li><a href="#"><i class="fas fa-users"></i> العملاء</a></li>
+            <li><a href="#"><i class="fas fa-cog"></i> الإعدادات</a></li>
+        </ul>
+    </aside>
+
+    <!-- مساحة العمل الرئيسية -->
+    <main class="main-content">
+        <h2 class="page-title">إدارة العروض السياحية</h2>
+        
+        <div class="content-grid">
+            <!-- نموذج إضافة عرض جديد -->
+            <div class="panel">
+                <h3>إضافة عرض جديد</h3>
+                <form id="offerForm">
+                    <div class="form-group">
+                        <label>عنوان العرض</label>
+                        <input type="text" id="offerTitle" required placeholder="مثال: رحلة المالديف الساحرة">
+                    </div>
+                    <div class="form-group">
+                        <label>نوع العرض</label>
+                        <select id="offerType">
+                            <option value="باقة سياحية">باقة سياحية</option>
+                            <option value="فيزا">تأشيرة (فيزا)</option>
+                            <option value="تذكرة طيران">تذكرة طيران</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>السعر (بالدولار)</label>
+                        <input type="number" id="offerPrice" required placeholder="مثال: 1200">
+                    </div>
+                    <div class="form-group">
+                        <label>رابط الصورة (URL)</label>
+                        <input type="url" id="offerImage" placeholder="https://example.com/image.jpg">
+                    </div>
+                    <div class="form-group">
+                        <label>وصف العرض</label>
+                        <textarea id="offerDesc" required placeholder="اكتب تفاصيل الرحلة وما تشمله..."></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit">حفظ ونشر العرض</button>
+                </form>
+            </div>
+
+            <!-- جدول العروض المضافة -->
+            <div class="panel">
+                <h3>العروض الحالية</h3>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>العنوان</th>
+                                <th>النوع</th>
+                                <th>السعر</th>
+                                <th>إجراء</th>
+                            </tr>
+                        </thead>
+                        <tbody id="offersTableBody">
+                            <!-- سيتم إضافة العروض هنا برمجياً -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // مصفوفة لتخزين العروض
+        let offers = [];
+
+        // تحميل العروض من التخزين المحلي
+        function loadOffers() {
+            const savedOffers = localStorage.getItem('florinOffers');
+            if (savedOffers) {
+                offers = JSON.parse(savedOffers);
+            }
+            renderOffersTable();
+        }
+
+        // حفظ العروض في التخزين المحلي
+        function saveOffers() {
+            localStorage.setItem('florinOffers', JSON.stringify(offers));
+        }
+
+        // عرض البيانات في الجدول
+        function renderOffersTable() {
+            const tbody = document.getElementById('offersTableBody');
+            tbody.innerHTML = ''; 
+
+            offers.forEach((offer, index) => {
+                const row = `
+                    <tr>
+                        <td><strong>${offer.title}</strong></td>
+                        <td><span class="offer-type">${offer.type}</span></td>
+                        <td>${offer.price}$</td>
+                        <td><button class="btn-delete" onclick="deleteOffer(${index})">حذف</button></td>
+                    </tr>
+                `;
+                tbody.innerHTML += row;
+            });
+        }
+
+        // معالجة إضافة عرض جديد
+        document.getElementById('offerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const newOffer = {
+                title: document.getElementById('offerTitle').value,
+                type: document.getElementById('offerType').value,
+                price: document.getElementById('offerPrice').value,
+                image: document.getElementById('offerImage').value,
+                description: document.getElementById('offerDesc').value
+            };
+
+            offers.push(newOffer);
+            saveOffers();
+            renderOffersTable();
+            
+            alert('تم حفظ العرض بنجاح!');
+            this.reset();
+        });
+
+        // دالة حذف العرض
+        function deleteOffer(index) {
+            if(confirm('هل أنت متأكد من حذف هذا العرض نهائياً؟')) {
+                offers.splice(index, 1); 
+                saveOffers(); 
+                renderOffersTable(); 
+            }
+        }
+
+        // التشغيل المبدئي
+        loadOffers();
+    </script>
+</body>
+  </html>
+
