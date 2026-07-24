@@ -1044,18 +1044,6 @@ function submitBooking(event) {
         const emailBody = encodeURIComponent(message.replace(/\*/g, '')); 
         const mailtoUrl = `mailto:${emailRecipient}?subject=${emailSubject}&body=${emailBody}`;
 
-        // 4. تنفيذ التأخير الزمني وفتح البريد
-        setTimeout(() => {
-            window.location.href = mailtoUrl;
-        }, 500); // تقليل المدة قليلاً لضمان استجابة المتصفح
-
-    } catch (error) {
-        // طباعة الخطأ في لوحة التحكم دون التأثير على عمل الموقع
-        console.error("تم اكتشاف خطأ في دالة الحجز، ولكن الموقع مستمر في العمل:", error);
-    }
-}
-
-
                 // أسعار تحويل العملات الافتراضية مقابل الدولار الأمريكي كأساس
         const currencyRates = {
             USD: 1,
@@ -1264,7 +1252,7 @@ function sendOrder() {
     
     // تحويل العميل مباشرة إلى الرابط المطلوب
     // يرجى استبدال الرابط أدناه بالرابط الفعلي للصفحة التي تريد التحويل إليها
-    window.location.href = 'https://www.example.com'; 
+    window.location.href = 'https://www.whatsapp.com'; 
 }
 
 // دالة إظهار حقل الطيران المخصص
